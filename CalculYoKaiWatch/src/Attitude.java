@@ -8,12 +8,12 @@ public class Attitude {
 
     Attitude(String nom, int Health, int Strength, int Spirit, int Defense, int Speed)
     {
-        nom = this.nom;
-        hp = Health;
-        str = Strength;
-        spr = Spirit;
-        def = Defense;
-        spe = Speed;
+        this.nom = nom;
+        this.hp = Health;
+        this.str = Strength;
+        this.spr = Spirit;
+        this.def = Defense;
+        this.spe = Speed;
     }
 
 

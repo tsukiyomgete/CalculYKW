@@ -6,6 +6,7 @@ public class Yokai {
     boolean canEvolve;
     boolean canFusion;
     FoodClass favFoodType;
+    
     int BaseSTR;
     int BaseSPR;
     int BaseDEF;
@@ -13,6 +14,8 @@ public class Yokai {
     Elemental elementType;
     Elemental weakness;
     Elemental resist;
+
+    Item[] HoldingItem;
 
 
 
