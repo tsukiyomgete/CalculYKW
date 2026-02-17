@@ -4,6 +4,6 @@ public class App {
       
         System.out.println("On va lancer le script de calcul");
         calcul.calculStats();
-        Attitude.creaAttitude();
+        /*Attitude.creaAttitude();*/
     }
 }

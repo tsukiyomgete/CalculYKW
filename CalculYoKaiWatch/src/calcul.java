@@ -126,7 +126,7 @@ public class calcul {
 		int Level;
 		int CorrectedNumber;
 		
-		Attitude[] attitudes = {
+		Attitude[] attitude = {
     		new Attitude("gentle",26,0,13,0,0),
     		new Attitude("tender",52,0,0,0,0),
     		new Attitude("grouchy",26,13,0,0,0),
@@ -160,9 +160,9 @@ public class calcul {
 		Level= Integer.parseInt(str);
 
 		System.out.println("What's the attitude of your yokai?");
-		String str = sc.nextLine();
+		str = sc.nextLine();
 
-
+/*
 		switch(str.toLowerCase()) {
 
     		case "gentle":
@@ -215,6 +215,8 @@ public class calcul {
 
     		default:
      		System.out.println("Unknown attitude");
+
+			
 }
 
 
@@ -224,7 +226,7 @@ public class calcul {
 
 
 		System.out.println("Your yokai's base stats is: " + CorrectedNumber);
-		
+*/	
 	}
 }
 	
