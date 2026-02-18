@@ -1,6 +1,18 @@
 public class Item {
-    int ID_Item;
-    boolean IsHoldable;
-    boolean IsFusable;
+    int IdItem;
+    Food food;
+    Equipement equipement;
+
+    Item(int IdItem, Food food)
+    {
+        this.IdItem = IdItem;
+        this.food = food;
+    }
+
+    Item(int IdItem, Equipement equipement)
+    {
+        this.IdItem = IdItem;
+        this.equipement = equipement;
+    }
     
 }

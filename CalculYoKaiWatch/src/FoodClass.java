@@ -1,11 +1,21 @@
 public class FoodClass {
     String nomClass;
-    int[] foodFamily;
+    Food[] food;
     int nbFood;
-
-    FoodClass(String nomClass, int FoodMax) 
+    FoodClass(String nomClass, int taille) 
     {
         this.nomClass = nomClass;
-        this.nbFood = FoodMax;
+        this.food = new Food[taille];
+        nbFood = 0;
     }
+    
+    public void addFood(Food f)
+    {
+        if(nbFood < food.length)
+        {
+            food[nbFood] = f;
+            nbFood++;
+        }      
+    }
+
 }
