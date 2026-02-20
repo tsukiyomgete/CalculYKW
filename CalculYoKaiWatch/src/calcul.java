@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class calcul {
+public class Calcul {
 	
 	public static void calculDegat()
 	{
@@ -87,15 +87,38 @@ public class calcul {
 		System.out.println("Your yokai is dealing: " + valeur);
 	}
 
-	public static void calculStats(Yokai y)
+	public static void calculStats(YokaiGeneral rorigoon)
 	{
-		int StatA;
-		int StatB;
-		int IV;
-		int Level;
+		StatA StatA = YokaiGeneral.yokai.statInit;
+		StatB StatB = YokaiGeneral.yokai.statEnd;
+		IV IV = rorigoon.ivYokai;
+		int Level = rorigoon.level;
 		int UncorrectedNumber;
+
+		int HP;
+		int STR;
+		int SPR;
+		int DEF;
+		int SPE;
+
+
 		Scanner sc = new Scanner(System.in);
-		
+		System.out.println("On va afficher les stats");
+
+		HP = StatA.BaseHP+(StatB.finalHP-StatA.BaseHP)*(Level-1)/98;
+		STR = StatA.BaseSTR+(StatB.finalSTR-StatA.BaseSTR)*(Level-1)/98;
+		SPR = StatA.BaseSPR+(StatB.finalSPR-StatA.BaseSPR)*(Level-1)/98;
+		DEF = StatA.BaseDEF+(StatB.finalDEF-StatA.BaseDEF)*(Level-1)/98;
+		SPE = StatA.BaseSPE+(StatB.finalSPE-StatA.BaseSPE)*(Level-1)/98;
+
+		System.out.println("HP" + HP);
+		System.out.println("STR" + STR);
+		System.out.println("SPR" + SPR);
+		System.out.println("DEF" + DEF);
+		System.out.println("SPE" + SPE);
+
+		/*
+
 		System.out.println("What's the stats of your yokai at level 1?");
 		String str = sc.nextLine();
 		StatA= Integer.parseInt(str);
@@ -115,7 +138,7 @@ public class calcul {
 		UncorrectedNumber = (int)(StatA+(StatB-StatA+IV)*(Level-1)/98);
 
 		System.out.println("Your yokai's base stats is: " + UncorrectedNumber);
-		
+		*/
 	}
 
 	public static void calculStatsCorrected()

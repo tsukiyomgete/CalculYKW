@@ -2,13 +2,14 @@
 
 public class App {
     
-	
-    		Attitude gentle = new Attitude("gentle",26,0,13,0,0);
+	public static void main(String[] args) throws Exception {
+        
+         	Attitude gentle = new Attitude("gentle",26,0,13,0,0);
     		Attitude tender = new Attitude("tender",52,0,0,0,0);
     		Attitude grouchy = new Attitude("grouchy",26,13,0,0,0);
     		Attitude rough = new Attitude("rough",0,26,0,0,0);
     		Attitude logical = new Attitude("logical",0,0,13,0,13);
-    		Attitude brainy = new Attitude("brainy",0,26,0,0,0);
+    		Attitude brainy = new Attitude("brainy",0,0,26,0,0);
     		Attitude careful = new Attitude("careful",0,0,13,13,0);
     		Attitude calm = new Attitude("calm",0,0,0,26,0);
     		Attitude twisted = new Attitude("twisted",0,0,0,0,13);
@@ -45,15 +46,13 @@ public class App {
 
 
 			Yokai Komasan = new Yokai("Komasan", 251, D, false, true, true, statFirstTotal[0], statEndTotal[0], Water, Fire, 1);
-		
-	
-	public static void main(String[] args) throws Exception {
-        
-        
 
+		YokaiGeneral rorigoon = new YokaiGeneral(1, Komasan,  "rori's goon", 60, 1, 1, 1, brainy, 1, 0);
+		
+		rorigoon.setIV(0,0,0,0,0);
       
         System.out.println("On va lancer le script de calcul");
-        calcul.calculStats(Yokai y);
+        Calcul.calculStats(rorigoon);
         /*Attitude.creaAttitude();*/
     }
 }
