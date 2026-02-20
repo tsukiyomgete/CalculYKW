@@ -1,3 +1,5 @@
+package yokai;
+
 public class FoodClass {
     String nomClass;
     Food[] food;

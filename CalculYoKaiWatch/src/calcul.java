@@ -1,5 +1,5 @@
-
 import java.util.Scanner;
+import yokai.*;
 
 public class Calcul {
 	
@@ -89,8 +89,8 @@ public class Calcul {
 
 	public static void calculStats(YokaiGeneral rorigoon)
 	{
-		StatA StatA = YokaiGeneral.yokai.statInit;
-		StatB StatB = YokaiGeneral.yokai.statEnd;
+		StatA StatA = rorigoon.yokai.statInit;
+		StatB StatB = rorigoon.yokai.statEnd;
 		IV IV = rorigoon.ivYokai;
 		int Level = rorigoon.level;
 		int UncorrectedNumber;

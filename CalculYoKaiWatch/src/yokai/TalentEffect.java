@@ -1,3 +1,5 @@
+package yokai;
+
 public class TalentEffect {
     public void Adrenaline()
     {

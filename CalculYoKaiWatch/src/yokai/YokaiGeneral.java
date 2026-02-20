@@ -1,16 +1,18 @@
+package yokai;
+
 public class YokaiGeneral {
-    static int rang1;
-    static Yokai yokai;
-    static String surnom;
-    static int level;
-    static int AttackLevel;
-    static int TechniqueLevel;
-    static int SoultimateLevel;
-    static Attitude attitudeYoKai;
-    static int LoafLevel;
-    static int TrainingCount;
-    static IV ivYokai;
-    static SportsClub SportsClub;
+    public static int rang1;
+    public static Yokai yokai;
+    public static String surnom;
+    public static int level;
+    public static int AttackLevel;
+    public static int TechniqueLevel;
+    public static int SoultimateLevel;
+    public static Attitude attitudeYoKai;
+    public static int LoafLevel;
+    public static int TrainingCount;
+    public static IV ivYokai;
+    public static SportsClub SportsClub;
 
     public YokaiGeneral(int rang1, Yokai yokai, String surnom, int level, int AttackLevel, int TechniqueLevel, int SoultimateLevel, Attitude attitudeYoKai, int LoafLevel, int TrainingCount) {
         this.rang1 = rang1;

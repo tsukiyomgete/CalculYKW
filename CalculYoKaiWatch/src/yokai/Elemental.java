@@ -1,5 +1,6 @@
+package yokai;
 public class Elemental {
-    String nom;
+    public String nom;
 
     public Elemental(String nom) 
     {

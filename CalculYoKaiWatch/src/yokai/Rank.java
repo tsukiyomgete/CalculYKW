@@ -1,8 +1,10 @@
+package yokai;
+
 public class Rank{
     char nomRank;
     int exp;
 
-    Rank(char nomRank)
+    public Rank(char nomRank)
     {
         this.nomRank = nomRank;
     }

@@ -1,4 +1,4 @@
-
+import yokai.*;
 
 public class App {
     

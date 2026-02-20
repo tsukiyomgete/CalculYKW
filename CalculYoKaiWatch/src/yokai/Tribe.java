@@ -1,9 +1,11 @@
+package yokai;
+
 public class Tribe {
     String nomTribu;
     Yokai[] listeYokai;
     int nbYokai;
 
-    Tribe (String nomTribu, int taille)
+    public Tribe (String nomTribu, int taille)
     {
         this.nomTribu = nomTribu;
         this.listeYokai = new Yokai[taille];

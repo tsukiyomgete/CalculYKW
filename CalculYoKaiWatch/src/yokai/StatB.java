@@ -1,9 +1,11 @@
+package yokai;
+
 public class StatB {
-    int finalHP;
-    int finalSTR;
-    int finalSPR;
-    int finalDEF;
-    int finalSPE;
+    public int finalHP;
+    public int finalSTR;
+    public int finalSPR;
+    public int finalDEF;
+    public int finalSPE;
 
     public StatB(int finalHP, int finalSTR, int finalSPR, int finalDEF, int finalSPE) {
         this.finalHP = finalHP;

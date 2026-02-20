@@ -1,3 +1,5 @@
+package yokai;
+
 public class SportsClub {
     int HP;
     int STR;

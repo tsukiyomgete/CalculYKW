@@ -1,11 +1,13 @@
+package yokai;
+
 public class Equipement{
-    int IdEquipement;
-    int BaseSTR;
-    int BaseSPR;
-    int BaseDEF;
-    int BaseSPE;
-    boolean IsFusable;
-    boolean IsHoldable;
+    public int IdEquipement;
+    public int BaseSTR;
+    public int BaseSPR;
+    public int BaseDEF;
+    public int BaseSPE;
+    public boolean IsFusable;
+    public boolean IsHoldable;
 
     public Equipement(int IdEquipement, int BaseSTR, int BaseSPR, int BaseDEF, int BaseSPE, boolean IsFusable, boolean IsHoldable) {
         this.IdEquipement = IdEquipement;
