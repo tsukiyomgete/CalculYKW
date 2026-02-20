@@ -1,10 +1,9 @@
 public class Rank{
-    String nomRank;
+    char nomRank;
     int exp;
 
-    Rank(String nomRank, int exp)
+    Rank(char nomRank)
     {
         this.nomRank = nomRank;
-        this.exp = exp;
     }
 }

@@ -17,15 +17,13 @@ public class Yokai {
 
     Item[] HoldingItem;
 
-    Yokai(String nom, Rank rangYokai,boolean isLegendary, face_icon faceYoKai, boolean canEvolve, boolean  canFusion, FoodClass favFood, int BaseHP, int BaseSTR, int BaseSPR, int BaseDEF, int BaseSPE, Elemental weak, Elemental rest, int maxItem)
+    Yokai(String nom, Rank rangYokai,boolean isLegendary, boolean canEvolve, boolean  canFusion,  int BaseHP, int BaseSTR, int BaseSPR, int BaseDEF, int BaseSPE, Elemental weak, Elemental rest, int maxItem)
     {
         this.nom = nom;
         this.rangYokai = rangYokai;
-        this.faceYoKai = faceYoKai;
         this.canEvolve = canFusion;
         this.isLegendary = isLegendary;
         
-        this.favFoodType = favFoodType;
         
         this.BaseSTR = BaseSTR;
         this.BaseSPR = BaseSPR;
