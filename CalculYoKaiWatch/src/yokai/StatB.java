@@ -15,5 +15,25 @@ public class StatB {
         this.finalSPE = finalSPE;
     }
 
+    public int GetFinalHP() {
+        return finalHP;
+    }
+
+    public int GetFinalSTR() {
+        return finalSTR;
+    }
+    
+    public int GetFinalSPR() {
+        return finalSPR;
+    }
+
+    public int GetFinalDEF() {
+        return finalDEF;
+    }
+
+    public int GetFinalSPE() {
+        return finalSPE;
+    }
+
     
 }

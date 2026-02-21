@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import yokai.*;
 
-public class Calcul {
+public class calcul {
 	
 	public static void calculDegat()
 	{
@@ -104,12 +104,13 @@ public class Calcul {
 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("On va afficher les stats");
+		double niv = (Level - 1)/98.0;
 
-		HP = StatA.BaseHP+(StatB.finalHP-StatA.BaseHP)*(Level-1)/98;
-		STR = StatA.BaseSTR+(StatB.finalSTR-StatA.BaseSTR)*(Level-1)/98;
-		SPR = StatA.BaseSPR+(StatB.finalSPR-StatA.BaseSPR)*(Level-1)/98;
-		DEF = StatA.BaseDEF+(StatB.finalDEF-StatA.BaseDEF)*(Level-1)/98;
-		SPE = StatA.BaseSPE+(StatB.finalSPE-StatA.BaseSPE)*(Level-1)/98;
+		HP  = (int) Math.floor(StatA.GetBaseHP()+(StatB.GetFinalHP()-StatA.GetBaseHP()+IV.GetIvHP())*niv);
+		STR = (int) Math.floor(StatA.GetBaseSTR()+(StatB.GetFinalSTR()-StatA.GetBaseSTR()+IV.GetIvSTR())*niv);
+		SPR = (int) Math.floor(StatA.GetBaseSPR()+(StatB.GetFinalSPR()-StatA.GetBaseSPR()+IV.GetIvSPR())*niv);
+		DEF = (int) Math.floor(StatA.GetBaseDEF()+(StatB.GetFinalDEF()-StatA.GetBaseDEF()+IV.GetIvDEF())*niv);
+		SPE = (int) Math.floor(StatA.GetBaseSPE()+(StatB.GetFinalSPE()-StatA.GetBaseSPE()+IV.GetIvSPE())*niv);
 
 		System.out.println("HP" + HP);
 		System.out.println("STR" + STR);
@@ -140,6 +141,8 @@ public class Calcul {
 		System.out.println("Your yokai's base stats is: " + UncorrectedNumber);
 		*/
 	}
+
+	
 
 	public static void calculStatsCorrected()
 	{

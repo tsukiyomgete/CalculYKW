@@ -1,11 +1,11 @@
 package yokai;
 
 public class StatA {
-    public int BaseHP;
-    public int BaseSTR;
-    public int BaseSPR;
-    public int BaseDEF;
-    public int BaseSPE;
+    int BaseHP;
+    int BaseSTR;
+    int BaseSPR;
+    int BaseDEF;
+    int BaseSPE;
 
     public StatA(int BaseHP, int BaseSTR, int BaseSPR, int BaseDEF, int BaseSPE) {
         this.BaseHP = BaseHP;
@@ -15,5 +15,24 @@ public class StatA {
         this.BaseSPE = BaseSPE;
     }
 
+    public int GetBaseHP() {
+        return BaseHP;
+    }
+
+    public int GetBaseSTR() {
+        return BaseSTR;
+    }
+    
+    public int GetBaseSPR() {
+        return BaseSPR;
+    }
+
+    public int GetBaseDEF() {
+        return BaseHP;
+    }
+
+    public int GetBaseSPE() {
+        return BaseHP;
+    }
     
 }

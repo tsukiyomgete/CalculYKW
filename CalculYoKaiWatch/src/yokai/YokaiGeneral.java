@@ -43,13 +43,28 @@ public class YokaiGeneral {
         this.SportsClub = SportsClub;
     }
 
-    public static void setIV(int HP, int STR, int SPR, int DEF, int SPE)
+    public YokaiGeneral(int rang1, Yokai yokai, String surnom,int level, int AttackLevel, int TechniqueLevel, int SoultimateLevel, Attitude attitudeYoKai, int LoafLevel, int TrainingCount, IV ivYokai) {
+        this.rang1 = rang1;
+        this.yokai = yokai;
+        this.surnom = surnom;
+        this.level = level;
+        this.AttackLevel = AttackLevel;
+        this.TechniqueLevel = TechniqueLevel;
+        this.SoultimateLevel = SoultimateLevel;
+        this.attitudeYoKai = attitudeYoKai;
+        this.LoafLevel = LoafLevel;
+        this.TrainingCount = TrainingCount;
+        this.ivYokai = ivYokai;
+        
+    }
+
+    public  void setIV(int HP, int STR, int SPR, int DEF, int SPE)
     {
-        ivYokai.HP = HP;
-        ivYokai.STR = STR;
-        ivYokai.SPR = SPR;
-        ivYokai.DEF = DEF;
-        ivYokai.SPE = SPE;
+        this.ivYokai.HP = HP;
+        this.ivYokai.STR = STR;
+        this.ivYokai.SPR = SPR;
+        this.ivYokai.DEF = DEF;
+        this.ivYokai.SPE = SPE;
 
     }
     

@@ -35,24 +35,24 @@ public class App {
 
 			StatA[] statFirstTotal = 
 			{
-				new StatA(41,4,26,9,21)
+				new StatA(42,9,19,10,13)
 			};
 
 			StatB[] statEndTotal =
 			{
-				new StatB(343,40,190,102,160)
+				new StatB(310,103,162,114,149)
 			};
 
-
+			IV yourIv = new IV(0,0,0,0,0);
 
 			Yokai Komasan = new Yokai("Komasan", 251, D, false, true, true, statFirstTotal[0], statEndTotal[0], Water, Fire, 1);
 
-		YokaiGeneral rorigoon = new YokaiGeneral(1, Komasan,  "rori's goon", 60, 1, 1, 1, brainy, 1, 0);
+		YokaiGeneral rorigoon = new YokaiGeneral(1, Komasan,  "rori's goon", 60, 1, 1, 1, brainy, 1, 0, yourIv);
 		
-		rorigoon.setIV(0,0,0,0,0);
+		rorigoon.setIV(15,15,15 ,15,15);
       
         System.out.println("On va lancer le script de calcul");
-        Calcul.calculStats(rorigoon);
+        calcul.calculStats(rorigoon);
         /*Attitude.creaAttitude();*/
     }
 }

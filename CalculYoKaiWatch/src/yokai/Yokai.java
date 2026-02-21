@@ -33,6 +33,8 @@ public class Yokai {
         this.HoldingItem = new Item[maxItem];
     }
 
+    
+
 
 
 }
