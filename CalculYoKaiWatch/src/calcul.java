@@ -3,7 +3,7 @@ import yokai.*;
 
 public class calcul {
 	
-	public static void calculDegat()
+	public void calculDegat()
 	{
 		final int YokaiNumber = 6;
 		final int maxDamage = 999;
@@ -87,14 +87,15 @@ public class calcul {
 		System.out.println("Your yokai is dealing: " + valeur);
 	}
 
-	public static void calculStats(YokaiGeneral rorigoon)
+	public static Stat calculStats(YokaiGeneral rorigoon)
 	{
-		StatA StatA = rorigoon.yokai.statInit;
-		StatB StatB = rorigoon.yokai.statEnd;
+		Stat StatA = rorigoon.yokai.statInit;
+		Stat StatB = rorigoon.yokai.statEnd;
 		IV IV = rorigoon.ivYokai;
 		int Level = rorigoon.level;
 		int UncorrectedNumber;
 
+		
 		int HP;
 		int STR;
 		int SPR;
@@ -106,11 +107,11 @@ public class calcul {
 		System.out.println("On va afficher les stats");
 		double niv = (Level - 1)/98.0;
 
-		HP  = (int) Math.floor(StatA.GetBaseHP()+(StatB.GetFinalHP()-StatA.GetBaseHP()+IV.GetIvHP())*niv);
-		STR = (int) Math.floor(StatA.GetBaseSTR()+(StatB.GetFinalSTR()-StatA.GetBaseSTR()+IV.GetIvSTR())*niv);
-		SPR = (int) Math.floor(StatA.GetBaseSPR()+(StatB.GetFinalSPR()-StatA.GetBaseSPR()+IV.GetIvSPR())*niv);
-		DEF = (int) Math.floor(StatA.GetBaseDEF()+(StatB.GetFinalDEF()-StatA.GetBaseDEF()+IV.GetIvDEF())*niv);
-		SPE = (int) Math.floor(StatA.GetBaseSPE()+(StatB.GetFinalSPE()-StatA.GetBaseSPE()+IV.GetIvSPE())*niv);
+		HP  = (int) Math.floor(StatA.GetHP()+(StatB.GetHP()-StatA.GetHP()+IV.GetIvHP())*niv);
+		STR = (int) Math.floor(StatA.GetSTR()+(StatB.GetSTR()-StatA.GetSTR()+IV.GetIvSTR())*niv);
+		SPR = (int) Math.floor(StatA.GetSPR()+(StatB.GetSPR()-StatA.GetSPR()+IV.GetIvSPR())*niv);
+		DEF = (int) Math.floor(StatA.GetDEF()+(StatB.GetDEF()-StatA.GetDEF()+IV.GetIvDEF())*niv);
+		SPE = (int) Math.floor(StatA.GetSPE()+(StatB.GetSPE()-StatA.GetSPE()+IV.GetIvSPE())*niv);
 
 		System.out.println("HP" + HP);
 		System.out.println("STR" + STR);
@@ -118,28 +119,7 @@ public class calcul {
 		System.out.println("DEF" + DEF);
 		System.out.println("SPE" + SPE);
 
-		/*
-
-		System.out.println("What's the stats of your yokai at level 1?");
-		String str = sc.nextLine();
-		StatA= Integer.parseInt(str);
-
-		System.out.println("What's the stats of your yokai at level 99?");
-		str = sc.nextLine();
-		StatB= Integer.parseInt(str);
-
-		System.out.println("What's the number of IV of your Yokai?");
-		str = sc.nextLine();
-		IV= Integer.parseInt(str);
-
-		System.out.println("What's the level of your yokai?");
-		str = sc.nextLine();
-		Level= Integer.parseInt(str);
-
-		UncorrectedNumber = (int)(StatA+(StatB-StatA+IV)*(Level-1)/98);
-
-		System.out.println("Your yokai's base stats is: " + UncorrectedNumber);
-		*/
+		return UncoStatActu;
 	}
 
 	

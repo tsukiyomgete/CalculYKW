@@ -1,18 +1,22 @@
 package yokai;
 
 public class YokaiGeneral {
-    public static int rang1;
-    public static Yokai yokai;
-    public static String surnom;
-    public static int level;
-    public static int AttackLevel;
-    public static int TechniqueLevel;
-    public static int SoultimateLevel;
-    public static Attitude attitudeYoKai;
-    public static int LoafLevel;
-    public static int TrainingCount;
-    public static IV ivYokai;
-    public static SportsClub SportsClub;
+    public int rang1;
+    public Yokai yokai;
+    public String surnom;
+
+    Stat StatActu;
+
+
+    public int level;
+    public int AttackLevel;
+    public int TechniqueLevel;
+    public int SoultimateLevel;
+    public Attitude attitudeYoKai;
+    public int LoafLevel;
+    public int TrainingCount;
+    public IV ivYokai;
+    public SportsClub SportsClub;
 
     public YokaiGeneral(int rang1, Yokai yokai, String surnom, int level, int AttackLevel, int TechniqueLevel, int SoultimateLevel, Attitude attitudeYoKai, int LoafLevel, int TrainingCount) {
         this.rang1 = rang1;
@@ -66,6 +70,15 @@ public class YokaiGeneral {
         this.ivYokai.DEF = DEF;
         this.ivYokai.SPE = SPE;
 
+    }
+
+    public void setStat(Stat stat)
+    {
+        this.StatActu.HP = stat.HP;
+        this.StatActu.STR = stat.STR;
+        this.StatActu.SPR = stat.SPR;
+        this.StatActu.DEF = stat.DEF;
+        this.StatActu.SPE = stat.SPE;
     }
     
 
