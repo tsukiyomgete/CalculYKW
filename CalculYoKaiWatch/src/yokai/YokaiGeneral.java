@@ -8,7 +8,7 @@ public class YokaiGeneral {
     Stat StatActu;
     Equipement ItemYokai;
 
-    public int level;
+    int level;
     public int AttackLevel;
     public int TechniqueLevel;
     public int SoultimateLevel;
@@ -38,6 +38,17 @@ public class YokaiGeneral {
 
         this.SportsClub = new SportsClub(0,0,0,0);
         this.StatActu = new Stat(0,0,0,0, 0);
+        this.ivYokai = new IV(0, 0, 0, 0,0);
+    }
+
+    public String GetName()
+    {
+        return yokai.GetName();
+    }
+
+    public int GetLevel()
+    {
+        return level;
     }
 
     public void setIV(int HP, int STR, int SPR, int DEF, int SPE)
@@ -72,6 +83,27 @@ public class YokaiGeneral {
     public SportsClub GetSportsClub()
     {
         return SportsClub;
+    }
+
+    public int GetHP()
+    {
+        return StatActu.HP;
+    }
+    public int GetSTR()
+    {
+        return StatActu.STR;
+    }
+    public int GetSPR()
+    {
+        return StatActu.SPR;
+    }
+    public int GetDEF()
+    {
+        return StatActu.DEF;
+    }
+     public int GetSPE()
+    {
+        return StatActu.SPE;
     }
     
 

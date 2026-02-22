@@ -1,11 +1,11 @@
 package yokai;
 
 public class Yokai {
-    public String nom;
-    public Rank rangYokai;
+    String nom;
+    Rank rangYokai;
     public face_icon faceYoKai;
-    public boolean canEvolve;
-    public boolean canFusion;
+    boolean canEvolve;
+    boolean canFusion;
     public boolean isLegendary;
     public FoodClass favFoodType;
     public int idMedallium;
@@ -33,6 +33,10 @@ public class Yokai {
         this.HoldingEquipement = new Equipement[maxItem];
     }
 
+    public String GetName()
+    {
+        return nom;
+    }
     
 
 

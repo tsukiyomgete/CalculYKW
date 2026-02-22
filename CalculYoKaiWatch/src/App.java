@@ -1,5 +1,7 @@
 import  static init.Init.*;
+import init.calcul;
 import yokai.*;
+
 
 public class App {
     
@@ -8,7 +10,6 @@ public class App {
 
 		YokaiGeneral rorigoon = new YokaiGeneral(1, Komasan,  "rori's goon", 60, brainy, yourIv, InvertedSpearOfHeaven);
 		
-		rorigoon.setIV(0,0,0 ,0,0);
       
         System.out.println("On va lancer le script de calcul");
         //rorigoon.setStat(calcul.calculStatsUncorrected(rorigoon));

@@ -1,3 +1,4 @@
+package init;
 import java.util.Scanner;
 import yokai.*;
 
@@ -92,7 +93,7 @@ public class calcul {
 		Stat StatA = yg.yokai.statInit;
 		Stat StatB = yg.yokai.statEnd;
 		IV IV = yg.ivYokai;
-		int Level = yg.level;
+		int Level = yg.GetLevel();
 	
 		int uHP;
 		int uSTR;
@@ -129,7 +130,7 @@ public class calcul {
 		Stat StatA = yg.yokai.statInit;
 		Stat StatB = yg.yokai.statEnd;
 		IV IV = yg.ivYokai;
-		int Level = yg.level;
+		int Level = yg.GetLevel();
 		Attitude atYG = yg.GetAttitude();
 		Equipement ItemYG = yg.GetEquipement();
 		SportsClub nbYG = yg.GetSportsClub();
