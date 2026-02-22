@@ -1,19 +1,59 @@
 package yokai;
 
 public class SportsClub {
-    int HP;
-    int STR;
-    int SPR;
-    int DEF;
-    int SPE;
+    int nbHP;
+    int nbSTR;
+    int nbSPR;
+    int nbDEF;
+    int nbSPE;
 
-    public SportsClub(int HP, int STR, int SPR, int DEF, int SPE) 
+    public SportsClub(int STR, int SPR, int DEF, int SPE) 
     {
-        this.HP = HP;
-        this.STR = STR;
-        this.SPR = SPR;
-        this.DEF = DEF;
-        this.SPE = SPE;
+        this.nbSTR = STR;
+        this.nbSPR = SPR;
+        this.nbDEF = DEF;
+        this.nbSPE = SPE;
+    }
+
+    public void addSTR()
+    {
+        nbSTR += 5;
+        nbDEF -= 2;
+    }
+    public void addSPR()
+    {
+        nbSPR+=5;
+        nbSPE-=2;
+    }
+    public void addDEF()
+    {
+        nbDEF+=5;
+        nbSPE-=2;
+    }
+    public void addSPE()
+    {
+        nbSPE+=5;
+        nbDEF-=2;
+    }
+
+    public int nbGetSTR()
+    {
+        return nbSTR;
+    }
+
+    public int nbGetSPR()
+    {
+        return nbSPR;
+    }
+
+    public int nbGetDEF()
+    {
+        return nbDEF;
+    }
+
+    public int nbGetSPE()
+    {
+        return nbSPE;
     }
 
 }

@@ -15,7 +15,7 @@ public class Yokai {
     public Elemental weakness;
     public Elemental resistance;
 
-    public Item[] HoldingItem;
+    public Equipement[] HoldingEquipement;
 
     public Yokai(String nom,int idMedallium, Rank rangYokai,boolean isLegendary, boolean canEvolve, boolean  canFusion, Stat statInit, Stat statEnd, Elemental weak, Elemental rest, int maxItem)
     {
@@ -30,7 +30,7 @@ public class Yokai {
         this.statEnd = statEnd;
         this.weakness = weak;
         this.resistance = rest;
-        this.HoldingItem = new Item[maxItem];
+        this.HoldingEquipement = new Equipement[maxItem];
     }
 
     

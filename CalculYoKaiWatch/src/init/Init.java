@@ -48,5 +48,9 @@ public class Init {
 
 			public static Yokai Komasan = new Yokai("Komasan", 251, D, false, true, true, statFirstTotal[0], statEndTotal[0], Water, Fire, 1);
 
+			public SportsClub Sports = new SportsClub(0,0,0,0);
+
+
+			public static Equipement InvertedSpearOfHeaven = new Equipement(1, 0, 20, 0, 0,0,false, false);
 		}
 

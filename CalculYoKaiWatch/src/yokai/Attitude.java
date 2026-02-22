@@ -1,15 +1,12 @@
 package yokai;
 
 public class Attitude {
-    public String nom;
-    public int hp;
-    public int str;
-    public int spr;
-    public int def;
-    public int spe;
-
-    
-    
+     String nom;
+     int hp;
+     int str;
+     int spr;
+     int def;
+     int spe;
 
     public Attitude(String nom, int Health, int Strength, int Spirit, int Defense, int Speed)
     {
@@ -21,5 +18,24 @@ public class Attitude {
         this.spe = Speed;
     }
 
-
+    public int GetHP()
+    {
+        return hp;
+    }
+    public int GetSTR()
+    {
+        return str;
+    }
+    public int GetSPR()
+    {
+        return spr;
+    }
+    public int GetDEF()
+    {
+        return def;
+    }
+    public int GetSPE()
+    {
+        return spe;
+    }
 }

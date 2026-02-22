@@ -87,138 +87,94 @@ public class calcul {
 		System.out.println("Your yokai is dealing: " + valeur);
 	}
 
-	public static Stat calculStats(YokaiGeneral rorigoon)
+	public static Stat calculStatsUncorrected(YokaiGeneral yg)
 	{
-		Stat StatA = rorigoon.yokai.statInit;
-		Stat StatB = rorigoon.yokai.statEnd;
-		IV IV = rorigoon.ivYokai;
-		int Level = rorigoon.level;
-		int UncorrectedNumber;
-
-		
-		int HP;
-		int STR;
-		int SPR;
-		int DEF;
-		int SPE;
+		Stat StatA = yg.yokai.statInit;
+		Stat StatB = yg.yokai.statEnd;
+		IV IV = yg.ivYokai;
+		int Level = yg.level;
+	
+		int uHP;
+		int uSTR;
+		int uSPR;
+		int uDEF;
+		int uSPE;
 
 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("On va afficher les stats");
 		double niv = (Level - 1)/98.0;
 
-		HP  = (int) Math.floor(StatA.GetHP()+(StatB.GetHP()-StatA.GetHP()+IV.GetIvHP())*niv);
-		STR = (int) Math.floor(StatA.GetSTR()+(StatB.GetSTR()-StatA.GetSTR()+IV.GetIvSTR())*niv);
-		SPR = (int) Math.floor(StatA.GetSPR()+(StatB.GetSPR()-StatA.GetSPR()+IV.GetIvSPR())*niv);
-		DEF = (int) Math.floor(StatA.GetDEF()+(StatB.GetDEF()-StatA.GetDEF()+IV.GetIvDEF())*niv);
-		SPE = (int) Math.floor(StatA.GetSPE()+(StatB.GetSPE()-StatA.GetSPE()+IV.GetIvSPE())*niv);
+		uHP  = (int) Math.floor(StatA.GetHP()+(StatB.GetHP()-StatA.GetHP()+IV.GetIvHP())*niv);
+		uSTR = (int) Math.floor(StatA.GetSTR()+(StatB.GetSTR()-StatA.GetSTR()+IV.GetIvSTR())*niv);
+		uSPR = (int) Math.floor(StatA.GetSPR()+(StatB.GetSPR()-StatA.GetSPR()+IV.GetIvSPR())*niv);
+		uDEF = (int) Math.floor(StatA.GetDEF()+(StatB.GetDEF()-StatA.GetDEF()+IV.GetIvDEF())*niv);
+		uSPE = (int) Math.floor(StatA.GetSPE()+(StatB.GetSPE()-StatA.GetSPE()+IV.GetIvSPE())*niv);
 
-		System.out.println("HP" + HP);
-		System.out.println("STR" + STR);
-		System.out.println("SPR" + SPR);
-		System.out.println("DEF" + DEF);
-		System.out.println("SPE" + SPE);
+		System.out.println("HP" + uHP);
+		System.out.println("STR" + uSTR);
+		System.out.println("SPR" + uSPR);
+		System.out.println("DEF" + uDEF);
+		System.out.println("SPE" + uSPE);
+
+		Stat UncoStatActu = new Stat(uHP,uSTR,uSPR,uDEF,uSPE);
 
 		return UncoStatActu;
 	}
 
 	
 
-	public static void calculStatsCorrected()
+	public static Stat calculStatsCorrected(YokaiGeneral yg)
 	{
-		int StatA;
-		int StatB;
-		int IV;
-		int Level;
-		int CorrectedNumber;
+		Stat StatA = yg.yokai.statInit;
+		Stat StatB = yg.yokai.statEnd;
+		IV IV = yg.ivYokai;
+		int Level = yg.level;
+		Attitude atYG = yg.GetAttitude();
+		Equipement ItemYG = yg.GetEquipement();
+		SportsClub nbYG = yg.GetSportsClub();
 		
+		int aHP = atYG.GetHP();
+		int aSTR = atYG.GetSTR();
+		int aSPR = atYG.GetSPR();
+		int aDEF = atYG.GetDEF();
+		int aSPE = atYG.GetSPE();
 
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.println("What's the stats of your yokai at level 1?");
-		String str = sc.nextLine();
-		StatA= Integer.parseInt(str);
+		int iHP=ItemYG.GetHP();
+		int iSTR=ItemYG.GetSTR();
+		int iSPR=ItemYG.GetSPR();
+		int iDEF=ItemYG.GetDEF();
+		int iSPE=ItemYG.GetSPE();
 
-		System.out.println("What's the stats of your yokai at level 99?");
-		str = sc.nextLine();
-		StatB= Integer.parseInt(str);
+		int nbSTR= nbYG.nbGetSPR();
+		int nbSPR= nbYG.nbGetSPR();
+		int nbDEF= nbYG.nbGetDEF();
+		int nbSPE= nbYG.nbGetSPE();
 
-		System.out.println("What's the number of IV of your Yokai?");
-		str = sc.nextLine();
-		IV= Integer.parseInt(str);
+		int cHP;
+		int cSTR;
+		int cSPR;
+		int cDEF;
+		int cSPE;
 
-		System.out.println("What's the level of your yokai?");
-		str = sc.nextLine();
-		Level= Integer.parseInt(str);
+		System.out.println("On va afficher les stats corrigés");
+		double niv = (Level - 1)/98.0;
 
-		System.out.println("What's the attitude of your yokai?");
-		str = sc.nextLine();
+		cHP  = (int) Math.floor(StatA.GetHP()+(StatB.GetHP()-StatA.GetHP()+IV.GetIvHP())*niv+aHP*(1+Level/198)+iHP);
+		cSTR = (int) Math.floor(StatA.GetSTR()+(StatB.GetSTR()-StatA.GetSTR()+IV.GetIvSTR())*niv+aSTR*(1+Level/198)+nbSTR*5+iSTR);
+		cSPR = (int) Math.floor(StatA.GetSPR()+(StatB.GetSPR()-StatA.GetSPR()+IV.GetIvSPR())*niv+aSPR*(1+Level/198)+nbSPR*5+iSPR);
+		cDEF = (int) Math.floor(StatA.GetDEF()+(StatB.GetDEF()-StatA.GetDEF()+IV.GetIvDEF())*niv+aDEF*(1+Level/198)+nbDEF*5+iDEF);
+		cSPE = (int) Math.floor(StatA.GetSPE()+(StatB.GetSPE()-StatA.GetSPE()+IV.GetIvSPE())*niv+aDEF*(1+Level/198)+nbSPE*5+iSPE);
 
-/*
-		switch(str.toLowerCase()) {
+		System.out.println("HP" + cHP);
+		System.out.println("STR" + cSTR);
+		System.out.println("SPR" + cSPR);
+		System.out.println("DEF" + cDEF);
+		System.out.println("SPE" + cSPE);
 
-    		case "gentle":
-        		attitudes = gentle;
-        		break;
+		Stat CoStatActu = new Stat(cHP,cSTR,cSPR,cDEF,cSPE);
 
-    		case "rough":
-        		attitudeChoisie = rough;
-        		break;
-
-    		case "logical":
-        		attitudeChoisie = logical;
-        		break;
-
-    		case "brainy":
-        		attitudeChoisie = brainy;
-        		break;
-
-    		case "calm":
-        		attitudeChoisie = calm;
-        		break;
-
-    		case "careful":
-        		attitudeChoisie = careful;
-        		break;
-
-    		case "twisted":
-        		attitudeChoisie = twisted;
-        		break;
-
-    		case "cruel":
-        		attitudeChoisie = cruel;
-        		break;
-
-    		case "helpful":
-        		attitudeChoisie = helpful;
-        		break;
-
-    		case "devoted":
-        		attitudeChoisie = devoted;
-        		break;
-
-    		case "tender":
-        		attitudeChoisie = tender;
-        		break;
-
-    		case "grouchy":
-        		attitudeChoisie = grouchy;
-        		break;
-
-    		default:
-     		System.out.println("Unknown attitude");
-
-			
-}
-
-
-
-		CorrectedNumber = (int)(StatA+(StatB-StatA+IV)*(Level-1)/98);
-		
-
-
-		System.out.println("Your yokai's base stats is: " + CorrectedNumber);
-*/	
+		return CoStatActu;	
 	}
 }
 	

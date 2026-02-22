@@ -6,63 +6,39 @@ public class YokaiGeneral {
     public String surnom;
 
     Stat StatActu;
-
+    Equipement ItemYokai;
 
     public int level;
     public int AttackLevel;
     public int TechniqueLevel;
     public int SoultimateLevel;
-    public Attitude attitudeYoKai;
+    Attitude attitudeYoKai;
     public int LoafLevel;
     public int TrainingCount;
     public IV ivYokai;
     public SportsClub SportsClub;
 
-    public YokaiGeneral(int rang1, Yokai yokai, String surnom, int level, int AttackLevel, int TechniqueLevel, int SoultimateLevel, Attitude attitudeYoKai, int LoafLevel, int TrainingCount) {
+    public YokaiGeneral(int rang1, Yokai yokai, String surnom, int level, IV ivYokai) {
         this.rang1 = rang1;
         this.yokai = yokai;
         this.surnom = surnom;
-        this.level = level;
-        this.AttackLevel = AttackLevel;
-        this.TechniqueLevel = TechniqueLevel;
-        this.SoultimateLevel = SoultimateLevel;
-        this.attitudeYoKai = attitudeYoKai;
-        this.LoafLevel = LoafLevel;
-        this.TrainingCount = TrainingCount;
-    
+        this.level = level;   
     }
 
-    public YokaiGeneral(int rang1, Yokai yokai, int level, int AttackLevel, int TechniqueLevel, int SoultimateLevel, Attitude attitudeYoKai, int LoafLevel, int TrainingCount, IV ivYokai, SportsClub SportsClub) {
-        this.rang1 = rang1;
-        this.yokai = yokai;
-        this.surnom = null;
-        this.level = level;
-        this.AttackLevel = AttackLevel;
-        this.TechniqueLevel = TechniqueLevel;
-        this.SoultimateLevel = SoultimateLevel;
-        this.attitudeYoKai = attitudeYoKai;
-        this.LoafLevel = LoafLevel;
-        this.TrainingCount = TrainingCount;
-        this.ivYokai = ivYokai;
-        this.SportsClub = SportsClub;
-    }
-
-    public YokaiGeneral(int rang1, Yokai yokai, String surnom,int level, int AttackLevel, int TechniqueLevel, int SoultimateLevel, Attitude attitudeYoKai, int LoafLevel, int TrainingCount, IV ivYokai) {
+    public YokaiGeneral(int rang1, Yokai yokai, String surnom,int level, Attitude attitudeYoKai, IV ivYokai, Equipement EquipYokai) {
         this.rang1 = rang1;
         this.yokai = yokai;
         this.surnom = surnom;
+        this.ItemYokai = EquipYokai;
         this.level = level;
-        this.AttackLevel = AttackLevel;
-        this.TechniqueLevel = TechniqueLevel;
-        this.SoultimateLevel = SoultimateLevel;
+
         this.attitudeYoKai = attitudeYoKai;
-        this.LoafLevel = LoafLevel;
-        this.TrainingCount = TrainingCount;
         this.ivYokai = ivYokai;
-        
+
+        this.SportsClub = new SportsClub(0,0,0,0);
     }
 
-    public  void setIV(int HP, int STR, int SPR, int DEF, int SPE)
+    public void setIV(int HP, int STR, int SPR, int DEF, int SPE)
     {
         this.ivYokai.HP = HP;
         this.ivYokai.STR = STR;
@@ -79,6 +55,21 @@ public class YokaiGeneral {
         this.StatActu.SPR = stat.SPR;
         this.StatActu.DEF = stat.DEF;
         this.StatActu.SPE = stat.SPE;
+    }
+
+    public Attitude GetAttitude()
+    {
+        return this.attitudeYoKai;
+    }
+
+    public Equipement GetEquipement()
+    {
+        return ItemYokai;
+    }
+
+    public SportsClub GetSportsClub()
+    {
+        return SportsClub;
     }
     
 
