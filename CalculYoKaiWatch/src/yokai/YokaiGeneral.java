@@ -35,7 +35,9 @@ public class YokaiGeneral {
         this.attitudeYoKai = attitudeYoKai;
         this.ivYokai = ivYokai;
 
+
         this.SportsClub = new SportsClub(0,0,0,0);
+        this.StatActu = new Stat(0,0,0,0, 0);
     }
 
     public void setIV(int HP, int STR, int SPR, int DEF, int SPE)
