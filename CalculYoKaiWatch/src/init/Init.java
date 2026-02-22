@@ -36,17 +36,42 @@ public class Init {
 
 			public static Stat[] statFirstTotal = 
 			{
-				new Stat(41,4,26,9,21)
+				new Stat(41,4,26,9,21),
+				new Stat(36, 35, 3, 9, 11),
+				new Stat(40,18,18,12,17),
+				new Stat(65,8,43,30,22),
+				new Stat(50, 33, 5, 20, 27),
+				new Stat(63,11,17,33,11),
+			
+			
+			
 			};
 
 			public static Stat[] statEndTotal =
 			{
-				new Stat(343,40,190,102,160)
+				new Stat(343,40,190,102,160),
+				new Stat(290,212,38,115,115),
+				new Stat(321,155,155,85,112),
+				new Stat(508,45,281,180,141),
+				new Stat(416,203,39,155,181),
+				new Stat(448,90,156,218,86),
+			
+			
+			
 			};
 
 			public static IV yourIv = new IV(0,0,0,0,0);
 
 			public static Yokai Komasan = new Yokai("Komasan", 251, D, false, true, true, statFirstTotal[0], statEndTotal[0], Water, Fire, 1);
+			public static Yokai Pandle = new Yokai("Pandle", 3, E, false, true, false, statFirstTotal[1], statEndTotal[1], Water, Fire, 1 );
+			public static Yokai Draggie = new Yokai("Draggie", 537, D, false, false, true, statFirstTotal[2], statEndTotal[2], Earth, Wind, 1);
+			public static Yokai ReQPerate = new Yokai("Re-Q-Perate", 616, S, true, false, false, statFirstTotal[3], statEndTotal[3], Wind, Earth, 1);
+			public static Yokai Neighfarious = new Yokai("Neighfarious", 432, A, false, false, false, statFirstTotal[4], statEndTotal[4], Earth, Thunder, 1);
+			public static Yokai PrideShrimp = new Yokai("Pride Shrimp", 144, B, false, false, false, statFirstTotal[5], statEndTotal[5], Fire, Ice, 1);
+
+
+
+
 
 			public SportsClub Sports = new SportsClub(0,0,0,0);
 
