@@ -42,6 +42,8 @@ public class Init {
 				new Stat(65,8,43,30,22),
 				new Stat(50, 33, 5, 20, 27),
 				new Stat(63,11,17,33,11),
+				new Stat(45,4,36,14,25),
+				new Stat(51,8,39,13,25),
 			
 			
 			
@@ -55,7 +57,8 @@ public class Init {
 				new Stat(508,45,281,180,141),
 				new Stat(416,203,39,155,181),
 				new Stat(448,90,156,218,86),
-			
+				new Stat(301,49,241,117,174),
+				new Stat(397, 45, 239, 113, 186),
 			
 			
 			};
@@ -68,7 +71,8 @@ public class Init {
 			public static Yokai ReQPerate = new Yokai("Re-Q-Perate", 616, S, true, false, false, statFirstTotal[3], statEndTotal[3], Wind, Earth, 1);
 			public static Yokai Neighfarious = new Yokai("Neighfarious", 432, A, false, false, false, statFirstTotal[4], statEndTotal[4], Earth, Thunder, 1);
 			public static Yokai PrideShrimp = new Yokai("Pride Shrimp", 144, B, false, false, false, statFirstTotal[5], statEndTotal[5], Fire, Ice, 1);
-
+			public static Yokai Grainpa = new Yokai("Grainpa", 318, B, false, false, false,statFirstTotal[6], statEndTotal[6], Wind , Earth, 1);
+			public static Yokai Komaous = new Yokai("Komaous", 252, A, false, false, false, statFirstTotal[7], statEndTotal[7], Water, Fire, 1);
 
 
 
@@ -76,6 +80,6 @@ public class Init {
 			public SportsClub Sports = new SportsClub(0,0,0,0);
 
 
-			public static Equipement InvertedSpearOfHeaven = new Equipement(1, 0, 20, 0, 0,0,false, false);
+			public static Equipement InvertedSpearOfHeaven = new Equipement(1, 0, 0, 0, 0, 0,false, false);
 		}
 

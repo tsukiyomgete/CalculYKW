@@ -8,7 +8,8 @@ public class App {
 	public static void main(String[] args) throws Exception {
         
 
-		YokaiGeneral rorigoon = new YokaiGeneral(1, Komasan,  "rori's goon", 60, brainy, yourIv, InvertedSpearOfHeaven);
+		YokaiGeneral rorigoon = new YokaiGeneral(1, Komaous,  "rori's goon", 63, logical, yourIv, InvertedSpearOfHeaven);
+        rorigoon.setIV(16, 8, 8, 8, 8);
 		
       
         System.out.println("On va lancer le script de calcul");
