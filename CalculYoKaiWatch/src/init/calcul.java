@@ -1,9 +1,32 @@
 package init;
+import java.util.Random;
 import java.util.Scanner;
 import yokai.*;
 
+
+
 public class calcul {
 	
+
+	static Random r = new Random();
+
+	public static int randomGenerate(int max)
+	{
+		return r.nextInt(max);
+	}
+
+	public static int min(int valeurMax, int valeur)
+	{
+		if(valeur < valeurMax) 
+		{
+			return valeur;
+		}
+		else 
+		{
+			return valeurMax;
+		}
+	}
+
 	public void calculDegat()
 	{
 		final int YokaiNumber = 6;
@@ -90,9 +113,9 @@ public class calcul {
 
 	public static Stat calculStatsUncorrected(YokaiGeneral yg)
 	{
-		Stat StatA = yg.yokai.statInit;
-		Stat StatB = yg.yokai.statEnd;
-		IV IV = yg.ivYokai;
+		Stat StatA = yg.GetYokai().statInit;
+		Stat StatB = yg.GetYokai().statEnd;
+		IV IV = yg.GetIv();
 		int Level = yg.GetLevel();
 	
 		int uHP;
@@ -127,9 +150,9 @@ public class calcul {
 
 	public static Stat calculStatsCorrected(YokaiGeneral yg)
 	{
-		Stat StatA = yg.yokai.statInit;
-		Stat StatB = yg.yokai.statEnd;
-		IV IV = yg.ivYokai;
+		Stat StatA = yg.GetYokai().statInit;
+		Stat StatB = yg.GetYokai().statEnd;
+		IV IV = yg.GetIv();
 		int Level = yg.GetLevel();
 		Attitude atYG = yg.GetAttitude();
 		Equipement ItemYG = yg.GetEquipement();
@@ -177,5 +200,10 @@ public class calcul {
 
 		return CoStatActu;	
 	}
+
+	
+
+
+
 }
 	

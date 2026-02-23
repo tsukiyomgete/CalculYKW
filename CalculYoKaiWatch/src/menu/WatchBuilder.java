@@ -14,8 +14,11 @@ public class WatchBuilder {
     }
     
 
-    public void addYokai(YokaiGeneral yg)
+    public void addYokai()
     {
+        YokaiGeneral yg = new YokaiGeneral();
+        
+        
         for(int i=0; i<WatchTeam.length; i++)
         {
             if(WatchTeam[i]==null)

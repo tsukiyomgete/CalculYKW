@@ -1,9 +1,11 @@
 package yokai;
 
+import static init.Init.medaillum;
+import java.util.Scanner;
+
 public class YokaiGeneral {
-    public int rang1;
-    public Yokai yokai;
-    public String surnom;
+    Yokai yokai;
+    String surnom;
 
     Stat StatActu;
     Equipement ItemYokai;
@@ -15,31 +17,87 @@ public class YokaiGeneral {
     Attitude attitudeYoKai;
     public int LoafLevel;
     public int TrainingCount;
-    public IV ivYokai;
-    public SportsClub SportsClub;
+    IV ivYokai;
+    SportsClub SportsClub;
 
-    public YokaiGeneral(int rang1, Yokai yokai, String surnom, int level, IV ivYokai) {
-        this.rang1 = rang1;
+    
+    public YokaiGeneral()
+    {
+        
+    }
+
+
+
+    public YokaiGeneral(Yokai yokai, String surnom, int level, IV ivYokai) {
+        
         this.yokai = yokai;
         this.surnom = surnom;
         this.level = level;   
     }
 
-    public YokaiGeneral(int rang1, Yokai yokai, String surnom,int level, Attitude attitudeYoKai, IV ivYokai, Equipement EquipYokai) {
-        this.rang1 = rang1;
+    public YokaiGeneral(Yokai yokai, String surnom,int level, Attitude attitudeYoKai, Equipement EquipYokai) {
+        
         this.yokai = yokai;
         this.surnom = surnom;
         this.ItemYokai = EquipYokai;
         this.level = level;
 
         this.attitudeYoKai = attitudeYoKai;
-        this.ivYokai = ivYokai;
-
 
         this.SportsClub = new SportsClub(0,0,0,0);
         this.StatActu = new Stat(0,0,0,0, 0);
         this.ivYokai = new IV(0, 0, 0, 0,0);
     }
+
+    public Yokai GetYokai()
+    {
+        return yokai;
+    }
+
+    public IV GetIv()
+    {
+        return ivYokai;
+    }
+
+public void addYokai(Yokai y)
+{
+    if(yokai == null)
+    {
+    Scanner sc = new Scanner(System.in);
+    int trouve=-1;
+
+    System.out.println("What yokai do you want to add?");
+    String str = sc.nextLine();
+        
+    for(int i=0; i<medaillum.length; i++)
+    {
+        if(str.equalsIgnoreCase(medaillum[i].GetName()))
+        {
+        trouve = i;
+        }
+    }
+
+    if(trouve != -1)
+    {
+        yokai = medaillum[trouve];
+        System.out.println("The yokai " + medaillum[trouve].GetName() + " has been added!");
+    }
+    else
+    {
+        System.out.println("Yokai non-trouvé");
+    }
+
+    }
+    else
+    {
+        throw new IllegalArgumentException("You can't have 2 souls of a yokai in one");
+    }       
+}
+
+    
+
+
+
 
     public String GetName()
     {
@@ -51,15 +109,7 @@ public class YokaiGeneral {
         return level;
     }
 
-    public void setIV(int HP, int STR, int SPR, int DEF, int SPE)
-    {
-        this.ivYokai.HP = HP;
-        this.ivYokai.STR = STR;
-        this.ivYokai.SPR = SPR;
-        this.ivYokai.DEF = DEF;
-        this.ivYokai.SPE = SPE;
 
-    }
 
     public void setStat(Stat stat)
     {
@@ -69,6 +119,10 @@ public class YokaiGeneral {
         this.StatActu.DEF = stat.DEF;
         this.StatActu.SPE = stat.SPE;
     }
+
+
+
+
 
     public Attitude GetAttitude()
     {

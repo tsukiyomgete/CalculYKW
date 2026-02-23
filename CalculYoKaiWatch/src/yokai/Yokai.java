@@ -7,8 +7,8 @@ public class Yokai {
     boolean canEvolve;
     boolean canFusion;
     public boolean isLegendary;
-    public FoodClass favFoodType;
-    public int idMedallium;
+    
+    int idMedallium;
     public Stat statInit;
     public Stat statEnd;
     
@@ -33,11 +33,22 @@ public class Yokai {
         this.HoldingEquipement = new Equipement[maxItem];
     }
 
+
+
     public String GetName()
     {
         return nom;
     }
     
+    public char GetRank()
+    {
+        return rangYokai.GetRank();
+    }
+
+    public int GetID()
+    {
+        return idMedallium;
+    }
 
 
 

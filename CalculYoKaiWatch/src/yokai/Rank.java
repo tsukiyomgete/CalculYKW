@@ -8,4 +8,10 @@ public class Rank{
     {
         this.nomRank = nomRank;
     }
+
+
+    public char GetRank()
+    {
+        return nomRank;
+    }
 }
