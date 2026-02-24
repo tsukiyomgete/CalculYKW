@@ -10,7 +10,6 @@ public class Tribe {
     }
 
 
-
     public String GetTribe()
     {
         return nomTribu;

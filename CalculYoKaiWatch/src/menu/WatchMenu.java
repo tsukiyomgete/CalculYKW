@@ -16,7 +16,7 @@ public class WatchMenu {
 
     public void menu()
     {
-        int choix=0;
+        int choix=-1;
 
         while(choix!=3)
         {
@@ -25,6 +25,20 @@ public class WatchMenu {
             System.out.println("2) Afficher les équipes");
             System.out.println("3) Quitter");
             choix = sc.nextInt();
+            sc.nextLine();
+
+            if(choix == 1)
+            {
+                addTeam();
+            }
+            if(choix == 2)
+            {
+                printTeam();
+            }
+            if(choix == 3)
+            {
+                System.out.println("Bye !"); 
+            }
 
         }
 
