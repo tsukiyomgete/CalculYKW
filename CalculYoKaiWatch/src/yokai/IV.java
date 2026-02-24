@@ -1,5 +1,6 @@
 package yokai;
 import init.*;
+import java.util.Scanner;
 
 public class IV {
     final int MAXIVPOINTS = 40;
@@ -8,6 +9,7 @@ public class IV {
     int SPR;
     int DEF;
     int SPE;
+    Scanner sc = new Scanner(System.in);
 
     
     public IV()
@@ -50,8 +52,57 @@ public class IV {
 
     public void setIV()
     {
+        int str = sc.nextInt();
         int total=MAXIVPOINTS;
-        
+        System.out.println("Les IV de ton yokai disponible : " + (total-(HP/2 + STR + SPR + DEF +SPE)));
+        System.out.println("Choisi le nombre de PV pour ton yokai (0-32)");
+        if(str<0 || str>32)
+        {
+            throw new IllegalArgumentException("Erreur, IV pas compris entre les bonnes valeurs");
+        }
+        else
+        {
+            HP = str/2;
+            System.out.println("Choisi le nombre de STR (physique) pour ton yokai (0-16)");
+            if(str<0 || str>16)
+            {
+                throw new IllegalArgumentException("Erreur, IV pas compris entre les bonnes valeurs");
+            }
+            else
+            {
+               STR = str;
+               System.out.println("Choisi le nombre d'IV SPR (spéciale) pour ton yokai (0-16)");
+               if(str<0 || str>16)
+               {
+                    throw new IllegalArgumentException("Erreur, IV pas compris entre les bonnes valeurs");
+               }
+               else
+               {
+                SPR = str;
+                System.out.println("Choisi le nombre d'IV DEF pour ton yokai (0-16)");
+                if(str<0 || str>16)
+                {
+                    throw new IllegalArgumentException("Erreur, IV pas compris entre les bonnes valeurs");
+                }
+                else
+                {
+                    DEF = str;
+                    System.out.println("Choisi le nombre d'IV SPE pour ton yokai (0-16)");
+                    if(str<0 || str>16)
+                    {
+                        throw new IllegalArgumentException("Erreur, IV pas compris entre les bonnes valeurs");
+                    }
+                    else
+                    {
+                        SPE = str;
+                    }
+                }
+               }
+            }
+            
+        }
+
+
     }
 
     public void print()

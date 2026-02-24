@@ -4,7 +4,17 @@ import yokai.*;
 
 public class Init {
     		
-
+			public static Tribe Brave = new Tribe("Brave");
+			public static Tribe Mysterious = new Tribe("Mysterious");
+			public static Tribe Tough = new Tribe("Tough");
+			public static Tribe Charming = new Tribe("Charming");
+			public static Tribe Heartful = new Tribe("Heartful");
+			public static Tribe Shady = new Tribe("Shady");
+			public static Tribe Eerie = new Tribe("Eerie");
+			public static Tribe Slippery = new Tribe("Slippery");
+			public static Tribe Wicked = new Tribe("Wicked");
+			public static Tribe Enma = new Tribe("Enma");
+			
 			public static Attitude unknown = new Attitude("null", 0, 0, 0, 0, 0);
 			public static Attitude gentle = new Attitude("gentle",26,0,13,0,0);
     		public static Attitude tender = new Attitude("tender",52,0,0,0,0);
@@ -77,9 +87,9 @@ public class Init {
 
 
 			public static Yokai[] medaillum = {
-				new Yokai("Sigh-Durr", 1, E, false, statFirstTotal[0], statEndTotal[0], Earth ,Wind, Earth, 1),
-				new Yokai("Flippit", 2, E, false, statFirstTotal[1], statEndTotal[1], Earth ,Wind, Earth, 1),
-				new Yokai("Pandle", 3, E, false, statFirstTotal[2], statEndTotal[2], Fire ,Water, Fire, 1 ),
+				new Yokai("Sigh-Durr", 1, E, Brave,false, statFirstTotal[0], statEndTotal[0], Earth ,Wind, Earth, 1),
+				new Yokai("Flippit", 2, E, Brave,false, statFirstTotal[1], statEndTotal[1], Earth ,Wind, Earth, 1),
+				new Yokai("Pandle", 3, E, Brave ,false, statFirstTotal[2], statEndTotal[2], Fire ,Water, Fire, 1 ),
 			
 			};
 
@@ -88,10 +98,10 @@ public class Init {
 
 			public static void printYokai()
     		{
-        		System.out.printf("%-20s %-5s %-5s%n", "Yo-kai", "Rang", "N° Medaillum");
+        		System.out.printf("%-20s %-5s %-5s %10s%n", "Yo-kai", "Rang", "N° Medaillum", "Tribu");
 				for(Yokai y : medaillum)
 				{
-					System.out.printf("%-20s %-5s %-5d%n", y.GetName(), y.GetRank(), y.GetID());
+					System.out.printf("%-20s %-5s %-5s %17s%n", y.GetName(), y.GetRank(), y.GetID(), y.GetTribe());
 				}
     		}
 		}

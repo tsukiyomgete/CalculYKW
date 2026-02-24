@@ -34,8 +34,6 @@ public class YokaiGeneral {
         SportsClub = new SportsClub(0, 0, 0, 0);
     }
 
-
-
     public YokaiGeneral(Yokai yokai, String surnom, int level, IV ivYokai) {
         
         this.yokai = yokai;

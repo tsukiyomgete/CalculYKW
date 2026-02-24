@@ -2,21 +2,17 @@ package yokai;
 
 public class Tribe {
     String nomTribu;
-    Yokai[] listeYokai;
-    int nbYokai;
 
-    public Tribe (String nomTribu, int taille)
+
+    public Tribe (String nomTribu)
     {
         this.nomTribu = nomTribu;
-        this.listeYokai = new Yokai[taille];
-        nbYokai = 0;
     }
-    public void addYokai(Yokai y)
+
+
+
+    public String GetTribe()
     {
-        if (nbYokai < listeYokai.length) 
-        {
-            listeYokai[nbYokai] = y;
-            nbYokai++;
-        }
+        return nomTribu;
     }
 }

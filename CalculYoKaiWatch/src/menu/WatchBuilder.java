@@ -5,24 +5,22 @@ import yokai.*;
 
 public class WatchBuilder {
     String nomTeam;
-    int MAXYOKAI=6;
-    YokaiGeneral[] WatchTeam = new YokaiGeneral[MAXYOKAI];
+    final int MAXYOKAI=6;
+    YokaiGeneral[] WatchTeam;
 
     public WatchBuilder(String nomTeam)
     {
         this.nomTeam = nomTeam;
+        this.WatchTeam = new YokaiGeneral[MAXYOKAI];
     }
     
-
     public void addYokai()
     {
-        YokaiGeneral yg = new YokaiGeneral();
-        
-        
         for(int i=0; i<WatchTeam.length; i++)
         {
             if(WatchTeam[i]==null)
             {
+                YokaiGeneral yg = new YokaiGeneral();
                 WatchTeam[i] = yg;
             }
             else
@@ -46,6 +44,16 @@ public class WatchBuilder {
             System.out.println("SPE: " + WatchTeam[i].GetSPE());
             System.out.println(" ");
         }
+    }
+
+    public String GetTeamName()
+    {
+        return nomTeam;
+    }
+
+    public int GetTeamSize()
+    {
+        return WatchTeam.length;
     }
 
 

@@ -1,6 +1,4 @@
 package init;
-import static init.Init.medaillum;
-
 import java.util.Random;
 import java.util.Scanner;
 import yokai.*;
@@ -203,27 +201,7 @@ public class calcul {
 		return CoStatActu;	
 	}
 
-	public static Yokai rechercheYokai(String nomRecherche)
-	{
-		int trouve;
-		for(int i=0; i<medaillum.length; i++)
-        {
-            if(str.equalsIgnoreCase(medaillum[i].GetName()))
-            {
-            trouve = i;
-            }
-        }
-
-        if(trouve != -1)
-        {
-            yokai = medaillum[trouve];
-            System.out.println("The yokai " + medaillum[trouve].GetName() + " has been added!");
-        }
-        else
-        {
-            System.out.println("Yokai non-trouvé");
-        }
-	}
+	
 	
 
 
