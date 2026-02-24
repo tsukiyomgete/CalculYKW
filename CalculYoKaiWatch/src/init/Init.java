@@ -5,6 +5,7 @@ import yokai.*;
 public class Init {
     		
 
+			public static Attitude unknown = new Attitude("null", 0, 0, 0, 0, 0);
 			public static Attitude gentle = new Attitude("gentle",26,0,13,0,0);
     		public static Attitude tender = new Attitude("tender",52,0,0,0,0);
     		public static Attitude grouchy = new Attitude("grouchy",26,13,0,0,0);
@@ -76,9 +77,9 @@ public class Init {
 
 
 			public static Yokai[] medaillum = {
-				new Yokai("Sigh-Durr", 1, E, false, false, false, statFirstTotal[0], statEndTotal[0], Wind, Earth, 1),
-				new Yokai("Flippit", 2, E, false, false, false, statFirstTotal[1], statEndTotal[1], Wind, Earth, 1),
-				new Yokai("Pandle", 3, E, false, true, false, statFirstTotal[2], statEndTotal[2], Water, Fire, 1 ),
+				new Yokai("Sigh-Durr", 1, E, false, statFirstTotal[0], statEndTotal[0], Earth ,Wind, Earth, 1),
+				new Yokai("Flippit", 2, E, false, statFirstTotal[1], statEndTotal[1], Earth ,Wind, Earth, 1),
+				new Yokai("Pandle", 3, E, false, statFirstTotal[2], statEndTotal[2], Fire ,Water, Fire, 1 ),
 			
 			};
 

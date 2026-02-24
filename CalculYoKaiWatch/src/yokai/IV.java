@@ -48,6 +48,12 @@ public class IV {
         total -= this.SPE;
     }
 
+    public void setIV()
+    {
+        int total=MAXIVPOINTS;
+        
+    }
+
     public void print()
     {
         System.out.println("Les IV de ton yokai");

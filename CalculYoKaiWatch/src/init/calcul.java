@@ -1,4 +1,6 @@
 package init;
+import static init.Init.medaillum;
+
 import java.util.Random;
 import java.util.Scanner;
 import yokai.*;
@@ -113,8 +115,8 @@ public class calcul {
 
 	public static Stat calculStatsUncorrected(YokaiGeneral yg)
 	{
-		Stat StatA = yg.GetYokai().statInit;
-		Stat StatB = yg.GetYokai().statEnd;
+		Stat StatA = yg.GetYokai().GetStatInit();
+		Stat StatB = yg.GetYokai().GetStatEnd();
 		IV IV = yg.GetIv();
 		int Level = yg.GetLevel();
 	
@@ -150,8 +152,8 @@ public class calcul {
 
 	public static Stat calculStatsCorrected(YokaiGeneral yg)
 	{
-		Stat StatA = yg.GetYokai().statInit;
-		Stat StatB = yg.GetYokai().statEnd;
+		Stat StatA = yg.GetYokai().GetStatInit();
+		Stat StatB = yg.GetYokai().GetStatEnd();
 		IV IV = yg.GetIv();
 		int Level = yg.GetLevel();
 		Attitude atYG = yg.GetAttitude();
@@ -188,7 +190,7 @@ public class calcul {
 		cSTR = (int) Math.floor(StatA.GetSTR()+(StatB.GetSTR()-StatA.GetSTR()+IV.GetIvSTR())*niv+aSTR*(1+Level/198)+nbSTR*5+iSTR);
 		cSPR = (int) Math.floor(StatA.GetSPR()+(StatB.GetSPR()-StatA.GetSPR()+IV.GetIvSPR())*niv+aSPR*(1+Level/198)+nbSPR*5+iSPR);
 		cDEF = (int) Math.floor(StatA.GetDEF()+(StatB.GetDEF()-StatA.GetDEF()+IV.GetIvDEF())*niv+aDEF*(1+Level/198)+nbDEF*5+iDEF);
-		cSPE = (int) Math.floor(StatA.GetSPE()+(StatB.GetSPE()-StatA.GetSPE()+IV.GetIvSPE())*niv+aDEF*(1+Level/198)+nbSPE*5+iSPE);
+		cSPE = (int) Math.floor(StatA.GetSPE()+(StatB.GetSPE()-StatA.GetSPE()+IV.GetIvSPE())*niv+aSPE*(1+Level/198)+nbSPE*5+iSPE);
 
 		System.out.println("HP" + cHP);
 		System.out.println("STR" + cSTR);
@@ -201,6 +203,27 @@ public class calcul {
 		return CoStatActu;	
 	}
 
+	public static Yokai rechercheYokai(String nomRecherche)
+	{
+		int trouve;
+		for(int i=0; i<medaillum.length; i++)
+        {
+            if(str.equalsIgnoreCase(medaillum[i].GetName()))
+            {
+            trouve = i;
+            }
+        }
+
+        if(trouve != -1)
+        {
+            yokai = medaillum[trouve];
+            System.out.println("The yokai " + medaillum[trouve].GetName() + " has been added!");
+        }
+        else
+        {
+            System.out.println("Yokai non-trouvé");
+        }
+	}
 	
 
 
