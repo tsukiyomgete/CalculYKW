@@ -9,10 +9,13 @@ public class App {
         //rorigoon.setStat(calcul.calculStatsUncorrected(rorigoon));
         //int valR = calcul.randomGenerate(33);
         //System.out.println(valR);
-
-        WatchMenu Menu= new WatchMenu();
-
-        Menu.menu();
+        while(true)
+        {
+            WatchMenu Menu= new WatchMenu();
+            Menu.menu();
+            
+        }
+        
 
 
         

@@ -65,15 +65,12 @@ public class YokaiGeneral {
         return ivYokai;
     }
 
-    public void addYokai()
+    public void addYokai(String str)
     {
         if(yokai == null)
         {
             Scanner sc = new Scanner(System.in);
             int trouve=-1;
-
-            System.out.println("What yokai do you want to add?");
-            String str = sc.nextLine();
             if(rechercheYokai(str)!=0)
             {
                 yokai = medaillum[rechercheYokai(str)];
@@ -90,7 +87,6 @@ public class YokaiGeneral {
             int trouve=-1;
 
             System.out.println("With what yokai do you want to replace " + yokai.GetName() + " ?");
-            String str = sc.nextLine();
             if(rechercheYokai(str)!=0 && medaillum[rechercheYokai(str)]!=yokai)
             {
                 yokai = medaillum[rechercheYokai(str)];

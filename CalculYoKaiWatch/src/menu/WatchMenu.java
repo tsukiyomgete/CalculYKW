@@ -43,6 +43,7 @@ public class WatchMenu {
         }
 
     }
+    
 
     public void addTeam()
     {
@@ -62,16 +63,54 @@ public class WatchMenu {
 
     public void printTeam()
     {
-        if(nbTeam == 0)
+        int choix=-1;
+        while(choix!=2)
         {
-            System.out.println("Aucune équipe n'est encore disponible");
+            if(nbTeam == 0)
+            {
+                System.out.println("Aucune équipe n'est encore disponible");
+                return;
+            }
+            System.out.println("    TES EQUIPES     ");
+            System.out.printf("%-10s %-5s%n", "Nom de l'équipe", "Nombre de yokai");
+		    for (int i = 0; i < nbTeam; i++) 
+            {
+                WatchBuilder wT = yourTeam[i];
+                System.out.printf("%-10s %-5d%n", wT.GetTeamName(), wT.GetTeamSize());
+            }
+            System.out.println("Veux-tu quitter où modifier tes équipes ?");
+            System.out.println("1) Modifier");
+            System.out.println("2) Quitter");
+            choix = Integer.parseInt(sc.nextLine());
+            if(choix == 1)
+            {
+                searchTeam();
+                break;
+            }
+            else if(choix == 2)
+            {
+                break;
+            }
         }
-        System.out.println("    TES EQUIPES     ");
-        System.out.printf("%-10s %-5s%n", "Nom de l'équipe", "Nombre de yokai");
-		for(WatchBuilder wT : yourTeam)
-		{
-			System.out.printf("%-10s %-5d%n", wT.GetTeamName(), wT.GetTeamSize());
-		}
+    }
+
+    public void searchTeam()
+    {
+        System.out.println("Quel équipe souhaitez vous modifier ?");
+        String nomTeam = sc.nextLine();
+        for(int i=0; i<yourTeam.length; i++)
+        {
+            if(yourTeam[i] != null && nomTeam.equalsIgnoreCase(yourTeam[i].GetTeamName()))
+            {
+                yourTeam[i].print();
+                yourTeam[i].addYokai();
+            }
+            else
+            {
+                System.out.println("Aucune équipe ont été trouvé");
+                return;  
+            }
+        }
     }
 
 }
