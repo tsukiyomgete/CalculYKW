@@ -125,18 +125,37 @@ public class WatchMenu {
         {
             if(yourTeam[i] != null && nomTeam.equalsIgnoreCase(yourTeam[i].GetTeamName()))
             {
-                System.out.println("Souhaitez vous modifiez les IV et le niveau des Yokai?");
                 
-                
-                
+                //Si oui, on commence par le level et ensuite par les IV et on recalcule les stats ici    
                 yourTeam[i].print();
                 yourTeam[i].addYokai();
+
+                System.out.println("Souhaitez vous modifiez les IV et le niveau des Yokai?");
+                nomTeam = sc.nextLine();
+                if(nomTeam.equalsIgnoreCase("O"))
+                {
+                    System.out.println("A quel rang souhaitez vous modifier les stats du yokai?");
+                    int rang = Integer.parseInt(sc.nextLine()); 
+                    //yourTeam[i].modifYokai();
+                }
             }
             else
             {
                 System.out.println("Aucune équipe ont été trouvé");
                 return;  
             }
+        }
+    }
+
+    public boolean isModifyable(int iTeam, int rang)
+    {
+        if(yourTeam[iTeam].GetName(rang) != "???")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

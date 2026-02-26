@@ -71,10 +71,12 @@ public class YokaiGeneral {
 
     public void addYokai(String str)
     {
+        Scanner sc = new Scanner(System.in);
+        int trouve=-1;
+        
         if(yokai == null && yokai == unknownYokai)
         {
-            Scanner sc = new Scanner(System.in);
-            int trouve=-1;
+            
             if(rechercheYokai(str)!=0)
             {
                 yokai = medaillum[rechercheYokai(str)];
@@ -87,20 +89,29 @@ public class YokaiGeneral {
         }
         else
         {
-            Scanner sc = new Scanner(System.in);
-            int trouve=-1;
-
-            System.out.println("With what yokai do you want to replace " + yokai.GetName() + " ?");
             if(rechercheYokai(str)!=0 && medaillum[rechercheYokai(str)]!=yokai)
             {
                 yokai = medaillum[rechercheYokai(str)];
-                System.out.println("Souhaitez vous modifiez les IV ou le niveau des Yokai? O pour oui N pour non");
+                
             }
             else
             {
                 System.out.println("Yokai non trouvé!");
             }
         }         
+    }
+
+    public void modifYokai()
+    {
+        System.out.println("    ");
+        System.out.println("Veuillez Insérez le niveau de votre yokai");
+        System.out.println("    ");
+        String strLevel = sc.nextLine();
+        setLevel(strLevel);
+        System.out.println("    ");
+        System.out.println("Lancement de méthode setIV");
+        System.out.println("    ");
+        setIV();
     }
 
 
@@ -121,7 +132,7 @@ public class YokaiGeneral {
         if(trouve != -1)
         {
             yokai = medaillum[trouve];
-            System.out.println("The yokai " + medaillum[trouve].GetName() + " has been found!");
+            //System.out.println("The yokai " + medaillum[trouve].GetName() + " has been found!");
             return trouve;
         }
         else
@@ -164,12 +175,8 @@ public class YokaiGeneral {
         ivYokai.setIV();
     }
 
-    public void setLevel()
+    public void setLevel(String str)
     {
-        
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Insert the level of your yokai");
-        String str = sc.nextLine();
         int level=Integer.parseInt(str);
         if(level < 0 || level > 99)
         {

@@ -23,25 +23,40 @@ public class WatchBuilder {
         }
     }
     
-    public void addYokai()
+    public int addYokai()
     {
-            int rang=0;
-            System.out.println("A quel rang voulez vous ajouter un yokai? (1-6)");
-            String rangNum = sc.nextLine();
-            rang=Integer.parseInt(rangNum);
-            if(rang < 1 || rang > 6)
-            {
-                throw new IllegalArgumentException("Faux pas compris entre 1 et 6");
-            }
-            else
-            {
-                rang -= 1;
-                System.out.println("Avec quel yokai souhaites tu le remplacer?");
-                String yokaiString = sc.nextLine();
-                WatchTeam[rang] = new YokaiGeneral();
-                WatchTeam[rang].addYokai(yokaiString);
-                System.out.println(WatchTeam[rang].GetName());
-            }
+        int rang=0;
+        System.out.println("A quel rang voulez vous ajouter un yokai? (1-6)");
+        String rangNum = sc.nextLine();
+        rang=Integer.parseInt(rangNum);
+        if(rang < 1 || rang > 6)
+        {
+            throw new IllegalArgumentException("Faux pas compris entre 1 et 6");
+        }
+        else
+        {
+            rang -= 1;
+            System.out.println("Avec quel yokai souhaites tu le remplacer?");
+            String yokaiString = sc.nextLine();
+            WatchTeam[rang] = new YokaiGeneral();
+            WatchTeam[rang].addYokai(yokaiString);
+            System.out.println(WatchTeam[rang].GetName());
+            return rang;
+        }
+    }
+
+    public void modifYokai(int rang)
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("    ");
+        System.out.println("Veuillez Insérez le niveau de votre yokai");
+        System.out.println("    ");
+        String strLevel = sc.nextLine();
+        setLevel(strLevel);
+        System.out.println("    ");
+        System.out.println("Lancement de méthode setIV");
+        System.out.println("    ");
+        setIV();
     }
 
 
@@ -69,7 +84,10 @@ public class WatchBuilder {
         }
     }
 
-
+    public String GetName(int rang)
+    {
+        return WatchTeam[rang].GetName();
+    }
 
     public String GetTeamName()
     {
