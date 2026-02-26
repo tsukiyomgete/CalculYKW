@@ -72,17 +72,10 @@ public class IV {
             }
             else
             {
-               STR = str;
-               System.out.println("Choisi le nombre d'IV SPR (spéciale) pour ton yokai (0-16)");
-               str = sc.nextInt();
-               if(str<0 || str>16)
-               {
-                    throw new IllegalArgumentException("Erreur, IV pas compris entre les bonnes valeurs");
-               }
-               else
-               {
-                SPR = str;
-                System.out.println("Choisi le nombre d'IV DEF pour ton yokai (0-16)");
+                total-=HP;
+                System.out.println("Il te reste" + total);
+                STR = str;
+                System.out.println("Choisi le nombre d'IV SPR (spéciale) pour ton yokai (0-16)");
                 str = sc.nextInt();
                 if(str<0 || str>16)
                 {
@@ -90,8 +83,9 @@ public class IV {
                 }
                 else
                 {
-                    DEF = str;
-                    System.out.println("Choisi le nombre d'IV SPE pour ton yokai (0-16)");
+                    total-=STR;
+                    SPR = str;
+                    System.out.println("Choisi le nombre d'IV DEF pour ton yokai (0-16)");
                     str = sc.nextInt();
                     if(str<0 || str>16)
                     {
@@ -99,15 +93,21 @@ public class IV {
                     }
                     else
                     {
-                        SPE = str;
+                        DEF = str;
+                        System.out.println("Choisi le nombre d'IV SPE pour ton yokai (0-16)");
+                        str = sc.nextInt();
+                        if(str<0 || str>16)
+                        {
+                            throw new IllegalArgumentException("Erreur, IV pas compris entre les bonnes valeurs");
+                        }
+                        else
+                        {
+                            SPE = str;
+                        }
                     }
                 }
-               }
-            }
-            
+            }   
         }
-
-
     }
 
     public void print()
