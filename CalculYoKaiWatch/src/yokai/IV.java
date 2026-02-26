@@ -52,10 +52,11 @@ public class IV {
 
     public void setIV()
     {
-        int str = sc.nextInt();
+        
         int total=MAXIVPOINTS;
         System.out.println("Les IV de ton yokai disponible : " + (total-(HP/2 + STR + SPR + DEF +SPE)));
         System.out.println("Choisi le nombre de PV pour ton yokai (0-32)");
+        int str = sc.nextInt();
         if(str<0 || str>32)
         {
             throw new IllegalArgumentException("Erreur, IV pas compris entre les bonnes valeurs");
@@ -64,6 +65,7 @@ public class IV {
         {
             HP = str/2;
             System.out.println("Choisi le nombre de STR (physique) pour ton yokai (0-16)");
+            str = sc.nextInt();
             if(str<0 || str>16)
             {
                 throw new IllegalArgumentException("Erreur, IV pas compris entre les bonnes valeurs");
@@ -72,6 +74,7 @@ public class IV {
             {
                STR = str;
                System.out.println("Choisi le nombre d'IV SPR (spéciale) pour ton yokai (0-16)");
+               str = sc.nextInt();
                if(str<0 || str>16)
                {
                     throw new IllegalArgumentException("Erreur, IV pas compris entre les bonnes valeurs");
@@ -80,6 +83,7 @@ public class IV {
                {
                 SPR = str;
                 System.out.println("Choisi le nombre d'IV DEF pour ton yokai (0-16)");
+                str = sc.nextInt();
                 if(str<0 || str>16)
                 {
                     throw new IllegalArgumentException("Erreur, IV pas compris entre les bonnes valeurs");
@@ -88,6 +92,7 @@ public class IV {
                 {
                     DEF = str;
                     System.out.println("Choisi le nombre d'IV SPE pour ton yokai (0-16)");
+                    str = sc.nextInt();
                     if(str<0 || str>16)
                     {
                         throw new IllegalArgumentException("Erreur, IV pas compris entre les bonnes valeurs");

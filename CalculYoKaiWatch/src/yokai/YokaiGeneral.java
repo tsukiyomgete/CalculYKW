@@ -92,7 +92,6 @@ public class YokaiGeneral {
             if(rechercheYokai(str)!=0 && medaillum[rechercheYokai(str)]!=yokai)
             {
                 yokai = medaillum[rechercheYokai(str)];
-                
             }
             else
             {
@@ -101,18 +100,7 @@ public class YokaiGeneral {
         }         
     }
 
-    public void modifYokai()
-    {
-        System.out.println("    ");
-        System.out.println("Veuillez Insérez le niveau de votre yokai");
-        System.out.println("    ");
-        String strLevel = sc.nextLine();
-        setLevel(strLevel);
-        System.out.println("    ");
-        System.out.println("Lancement de méthode setIV");
-        System.out.println("    ");
-        setIV();
-    }
+    
 
 
 

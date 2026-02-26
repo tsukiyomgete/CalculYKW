@@ -52,11 +52,11 @@ public class WatchBuilder {
         System.out.println("Veuillez Insérez le niveau de votre yokai");
         System.out.println("    ");
         String strLevel = sc.nextLine();
-        setLevel(strLevel);
+        WatchTeam[rang].setLevel(strLevel);
         System.out.println("    ");
         System.out.println("Lancement de méthode setIV");
         System.out.println("    ");
-        setIV();
+        WatchTeam[rang].setIV();
     }
 
 

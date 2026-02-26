@@ -135,8 +135,14 @@ public class WatchMenu {
                 if(nomTeam.equalsIgnoreCase("O"))
                 {
                     System.out.println("A quel rang souhaitez vous modifier les stats du yokai?");
-                    int rang = Integer.parseInt(sc.nextLine()); 
+                    int rang = Integer.parseInt(sc.nextLine());
+                    rang-=1; 
+                    yourTeam[i].modifYokai(rang);
                     //yourTeam[i].modifYokai();
+                }
+                else
+                {
+                    return;
                 }
             }
             else
