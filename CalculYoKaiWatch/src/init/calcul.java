@@ -180,8 +180,6 @@ public class calcul {
 		int cSPR;
 		int cDEF;
 		int cSPE;
-
-		System.out.println("On va afficher les stats corrigés");
 		double niv = (Level - 1)/98.0;
 
 		cHP  = (int) Math.floor(StatA.GetHP()+(StatB.GetHP()-StatA.GetHP()+IV.GetIvHP())*niv+aHP*(1+Level/198)+iHP);

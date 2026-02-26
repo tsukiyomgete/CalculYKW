@@ -85,7 +85,9 @@ public class Init {
 			
 			};
 
-
+			public static Stat unknownStat = new Stat(0,0,0,0,0);
+			public static Yokai unknownYokai = new Yokai("???", 0, E, Wicked, false, unknownStat, unknownStat, Fire, Fire, Fire, 1);
+			public static Equipement unknowEquipement = new Equipement(0, 0, 0, 0, 0, 0, false, false);
 			public static Yokai[] medaillum = {
 				new Yokai("Sigh-Durr", 1, E, Brave,false, statFirstTotal[0], statEndTotal[0], Earth ,Wind, Earth, 1),
 				new Yokai("Flippit", 2, E, Brave,false, statFirstTotal[1], statEndTotal[1], Earth ,Wind, Earth, 1),

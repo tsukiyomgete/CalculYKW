@@ -16,45 +16,56 @@ public class WatchBuilder {
     {
         this.nomTeam = nomTeam;
         this.WatchTeam = new YokaiGeneral[MAXYOKAI];
-        WatchTeam[0] = new YokaiGeneral();
-        nbYokai=1;
+        for(int i=0; i<WatchTeam.length;i++)
+        {
+            WatchTeam[i]= new YokaiGeneral();
+            nbYokai++;
+        }
     }
     
     public void addYokai()
     {
-        if(nbYokai<MAXYOKAI)
-        {
-            System.out.println("Veuillez saisir un yokai à ajouter !");
-            String yokaiString = sc.nextLine();
-            
-            WatchTeam[nbYokai] = new YokaiGeneral();
-            WatchTeam[nbYokai].addYokai(yokaiString);
-            System.out.println(WatchTeam[nbYokai].GetName());
-            //WatchTeam[nbYokai]
-            nbYokai++;
-        }
-        
+            int rang=0;
+            System.out.println("A quel rang voulez vous ajouter un yokai? (1-6)");
+            String rangNum = sc.nextLine();
+            rang=Integer.parseInt(rangNum);
+            if(rang < 1 || rang > 6)
+            {
+                throw new IllegalArgumentException("Faux pas compris entre 1 et 6");
+            }
+            else
+            {
+                rang -= 1;
+                System.out.println("Avec quel yokai souhaites tu le remplacer?");
+                String yokaiString = sc.nextLine();
+                WatchTeam[rang] = new YokaiGeneral();
+                WatchTeam[rang].addYokai(yokaiString);
+                System.out.println(WatchTeam[rang].GetName());
+            }
     }
+
+
 
     public void print()
     {
         System.out.println(nomTeam);
-    }
-
-
-    public void printLN()
-    {
-        System.out.println(nomTeam);
-        for(int i=0; i<WatchTeam.length; i++)
+        for(int i=0; i<nbYokai; i++)
         {  
-            System.out.println(WatchTeam[i].GetName()+ " Level: " + WatchTeam[i].GetLevel());
-            WatchTeam[i].setStat(calcul.calculStatsCorrected(WatchTeam[i]));
-            System.out.println("HP: " + WatchTeam[i].GetHP());
-            System.out.println("STR: " + WatchTeam[i].GetSTR());
-            System.out.println("SPR: " + WatchTeam[i].GetSPR());
-            System.out.println("DEF: " + WatchTeam[i].GetDEF());
-            System.out.println("SPE: " + WatchTeam[i].GetSPE());
-            System.out.println(" ");
+            if((WatchTeam[i].GetEquipement() != null) || (WatchTeam[i].GetAttitude() != null))
+            {
+                System.out.println(WatchTeam[i].GetName()+ " Level: " + WatchTeam[i].GetLevel());
+                WatchTeam[i].setStat(calcul.calculStatsCorrected(WatchTeam[i]));
+                System.out.println("        ");
+                System.out.println("        ");
+            }
+            else
+            {
+                System.out.println(WatchTeam[i].GetName()+ " Level: " + WatchTeam[i].GetLevel());
+                WatchTeam[i].setStat(calcul.calculStatsUncorrected(WatchTeam[i]));
+                System.out.println("        ");
+                System.out.println("        ");
+            }
+            
         }
     }
 

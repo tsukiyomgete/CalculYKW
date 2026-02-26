@@ -78,16 +78,39 @@ public class WatchMenu {
                 WatchBuilder wT = yourTeam[i];
                 System.out.printf("%-10s %-5d%n", wT.GetTeamName(), wT.GetTeamSize());
             }
+            System.out.println("        ");
+            System.out.println("        "); 
+            System.out.println("        ");
+            System.out.println("        "); 
+
             System.out.println("Veux-tu quitter où modifier tes équipes ?");
             System.out.println("1) Modifier");
-            System.out.println("2) Quitter");
+            System.out.println("2) Afficher");
+            System.out.println("3) Quitter");
             choix = Integer.parseInt(sc.nextLine());
             if(choix == 1)
             {
                 searchTeam();
                 break;
             }
-            else if(choix == 2)
+            if(choix == 2)
+            {
+                System.out.println("Quel équipe souhaitez vous observez ?");
+                String nomTeam = sc.nextLine();
+                for(int i=0; i<yourTeam.length; i++)
+                {
+                    if(yourTeam[i] != null && nomTeam.equalsIgnoreCase(yourTeam[i].GetTeamName()))
+                    {
+                        yourTeam[i].print();
+                    }   
+                    else
+                    {
+                        System.out.println("Aucune équipe ont été trouvé");
+                        return;  
+                    }
+                }
+            }
+            else if(choix == 3)
             {
                 break;
             }
@@ -102,6 +125,10 @@ public class WatchMenu {
         {
             if(yourTeam[i] != null && nomTeam.equalsIgnoreCase(yourTeam[i].GetTeamName()))
             {
+                System.out.println("Souhaitez vous modifiez les IV et le niveau des Yokai?");
+                
+                
+                
                 yourTeam[i].print();
                 yourTeam[i].addYokai();
             }

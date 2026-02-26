@@ -1,7 +1,10 @@
 package yokai;
 
 import static init.Init.medaillum;
+import static init.Init.unknowEquipement;
 import static init.Init.unknown;
+import static init.Init.unknownYokai;
+
 import java.util.Scanner;
 
 public class YokaiGeneral {
@@ -24,14 +27,15 @@ public class YokaiGeneral {
     
     public YokaiGeneral()
     {
-        yokai = null;
-        surnom = null;
+        yokai = unknownYokai;
+        surnom = "???";
         StatActu = new Stat(0,0,0,0,0);
         ItemYokai = null;
         level = 0;
         attitudeYoKai = unknown;
         ivYokai = new IV(0,0,0,0,0);
         SportsClub = new SportsClub(0, 0, 0, 0);
+        ItemYokai = unknowEquipement;
     }
 
     public YokaiGeneral(Yokai yokai, String surnom, int level, IV ivYokai) {
@@ -67,7 +71,7 @@ public class YokaiGeneral {
 
     public void addYokai(String str)
     {
-        if(yokai == null)
+        if(yokai == null && yokai == unknownYokai)
         {
             Scanner sc = new Scanner(System.in);
             int trouve=-1;
@@ -90,6 +94,7 @@ public class YokaiGeneral {
             if(rechercheYokai(str)!=0 && medaillum[rechercheYokai(str)]!=yokai)
             {
                 yokai = medaillum[rechercheYokai(str)];
+                System.out.println("Souhaitez vous modifiez les IV ou le niveau des Yokai? O pour oui N pour non");
             }
             else
             {
@@ -150,6 +155,29 @@ public class YokaiGeneral {
         else
         {
             surnom = str;
+        }
+    }
+
+    public void setIV()
+    {
+        System.out.println("On va générer les IV de ce yokai");
+        ivYokai.setIV();
+    }
+
+    public void setLevel()
+    {
+        
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Insert the level of your yokai");
+        String str = sc.nextLine();
+        int level=Integer.parseInt(str);
+        if(level < 0 || level > 99)
+        {
+            throw new IllegalArgumentException("Impossible, valeur de niveau non comprise");
+        }
+        else
+        {
+            this.level = level;
         }
     }
 
