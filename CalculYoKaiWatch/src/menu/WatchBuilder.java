@@ -1,13 +1,14 @@
 package menu;
 import init.calcul;
+import java.util.*;
 import yokai.*;
-import java.util.Scanner;
 
 
 public class WatchBuilder {
     String nomTeam;
     final int MAXYOKAI=6;
-    YokaiGeneral[] WatchTeam;
+    //YokaiGeneral[] WatchTeam;
+    ArrayList<YokaiGeneral> WatchTeam;
     int nbYokai;
 
     Scanner sc = new Scanner(System.in);
@@ -15,17 +16,13 @@ public class WatchBuilder {
     public WatchBuilder(String nomTeam)
     {
         this.nomTeam = nomTeam;
-        this.WatchTeam = new YokaiGeneral[MAXYOKAI];
-        for(int i=0; i<WatchTeam.length;i++)
-        {
-            WatchTeam[i]= new YokaiGeneral();
-            nbYokai++;
-        }
+        this.WatchTeam = new ArrayList<YokaiGeneral>();
+        
     }
     
     public int addYokai()
     {
-        int rang=0;
+        int rang=-1;
         System.out.println("A quel rang voulez vous ajouter un yokai? (1-6)");
         String rangNum = sc.nextLine();
         rang=Integer.parseInt(rangNum);
@@ -38,9 +35,15 @@ public class WatchBuilder {
             rang -= 1;
             System.out.println("Avec quel yokai souhaites tu le remplacer?");
             String yokaiString = sc.nextLine();
-            WatchTeam[rang] = new YokaiGeneral();
-            WatchTeam[rang].addYokai(yokaiString);
-            System.out.println(WatchTeam[rang].GetName());
+            YokaiGeneral yk = new YokaiGeneral();
+            yk.addYokai(yokaiString);
+            WatchTeam.add(rang, yk);
+            
+            //WatchTeam[rang] = new YokaiGeneral();
+            //WatchTeam[rang].addYokai(yokaiString);
+
+            System.out.println(WatchTeam.get(rang).GetName());
+            //System.out.println(WatchTeam[rang].GetName());
             return rang;
         }
     }
