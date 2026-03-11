@@ -4,13 +4,13 @@ import java.util.*;
 
 public class WatchMenu {
     final int MAXTEAM=20;
-    WatchBuilder[] yourTeam;
+    ArrayList<WatchBuilder> yourTeam;
     int nbTeam;
     Scanner sc = new Scanner(System.in);
     
     public WatchMenu()
     {
-        yourTeam = new WatchBuilder[MAXTEAM];
+        yourTeam = new ArrayList<WatchBuilder>();
         nbTeam=0;
     }
 
@@ -51,7 +51,8 @@ public class WatchMenu {
         {
             System.out.println("Choisissez le nom de votre équipe :");
             String nomTeam = sc.nextLine();
-            yourTeam[nbTeam] = new WatchBuilder(nomTeam);
+
+            yourTeam.add(nbTeam, new WatchBuilder(nomTeam));
             nbTeam++;
         }
         else
@@ -75,7 +76,7 @@ public class WatchMenu {
             System.out.printf("%-10s %-5s%n", "Nom de l'équipe", "Nombre de yokai");
 		    for (int i = 0; i < nbTeam; i++) 
             {
-                WatchBuilder wT = yourTeam[i];
+                WatchBuilder wT = yourTeam.get(i);
                 System.out.printf("%-10s %-5d%n", wT.GetTeamName(), wT.GetTeamSize());
             }
             System.out.println("        ");
@@ -97,11 +98,11 @@ public class WatchMenu {
             {
                 System.out.println("Quel équipe souhaitez vous observez ?");
                 String nomTeam = sc.nextLine();
-                for(int i=0; i<yourTeam.length; i++)
+                for(int i=0; i<yourTeam.size(); i++)
                 {
-                    if(yourTeam[i] != null && nomTeam.equalsIgnoreCase(yourTeam[i].GetTeamName()))
+                    if(yourTeam.get(i) != null && nomTeam.equalsIgnoreCase(yourTeam.get(i).GetTeamName()))
                     {
-                        yourTeam[i].print();
+                        yourTeam.get(i).print();
                     }   
                     else
                     {
@@ -121,47 +122,18 @@ public class WatchMenu {
     {
         System.out.println("Quel équipe souhaitez vous modifier ?");
         String nomTeam = sc.nextLine();
-        for(int i=0; i<yourTeam.length; i++)
+        for(int i=0; i<yourTeam.size(); i++)
         {
-            if(yourTeam[i] != null && nomTeam.equalsIgnoreCase(yourTeam[i].GetTeamName()))
+            if(yourTeam.get(i) != null && nomTeam.equalsIgnoreCase(yourTeam.get(i).GetTeamName()))
             {
-                
-                //Si oui, on commence par le level et ensuite par les IV et on recalcule les stats ici    
-                yourTeam[i].print();
-                yourTeam[i].addYokai();
-
-                System.out.println("Souhaitez vous modifiez les IV et le niveau des Yokai?");
-                nomTeam = sc.nextLine();
-                if(nomTeam.equalsIgnoreCase("O"))
-                {
-                    System.out.println("A quel rang souhaitez vous modifier les stats du yokai?");
-                    int rang = Integer.parseInt(sc.nextLine());
-                    rang-=1; 
-                    yourTeam[i].modifYokai(rang);
-                    //yourTeam[i].modifYokai();
-                }
-                else
-                {
-                    return;
-                }
+                yourTeam.get(i).print();
+                yourTeam.get(i).addYokai();
             }
             else
             {
                 System.out.println("Aucune équipe ont été trouvé");
                 return;  
             }
-        }
-    }
-
-    public boolean isModifyable(int iTeam, int rang)
-    {
-        if(yourTeam[iTeam].GetName(rang) != "???")
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 

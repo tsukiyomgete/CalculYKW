@@ -16,7 +16,7 @@ public class WatchBuilder {
     public WatchBuilder(String nomTeam)
     {
         this.nomTeam = nomTeam;
-        this.WatchTeam = new ArrayList<YokaiGeneral>();
+        this.WatchTeam = new ArrayList<>(Collections.nCopies(6, null));
         
     }
     
@@ -37,7 +37,7 @@ public class WatchBuilder {
             String yokaiString = sc.nextLine();
             YokaiGeneral yk = new YokaiGeneral();
             yk.addYokai(yokaiString);
-            WatchTeam.add(rang, yk);
+            WatchTeam.set(rang, yk);
             
             //WatchTeam[rang] = new YokaiGeneral();
             //WatchTeam[rang].addYokai(yokaiString);
@@ -50,46 +50,43 @@ public class WatchBuilder {
 
     public void modifYokai(int rang)
     {
-        Scanner sc = new Scanner(System.in);
         System.out.println("    ");
         System.out.println("Veuillez Insérez le niveau de votre yokai");
         System.out.println("    ");
         String strLevel = sc.nextLine();
-        WatchTeam[rang].setLevel(strLevel);
+        WatchTeam.get(rang).setLevel(strLevel);
         System.out.println("    ");
         System.out.println("Lancement de méthode setIV");
         System.out.println("    ");
-        WatchTeam[rang].setIV();
+        WatchTeam.get(rang).setIV();
     }
 
 
 
-    public void print()
-    {
-        System.out.println(nomTeam);
-        for(int i=0; i<nbYokai; i++)
-        {  
-            if((WatchTeam[i].GetEquipement() != null) || (WatchTeam[i].GetAttitude() != null))
-            {
-                System.out.println(WatchTeam[i].GetName()+ " Level: " + WatchTeam[i].GetLevel());
-                WatchTeam[i].setStat(calcul.calculStatsCorrected(WatchTeam[i]));
-                System.out.println("        ");
-                System.out.println("        ");
-            }
-            else
-            {
-                System.out.println(WatchTeam[i].GetName()+ " Level: " + WatchTeam[i].GetLevel());
-                WatchTeam[i].setStat(calcul.calculStatsUncorrected(WatchTeam[i]));
-                System.out.println("        ");
-                System.out.println("        ");
-            }
-            
+    public void print() {
+    System.out.println(nomTeam);
+    for (int i = 0; i < WatchTeam.size(); i++) {
+        YokaiGeneral yk = WatchTeam.get(i); // on stocke pour éviter les répétitions
+
+        if (yk == null) continue; // ✅ on saute les emplacements vides
+
+        System.out.println(yk.GetName() + " Level: " + yk.GetLevel());
+        System.out.println("Rang : " + (i+1));
+
+        if (yk.GetEquipement() != null || yk.GetAttitude() != null) { // ✅ null vérifié avant
+            yk.setStat(calcul.calculStatsCorrected(yk));
+        } else {
+            yk.setStat(calcul.calculStatsUncorrected(yk));
         }
+
+        System.out.println("        ");
+        System.out.println("        ");
     }
+}
 
     public String GetName(int rang)
     {
-        return WatchTeam[rang].GetName();
+        return WatchTeam.get(rang).GetName();
     }
 
     public String GetTeamName()
@@ -99,7 +96,7 @@ public class WatchBuilder {
 
     public int GetTeamSize()
     {
-        return WatchTeam.length;
+        return WatchTeam.size();
     }
 
 
