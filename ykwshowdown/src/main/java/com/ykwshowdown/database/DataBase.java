@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class DataBase {
 
-    private static final String URL = "jdbc:sqlite:db/ykwShowdown.db";
+    private static final String URL = "jdbc:mysql://root:ZPmMfFOoCvMCVtrxahcLRAmcAqVoHHMA@mainline.proxy.rlwy.net:43528/railway";
     private static Connection link;
 
     private DataBase() {}
@@ -22,12 +22,12 @@ public class DataBase {
         Statement requete = link.createStatement();
         requete.execute("""
         CREATE TABLE IF NOT EXISTS Users (
-            id          INTEGER PRIMARY KEY AUTOINCREMENT,
-            username    TEXT NOT NULL UNIQUE,
-            password    TEXT NOT NULL,
-            joined_date TEXT NOT NULL,
+            id          INTEGER PRIMARY KEY AUTO_INCREMENT,
+            username    VARCHAR(20) NOT NULL UNIQUE,
+            password    VARCHAR(255) NOT NULL,
+            joined_date DATE NOT NULL,
             elo         INTEGER DEFAULT 1000
-        )      
+            )      
         """);
     }
 
@@ -38,7 +38,7 @@ public class DataBase {
         java.sql.Date sqlDate = new java.sql.Date(dateUser.getTime());
 
         PreparedStatement uS = link.prepareStatement(
-            "INSERT INTO users (username, password, joined_date) VALUES (?, ?, ?)"
+            "INSERT INTO Users (username, password, joined_date) VALUES (?, ?, ?)"
         );
         uS.setString(1, userTest.getUser());
         uS.setString(2, userTest.getPassWord());
@@ -51,7 +51,7 @@ public class DataBase {
         if(link == null) init();
         userTest.addElo();
         PreparedStatement uS = link.prepareStatement(
-            "UPDATE users SET elo = ? WHERE id = ?"
+            "UPDATE Users SET elo = ? WHERE id = ?"
         );
         uS.setInt(1, userTest.getELO());
         uS.setInt(2, userTest.getID());
@@ -62,7 +62,7 @@ public class DataBase {
     {
         if(link == null) init();
         PreparedStatement rS = link.prepareStatement(
-            "SELECT id FROM users WHERE username = ?"
+            "SELECT id FROM Users WHERE username = ?"
         );
         rS.setString(1, username);
         ResultSet result = rS.executeQuery();
@@ -73,7 +73,7 @@ public class DataBase {
     {
         if(link == null) init();
         PreparedStatement rS = link.prepareStatement(
-            "SELECT password FROM users WHERE username = ?"
+            "SELECT password FROM Users WHERE username = ?"
         );
         rS.setString(1, username);
         ResultSet result = rS.executeQuery();
@@ -88,7 +88,7 @@ public class DataBase {
     {
         if(link == null) init();
         PreparedStatement rS = link.prepareStatement(
-            "SELECT COUNT(*) AS total FROM users"
+            "SELECT COUNT(*) AS total FROM Users"
         );
         ResultSet result = rS.executeQuery();
         if(result.next())
