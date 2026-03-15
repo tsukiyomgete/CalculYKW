@@ -8,31 +8,31 @@ public class HomeMenu
 {
     Scanner sc = new Scanner(System.in);
     String str;
-    private WatchList watchList = new WatchList(); // ← instance de WatchList
+    private WatchList watchList = new WatchList();
 
-    public void menu() { // ← retiré "static" pour pouvoir utiliser watchList
+    public void menu() {
         
         int choix = -1;
-        InitBaseDeDonnee();
+        initBaseDeDonnee();
+
         System.out.println("Possèdez vous un compte showdown chez nous ?");
         str = sc.nextLine();
+
+        User userConnected;
         if(str.equalsIgnoreCase("Oui"))
         {
-            User userlogged = logIn();
+            userConnected = logIn();
         }
         else
         {
-            User userTest =createUserData();
-
+            userConnected = createUserData();
             try {
-            DataBase baseDeDonnee = new DataBase();
-            baseDeDonnee.addUser(userTest);
-            System.out.println("Utilisateur ajouté à la base de données !");
+                DataBase.addUser(userConnected);
+                System.out.println("Utilisateur ajouté à la base de données !");
             } catch (SQLException e) {
-            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+                System.out.println("Erreur : " + e.getMessage());
             }
         }
-
 
         while (choix != 4) {
             System.out.println("    HOME MENU    ");
@@ -44,7 +44,7 @@ public class HomeMenu
             sc.nextLine();
 
             if (choix == 1) {
-                watchList.menu(); // ← ouvre le menu équipe complet
+                watchList.menu();
             }
             if (choix == 2) {
                 System.out.println("(Tier Actuel - à implémenter)");
@@ -54,6 +54,12 @@ public class HomeMenu
             }
             if (choix == 4) {
                 System.out.println("Bye !");
+                try {
+                    DataBase.closeLink();
+                } catch (SQLException e) {
+                    System.out.println("Erreur fermeture BDD : " + e.getMessage());
+                }
+                System.exit(0);
             }
         }
     }
@@ -64,62 +70,55 @@ public class HomeMenu
         String strMdp = "";
         do 
         {
-            System.out.println("Veuillez insérez votre nom d'utilisateur");
-            strUser =sc.nextLine();
-            System.out.println("Veuillez insérez votre mdp");
+            System.out.println("Veuillez insérez votre nom d'utilisateur (20 caractères max)");
+            strUser = sc.nextLine();
+            System.out.println("Veuillez insérez votre mdp (8 caractères min)");
             strMdp = sc.nextLine();
-        }while(strUser.length() > 20 || strMdp.length() < 8);
-        User userdata = new User(strUser, strMdp);
-        return userdata;
-         
+        } while(strUser.length() > 20 || strMdp.length() < 8);
+
+        return new User(strUser, strMdp);
     }
 
-    public void InitBaseDeDonnee()
+    public void initBaseDeDonnee()
     {
         try {
-        DataBase baseDeDonnee = new DataBase();
+            DataBase.init();
         } catch (SQLException e) {
-        System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
         }
     }
-
 
     public User logIn()
     {
         String strUser = "";
         String strMdp = "";
         try {
-        DataBase baseDeDonnee = new DataBase();
-        System.out.println("Veuillez insérez votre nom d'utilisateur");
-        strUser =sc.nextLine();
-        if(baseDeDonnee.userExists(strUser))
-        {
-            System.out.println("Veuillez insérez votre mdp");
-            strMdp = sc.nextLine();
-            if(baseDeDonnee.mdpExist(strUser, strMdp))
+            System.out.println("Veuillez insérez votre nom d'utilisateur");
+            strUser = sc.nextLine();
+
+            if(DataBase.userExists(strUser))
             {
-                System.out.println("Bon retour " + strUser);
-                User userLogged = new User(strUser, strMdp);
-                return userLogged;
+                System.out.println("Veuillez insérez votre mdp");
+                strMdp = sc.nextLine();
+
+                if(DataBase.mdpExist(strUser, strMdp))
+                {
+                    System.out.println("Bon retour " + strUser);
+                    return new User(strUser, strMdp);
+                }
+                else
+                {
+                    System.out.println("Mot de passe incorrect !");
+                }
             }
             else
             {
-                throw new IllegalArgumentException("Le mdp est incorrect");
+                System.out.println("Nom d'utilisateur introuvable !");
             }
         }
-        else
-        {
-            throw new IllegalArgumentException("Le nom d'utilisateur n'existe pas");
-        }
-        }
         catch (SQLException e) {
-        System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
         }
         return null;
-        
-    }
-
-    public static void main(String[] args) {
-        new HomeMenu().menu(); // ← point d'entrée
     }
 }
