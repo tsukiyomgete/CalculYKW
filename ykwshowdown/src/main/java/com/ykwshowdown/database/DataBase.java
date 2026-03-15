@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class DataBase {
 
-    private static final String URL = "jdbc:sqlite:C:/Users/Tsukiyom/Documents/YKWCalcul/CalculYKW/ykwshowdown/db/ykwShowdown.db";
+    private static final String URL = "jdbc:sqlite:db/ykwShowdown.db";
     private static Connection link;
 
     private DataBase() {}
