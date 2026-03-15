@@ -1,11 +1,12 @@
 package com.ykwshowdown.database;
-
+import io.github.cdimascio.dotenv.Dotenv;
 import com.ykwshowdown.user.*;
 import java.sql.*;
 
 public class DataBase {
 
-    private static final String URL = "jdbc:mysql://root:ZPmMfFOoCvMCVtrxahcLRAmcAqVoHHMA@mainline.proxy.rlwy.net:43528/railway";
+    private static final Dotenv dotenv = Dotenv.load();
+    private static final String URL = dotenv.get("MYSQL_URL");
     private static Connection link;
 
     private DataBase() {}
