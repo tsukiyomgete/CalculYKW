@@ -18,7 +18,7 @@ public class HomeMenu
         str = sc.nextLine();
         if(str.equalsIgnoreCase("Oui"))
         {
-            
+            User userlogged = logIn();
         }
         else
         {
@@ -84,9 +84,39 @@ public class HomeMenu
     }
 
 
-    public void logIn()
+    public User logIn()
     {
-
+        String strUser = "";
+        String strMdp = "";
+        try {
+        DataBase baseDeDonnee = new DataBase();
+        System.out.println("Veuillez insérez votre nom d'utilisateur");
+        strUser =sc.nextLine();
+        if(baseDeDonnee.userExists(strUser))
+        {
+            System.out.println("Veuillez insérez votre mdp");
+            strMdp = sc.nextLine();
+            if(baseDeDonnee.mdpExist(strUser, strMdp))
+            {
+                System.out.println("Bon retour " + strUser);
+                User userLogged = new User(strUser, strMdp);
+                return userLogged;
+            }
+            else
+            {
+                throw new IllegalArgumentException("Le mdp est incorrect");
+            }
+        }
+        else
+        {
+            throw new IllegalArgumentException("Le nom d'utilisateur n'existe pas");
+        }
+        }
+        catch (SQLException e) {
+        System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+        }
+        return null;
+        
     }
 
     public static void main(String[] args) {

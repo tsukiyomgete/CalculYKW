@@ -13,6 +13,7 @@ public class User {
     private String username;
     private String password;
     private Date joinedDate;
+    private Date lastLogged;
     private int ELO;
     private ArrayList<WatchList> userTeam;
     private ArrayList<User> friends;
@@ -23,7 +24,6 @@ public class User {
         this.username = username;
         this.password = password;
         joinedDate = new Date();
-        
     }
 
 
@@ -36,6 +36,28 @@ public class User {
     {
         return ID;
     }
+
+    public void addElo()
+    {
+        Random rand = new Random();
+        int nombre = rand.nextInt(40) + 10;
+        ELO+=nombre;
+    }
+
+    public void looseElo()
+    {
+        Random rand = new Random();
+        int nombre = rand.nextInt(40) + 10;
+        if((ELO-=nombre) < 1000)
+        {
+            ELO = 1000;
+        }
+        else
+        {
+            ELO-=nombre;
+        }
+    }
+
     public String getUser()
     {
         return username;

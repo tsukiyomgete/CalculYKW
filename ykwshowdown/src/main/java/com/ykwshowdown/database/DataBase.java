@@ -32,12 +32,21 @@ public class DataBase {
         java.sql.Date sqlDate = new java.sql.Date(dateUser.getTime());
         int idUser = userTest.getID();
         
-
         PreparedStatement uS = link.prepareStatement("INSERT INTO users (username, password, joined_date) VALUES ( ?, ?, ?)");
         uS.setString(1, userTest.getUser());
         uS.setString(2, userTest.getPassWord());
         uS.setDate(3, sqlDate);
         uS.executeUpdate();
+    }
+
+    public void addElo(User userTest) throws SQLException
+    {
+        userTest.addElo();
+        PreparedStatement uS = link.prepareStatement("UPDATE users SET elo = ? WHERE id = ?");
+        uS.setInt(1, userTest.getELO());
+        uS.setInt(2, userTest.getID());
+        uS.executeUpdate();
+        ResultSet result = uS.executeQuery();
     }
 
     public boolean userExists(String username) throws SQLException
@@ -46,6 +55,21 @@ public class DataBase {
         rS.setString(1 , username);
         ResultSet result = rS.executeQuery();
         return result.next();
+    }
+
+    public boolean mdpExist(String username, String mdp) throws SQLException
+    {
+        PreparedStatement rS = link.prepareStatement("SELECT password FROM users WHERE username = ?");
+        rS.setString(1 , username);
+        ResultSet result = rS.executeQuery();
+        if(result.next())
+        {
+            return (result.getString("password").equals(mdp));
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public int getNbUser() throws SQLException
