@@ -30,6 +30,10 @@ public class DataBase {
             )      
         """);
     }
+    public static void delTables() throws SQLException {
+        Statement requete = link.createStatement();
+        requete.execute("DROP TABLES Users");
+    }
 
     public static void addUser(User userTest) throws SQLException
     {
