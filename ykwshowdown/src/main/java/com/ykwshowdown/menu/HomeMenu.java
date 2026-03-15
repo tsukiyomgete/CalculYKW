@@ -92,33 +92,38 @@ public class HomeMenu
     {
         String strUser = "";
         String strMdp = "";
-        try {
-            System.out.println("Veuillez insérez votre nom d'utilisateur");
-            strUser = sc.nextLine();
+        do
+        {
+            try {
+                System.out.println("Veuillez insérez votre nom d'utilisateur");
+                strUser = sc.nextLine();
 
-            if(DataBase.userExists(strUser))
-            {
-                System.out.println("Veuillez insérez votre mdp");
-                strMdp = sc.nextLine();
-
-                if(DataBase.mdpExist(strUser, strMdp))
+                if(DataBase.userExists(strUser))
                 {
-                    System.out.println("Bon retour " + strUser);
-                    return new User(strUser, strMdp);
+                    System.out.println("Veuillez insérez votre mdp");
+                    strMdp = sc.nextLine();
+
+                    if(DataBase.mdpExist(strUser, strMdp))
+                    {
+                        System.out.println("Bon retour " + strUser);
+                        return new User(strUser, strMdp);
+                    }
+                    else
+                    {
+                        System.out.println("Mot de passe incorrect !");
+                    }
                 }
                 else
                 {
-                    System.out.println("Mot de passe incorrect !");
+                    System.out.println("Nom d'utilisateur introuvable !");
                 }
             }
-            else
+            catch (SQLException e)
             {
-                System.out.println("Nom d'utilisateur introuvable !");
-            }
-        }
-        catch (SQLException e) {
             System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
-        }
+            }
+        }while(DataBase.mdpExist(strUser, strMdp));
+        
         return null;
     }
 }
