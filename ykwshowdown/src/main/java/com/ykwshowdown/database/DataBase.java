@@ -1,21 +1,26 @@
 package com.ykwshowdown.database;
-import io.github.cdimascio.dotenv.Dotenv;
-import com.ykwshowdown.user.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.ykwshowdown.user.User;
 
 public class DataBase {
 
-    private static final Dotenv dotenv = Dotenv.load();
-    private static final String URL = dotenv.get("MYSQL_URL");
     private static Connection link;
 
     private DataBase() {}
 
     public static void init() throws SQLException {
-        if(link == null) {
-            link = DriverManager.getConnection(URL);
-            initTables();
-        }
+    if(link == null) 
+    {
+        String url = "jdbc:mysql://root:ZPmMfFOoCvMCVtrxahcLRAmcAqVoHHMA@mainline.proxy.rlwy.net:43528/railway?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+        link = DriverManager.getConnection(url);
+        initTables();
+    }
     }
 
     public static void initTables() throws SQLException {
