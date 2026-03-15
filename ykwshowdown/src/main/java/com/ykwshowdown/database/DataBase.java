@@ -1,20 +1,42 @@
 package com.ykwshowdown.database;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.ykwshowdown.user.User;
+
 import io.github.cdimascio.dotenv.Dotenv;
-import com.ykwshowdown.user.*;
-import java.sql.*;
 
 public class DataBase {
 
-    private static final Dotenv dotenv = Dotenv.load();
-    private static final String URL = dotenv.get("MYSQL_URL");
     private static Connection link;
 
     private DataBase() {}
 
     public static void init() throws SQLException {
-        if(link == null) {
-            link = DriverManager.getConnection(URL);
+        createEnvFile();
+        if(link == null) 
+        {
+            Dotenv dotenv = Dotenv.load();
+            link = DriverManager.getConnection(dotenv.get("MYSQL_URL"));
             initTables();
+        }
+    }
+
+
+    private static void createEnvFile() {
+        java.io.File envFile = new java.io.File(".env");
+        if(!envFile.exists()) {
+            try {
+                java.io.FileWriter fw = new java.io.FileWriter(envFile);
+                fw.write("MYSQL_URL=jdbc:mysql://root:ZPmMfFOoCvMCVtrxahcLRAmcAqVoHHMA@mainline.proxy.rlwy.net:43528/railway?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
+                fw.close();
+            } catch (Exception e) {
+                System.out.println("Erreur création .env : " + e.getMessage());
+            }
         }
     }
 
