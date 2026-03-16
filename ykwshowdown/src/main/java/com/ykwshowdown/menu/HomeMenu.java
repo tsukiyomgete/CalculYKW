@@ -1,17 +1,17 @@
 package com.ykwshowdown.menu;
+
 import java.sql.SQLException;
 import java.util.*;
 import com.ykwshowdown.user.*;
 import com.ykwshowdown.database.*;
 
-public class HomeMenu
-{
+public class HomeMenu {
     Scanner sc = new Scanner(System.in);
     String str;
     private WatchList watchList = new WatchList();
 
     public void menu() {
-        
+
         int choix = -1;
         initBaseDeDonnee();
 
@@ -19,12 +19,9 @@ public class HomeMenu
         str = sc.nextLine();
 
         User userConnected;
-        if(str.equalsIgnoreCase("Oui"))
-        {
+        if (str.equalsIgnoreCase("Oui")) {
             userConnected = logIn();
-        }
-        else
-        {
+        } else {
             userConnected = createUserData();
             try {
                 DataBase.addUser(userConnected);
@@ -64,23 +61,20 @@ public class HomeMenu
         }
     }
 
-    public User createUserData()
-    {
+    public User createUserData() {
         String strUser = "";
         String strMdp = "";
-        do 
-        {
+        do {
             System.out.println("Veuillez insérez votre nom d'utilisateur (20 caractères max)");
             strUser = sc.nextLine();
             System.out.println("Veuillez insérez votre mdp (8 caractères min)");
             strMdp = sc.nextLine();
-        } while(strUser.length() > 20 || strMdp.length() < 8);
+        } while (strUser.length() > 20 || strMdp.length() < 8);
 
         return new User(strUser, strMdp);
     }
 
-    public void initBaseDeDonnee()
-    {
+    public void initBaseDeDonnee() {
         try {
             DataBase.init();
         } catch (SQLException e) {
@@ -88,42 +82,33 @@ public class HomeMenu
         }
     }
 
-    public User logIn()
-    {
+    public User logIn() {
         String strUser = "";
         String strMdp = "";
-        do
-        {
-            try {
+        try {
+            boolean connected = false;
+            while (!connected) {
                 System.out.println("Veuillez insérez votre nom d'utilisateur");
                 strUser = sc.nextLine();
 
-                if(DataBase.userExists(strUser))
-                {
+                if (DataBase.userExists(strUser)) {
                     System.out.println("Veuillez insérez votre mdp");
                     strMdp = sc.nextLine();
 
-                    if(DataBase.mdpExist(strUser, strMdp))
-                    {
-                        System.out.println("Bon retour " + strUser);
-                        return new User(strUser, strMdp);
-                    }
-                    else
-                    {
+                    if (DataBase.mdpExist(strUser, strMdp)) {
+                        connected = true;
+                    } else {
                         System.out.println("Mot de passe incorrect !");
                     }
-                }
-                else
-                {
+                } else {
                     System.out.println("Nom d'utilisateur introuvable !");
                 }
             }
-            catch (SQLException e)
-            {
+            System.out.println("Bon retour " + strUser);
+            return new User(strUser, strMdp);
+        } catch (SQLException e) {
             System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
-            }
-        }while(DataBase.mdpExist(strUser, strMdp));
-        
+        }
         return null;
     }
 }

@@ -3,6 +3,7 @@ package com.ykwshowdown.yokai;
 public class Yokai {
     String nom;
     Rank rangYokai;
+    Tier yokaiTier;
     face_icon faceYoKai;
     boolean isLegendary;
     Tribe tribuYokai;
@@ -26,6 +27,7 @@ public class Yokai {
         this.isLegendary = isLegendary;
         this.statInit = statInit;
         this.statEnd = statEnd;
+        this.yokaiTier = Tier.NU;
         
         this.resistance = rest;
         this.weakness = weak;

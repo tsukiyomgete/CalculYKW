@@ -101,11 +101,6 @@ public class YokaiGeneral {
     }
 
     
-
-
-
-
-    
     public int rechercheYokai(String nomRecherche)
 	{
 		int trouve=0;
