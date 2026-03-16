@@ -49,7 +49,48 @@ public class DataBase {
             password    VARCHAR(255) NOT NULL,
             joined_date DATE NOT NULL,
             elo         INTEGER DEFAULT 1000
-            )      
+            )
+        CREATE TABLE IF NOT EXISTS Tribu (
+            nomTribu    VARCHAR(20) PRIMARY KEY
+        )
+        CREATE TABLE IF NOT EXISTS Elemental(
+            nomElement VARCHAR(20) PRIMARY KEY
+        )
+        CREATE TABLE IF NOT EXISTS Rang(
+            nomRang VARCHAR(1) PRIMARY KEY
+            CONSTRAINT check_Rang CHECK nomRang IN ('S', 'A', 'B', 'C', 'D', 'E')
+        )
+        CREATE TABLE IF NOT EXISTS Tier(
+            nomTier VARCHAR(8) PRIMARY KEY
+            CONSTRAINT check_Tier CHECK nomTier in ('Ubers', 'OUBL','OU', 'UU', 'RU' , 'NU' , 'ZU' , 'PU' , 'ZU')
+        )
+
+        CREATE TABLE IF NOT EXISTS StatB(
+            idStatB INTEGER PRIMARY KEY AUTO_INCREMENT,
+            HPStatB INTEGER NOT NULL,
+            STRStatB INTEGER NOT NULL,
+            SPRStatB INTEGER NOT NULL,
+            DEFStatB INTEGER NOT NULL,
+            SPEStatB INTEGER NOT NULL,
+        )
+
+        CREATE TABLE IF NOT EXISTS StatA(
+            idStatA INTEGER PRIMARY KEY AUTO_INCREMENT,
+            HPStatA INTEGER NOT NULL,
+            STRStatA INTEGER NOT NULL,
+            SPRStatA INTEGER NOT NULL,
+            DEFStatA INTEGER NOT NULL,
+            SPEStatA INTEGER NOT NULL,
+        )
+        
+        CREATE TABLE IF NOT EXISTS IV(
+            idIv INTEGER PRIMARY KEY AUTO_INCREMENT,
+            HPIv INTEGER NOT NULL,
+            STRIv INTEGER NOT NULL,
+            SPRIv INTEGER NOT NULL,
+            DEFIv INTEGER NOT NULL,
+            SPEIv INTEGER NOT NULL, 
+        )
         """);
     }
     public static void delTables() throws SQLException {

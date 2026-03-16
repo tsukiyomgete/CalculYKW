@@ -1,5 +1,5 @@
 package com.ykwshowdown;
-import com.ykwshowdown.menu.*;
+import com.ykwshowdown.menu.HomeMenu;
 
 public class Main {
     public static void main(String[] args) {

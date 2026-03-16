@@ -1,6 +1,12 @@
 package com.ykwshowdown.init;
 
-import com.ykwshowdown.yokai.*;
+import com.ykwshowdown.yokai.Attitude;
+import com.ykwshowdown.yokai.Elemental;
+import com.ykwshowdown.yokai.Equipement;
+import com.ykwshowdown.yokai.Rank;
+import com.ykwshowdown.yokai.Stat;
+import com.ykwshowdown.yokai.Tribe;
+import com.ykwshowdown.yokai.Yokai;
 
 public class Init {
     		
