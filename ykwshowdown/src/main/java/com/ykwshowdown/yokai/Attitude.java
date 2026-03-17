@@ -18,6 +18,11 @@ public class Attitude {
         this.spe = Speed;
     }
 
+    public String getAttitude()
+    {
+        return nom;
+    }
+
     public int GetHP()
     {
         return hp;

@@ -7,5 +7,10 @@ public class Elemental {
         this.nom = nom;
     }
 
+    public String getElement()
+    {
+        return nom;
+    }
+
     
 }

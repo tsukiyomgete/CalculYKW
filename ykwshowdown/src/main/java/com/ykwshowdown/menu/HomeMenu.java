@@ -1,5 +1,5 @@
 package com.ykwshowdown.menu;
-
+import com.ykwshowdown.init.*;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -15,6 +15,7 @@ public class HomeMenu {
 
         int choix = -1;
         initBaseDeDonnee();
+        Init.insererLesAttitudes();
 
         System.out.println("Possèdez vous un compte showdown chez nous ?");
         str = sc.nextLine();
@@ -31,7 +32,7 @@ public class HomeMenu {
                 System.out.println("Erreur : " + e.getMessage());
             }
         }
-        delBaseDeDonnee();
+        
 
         while (choix != 4) {
             System.out.println("    HOME MENU    ");
@@ -83,6 +84,7 @@ public class HomeMenu {
             } catch (SQLException e) {
             System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
             }
+        System.out.println("Suppression de la Table users");
     }
 
     public void initBaseDeDonnee() {

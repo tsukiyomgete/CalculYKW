@@ -24,6 +24,7 @@ public class User {
         this.username = username;
         this.password = password;
         joinedDate = new Date();
+        lastLogged = joinedDate;
     }
 
 
@@ -31,6 +32,17 @@ public class User {
     {
         User.nbUser = nbUser;
     }
+
+    public void setLoggedDate(Date today)
+    {
+        lastLogged = today;
+    }
+
+    public Date getLoggedDate()
+    {
+        return lastLogged;
+    }
+
 
     public int getID()
     {

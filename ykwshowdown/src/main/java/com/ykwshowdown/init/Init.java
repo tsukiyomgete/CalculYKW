@@ -1,56 +1,165 @@
 package com.ykwshowdown.init;
 
-import com.ykwshowdown.yokai.Attitude;
-import com.ykwshowdown.yokai.Elemental;
-import com.ykwshowdown.yokai.Equipement;
-import com.ykwshowdown.yokai.Rank;
-import com.ykwshowdown.yokai.Stat;
-import com.ykwshowdown.yokai.Tribe;
-import com.ykwshowdown.yokai.Yokai;
+import com.ykwshowdown.yokai.*;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.ykwshowdown.database.*;
 
 public class Init {
     		
-			public static Tribe Brave = new Tribe("Brave");
-			public static Tribe Mysterious = new Tribe("Mysterious");
-			public static Tribe Tough = new Tribe("Tough");
-			public static Tribe Charming = new Tribe("Charming");
-			public static Tribe Heartful = new Tribe("Heartful");
-			public static Tribe Shady = new Tribe("Shady");
-			public static Tribe Eerie = new Tribe("Eerie");
-			public static Tribe Slippery = new Tribe("Slippery");
-			public static Tribe Wicked = new Tribe("Wicked");
-			public static Tribe Enma = new Tribe("Enma");
-			public static Tribe Wandroid = new Tribe("Wandroid");
-			
-			public static Attitude unknown = new Attitude("null", 0, 0, 0, 0, 0);
-			public static Attitude gentle = new Attitude("gentle",26,0,13,0,0);
-    		public static Attitude tender = new Attitude("tender",52,0,0,0,0);
-    		public static Attitude grouchy = new Attitude("grouchy",26,13,0,0,0);
-    		public static Attitude rough = new Attitude("rough",0,26,0,0,0);
-    		public static Attitude logical = new Attitude("logical",0,0,13,0,13);
-    		public static Attitude brainy = new Attitude("brainy",0,0,26,0,0);
-    		public static Attitude careful = new Attitude("careful",0,0,13,13,0);
-    		public static Attitude calm = new Attitude("calm",0,0,0,26,0);
-    		public static Attitude twisted = new Attitude("twisted",0,0,0,0,13);
-    		public static Attitude cruel = new Attitude("cruel",0,0,0,0,26);
-    		public static Attitude helpful = new Attitude("helpful",26,0,0,0,13);
-    		public static Attitude devoted = new Attitude("devoted",0,13,0,13,0);
-		
-			public static Elemental Fire = new Elemental("Fire");
-			public static Elemental Water = new Elemental("Water");
-			public static Elemental Wind = new Elemental("Wind");
-			public static Elemental Ice = new Elemental("Ice");
-			public static Elemental Earth = new Elemental("Earth");
-			public static Elemental Thunder = new Elemental("Thunder");
-			public static Elemental Heal = new Elemental("Heal");
-			public static Elemental Absorb = new Elemental("Absorb");
+	public static void insererTribe(Tribe tribu)
+	{
+		try {
+            DataBase.insertTribe(tribu);;
+        } catch (SQLException e) {
+            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+        }
+	}
+	public static void insererElement(Elemental element)
+	{
+		try {
+            DataBase.insertElemental(element);
+        } catch (SQLException e) {
+            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+        }
+	}
 
-			public static Rank E = new Rank('E');
-			public static Rank D = new Rank('D');
-			public static Rank C = new Rank('C');
-			public static Rank B = new Rank('B');
-			public static Rank A = new Rank('A');
-			public static Rank S = new Rank('S');
+	public static void insererRang(Rank rang)
+	{
+		try {
+            DataBase.insertRank(rang);
+        } catch (SQLException e) {
+            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+        }
+	}
+
+	public static void insererTier(Tier tier)
+	{
+		try {
+            DataBase.insertTier(tier);
+        } catch (SQLException e) {
+            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+        }
+	}
+	public static void insererAttitude(Attitude attitude)
+	{
+		try {
+			DataBase.insertAttitude(attitude);
+		} catch(SQLException e){
+			System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+		}
+	}
+	public static void insererLesAttitudes()
+	{
+		insererAttitude(gentle);
+		insererAttitude(tender);
+		insererAttitude(grouchy);
+		insererAttitude(rough);
+		insererAttitude(logical);
+		insererAttitude(brainy);
+		insererAttitude(careful);
+		insererAttitude(calm);
+		insererAttitude(twisted);
+		insererAttitude(cruel);
+		insererAttitude(helpful);
+		insererAttitude(devoted);
+	}
+	
+		
+	
+	public static void insererLesElements()
+	{
+		insererElement(Fire);
+		insererElement(Water);
+		insererElement(Wind);
+		insererElement(Ice);
+		insererElement(Earth);
+		insererElement(Thunder);
+		insererElement(Heal);
+		insererElement(Absorb);
+	}
+	public static void insererLesTribus()
+	{
+		insererTribe(Brave);
+		insererTribe(Mysterious);
+		insererTribe(Tough);
+		insererTribe(Charming);
+		insererTribe(Heartful);
+		insererTribe(Shady);
+		insererTribe(Eerie);
+		insererTribe(Slippery);
+		insererTribe(Wicked);
+		insererTribe(Enma);
+		insererTribe(Wandroid);
+	}
+	public static void insererLesRangs()
+	{
+		insererRang(S);
+		insererRang(A);
+		insererRang(B);
+		insererRang(C);
+		insererRang(D);
+		insererRang(E);
+	}
+	
+
+	public static void insererLesTiers()
+	{
+		insererTier(Tier.Ubers);
+		insererTier(Tier.OUBL);
+		insererTier(Tier.OU);
+		insererTier(Tier.UU);
+		insererTier(Tier.RU);
+		insererTier(Tier.NU);
+		insererTier(Tier.PU);
+		insererTier(Tier.ZU);
+	}
+
+		
+		public static Tribe Brave = new Tribe("Brave");
+		public static Tribe Mysterious = new Tribe("Mysterious");
+		public static Tribe Tough = new Tribe("Tough");
+		public static Tribe Charming = new Tribe("Charming");
+		public static Tribe Heartful = new Tribe("Heartful");
+		public static Tribe Shady = new Tribe("Shady");
+		public static Tribe Eerie = new Tribe("Eerie");
+		public static Tribe Slippery = new Tribe("Slippery");
+		public static Tribe Wicked = new Tribe("Wicked");
+		public static Tribe Enma = new Tribe("Enma");
+		public static Tribe Wandroid = new Tribe("Wandroid");
+			
+		public static Attitude unknown = new Attitude("null", 0, 0, 0, 0, 0);
+		public static Attitude gentle = new Attitude("gentle",26,0,13,0,0);
+    	public static Attitude tender = new Attitude("tender",52,0,0,0,0);
+    	public static Attitude grouchy = new Attitude("grouchy",26,13,0,0,0);
+    	public static Attitude rough = new Attitude("rough",0,26,0,0,0);
+    	public static Attitude logical = new Attitude("logical",0,0,13,0,13);
+    	public static Attitude brainy = new Attitude("brainy",0,0,26,0,0);
+    	public static Attitude careful = new Attitude("careful",0,0,13,13,0);
+    	public static Attitude calm = new Attitude("calm",0,0,0,26,0);
+    	public static Attitude twisted = new Attitude("twisted",0,0,0,0,13);
+    	public static Attitude cruel = new Attitude("cruel",0,0,0,0,26);
+    	public static Attitude helpful = new Attitude("helpful",26,0,0,0,13);
+    	public static Attitude devoted = new Attitude("devoted",0,13,0,13,0);
+		
+		
+		public static Elemental Fire = new Elemental("Fire");
+		public static Elemental Water = new Elemental("Water");
+		public static Elemental Wind = new Elemental("Wind");
+		public static Elemental Ice = new Elemental("Ice");
+		public static Elemental Earth = new Elemental("Earth");
+		public static Elemental Thunder = new Elemental("Thunder");
+		public static Elemental Heal = new Elemental("Heal");
+		public static Elemental Absorb = new Elemental("Absorb");
+
+		public static Rank E = new Rank('E');
+		public static Rank D = new Rank('D');
+		public static Rank C = new Rank('C');
+		public static Rank B = new Rank('B');
+		public static Rank A = new Rank('A');
+		public static Rank S = new Rank('S');
 
 			// ============================================================
 // Stat arrays - split into chunks to avoid 64KB method limit
