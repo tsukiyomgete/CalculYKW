@@ -1,9 +1,10 @@
 package com.ykwshowdown.menu;
 
 import java.sql.SQLException;
-import java.util.*;
-import com.ykwshowdown.user.*;
-import com.ykwshowdown.database.*;
+import java.util.Scanner;
+
+import com.ykwshowdown.database.DataBase;
+import com.ykwshowdown.user.User;
 
 public class HomeMenu {
     Scanner sc = new Scanner(System.in);
@@ -30,6 +31,7 @@ public class HomeMenu {
                 System.out.println("Erreur : " + e.getMessage());
             }
         }
+        delBaseDeDonnee();
 
         while (choix != 4) {
             System.out.println("    HOME MENU    ");
@@ -72,6 +74,15 @@ public class HomeMenu {
         } while (strUser.length() > 20 || strMdp.length() < 8);
 
         return new User(strUser, strMdp);
+    }
+
+    public void delBaseDeDonnee()
+    {
+        try {
+             DataBase.delTables();
+            } catch (SQLException e) {
+            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+            }
     }
 
     public void initBaseDeDonnee() {

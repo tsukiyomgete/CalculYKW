@@ -1,12 +1,11 @@
 package com.ykwshowdown.yokai;
 
+import java.util.Scanner;
+
 import static com.ykwshowdown.init.Init.medaillum;
 import static com.ykwshowdown.init.Init.unknowEquipement;
 import static com.ykwshowdown.init.Init.unknown;
 import static com.ykwshowdown.init.Init.unknownYokai;
-
-
-import java.util.Scanner;
 
 public class YokaiGeneral {
     Yokai yokai;

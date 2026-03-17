@@ -19,7 +19,7 @@ public class DataBase {
     public static void init() throws SQLException {
     if(link == null) 
     {
-        String url = "jdbc:mysql://root:ZPmMfFOoCvMCVtrxahcLRAmcAqVoHHMA@mainline.proxy.rlwy.net:43528/railway?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+        String url = "jdbc:postgresql://postgres:0stdDpl3l5a4bR3o@db.qwzqlodvjcuxefwydazg.supabase.co:5432/postgres";
         link = DriverManager.getConnection(url);
         initTables();
     }
@@ -43,54 +43,129 @@ public class DataBase {
         if(link == null) init();
         Statement requete = link.createStatement();
         requete.execute("""
-        CREATE TABLE IF NOT EXISTS Users (
-            id          INTEGER PRIMARY KEY AUTO_INCREMENT,
-            username    VARCHAR(20) NOT NULL UNIQUE,
-            password    VARCHAR(255) NOT NULL,
-            joined_date DATE NOT NULL,
-            elo         INTEGER DEFAULT 1000
-            )
-        CREATE TABLE IF NOT EXISTS Tribu (
-            nomTribu    VARCHAR(20) PRIMARY KEY
-        )
-        CREATE TABLE IF NOT EXISTS Elemental(
-            nomElement VARCHAR(20) PRIMARY KEY
-        )
-        CREATE TABLE IF NOT EXISTS Rang(
-            nomRang VARCHAR(1) PRIMARY KEY
-            CONSTRAINT check_Rang CHECK nomRang IN ('S', 'A', 'B', 'C', 'D', 'E')
-        )
-        CREATE TABLE IF NOT EXISTS Tier(
-            nomTier VARCHAR(8) PRIMARY KEY
-            CONSTRAINT check_Tier CHECK nomTier in ('Ubers', 'OUBL','OU', 'UU', 'RU' , 'NU' , 'ZU' , 'PU' , 'ZU')
-        )
+    CREATE TABLE IF NOT EXISTS Users (
+        id              INTEGER PRIMARY KEY AUTO_INCREMENT,
+        username        VARCHAR(20) NOT NULL UNIQUE,
+        password        VARCHAR(255) NOT NULL,
+        joined_date     DATE NOT NULL,
+        last_connected  DATE NOT NULL,
+        elo             INTEGER DEFAULT 1000
+    );
 
-        CREATE TABLE IF NOT EXISTS StatB(
-            idStatB INTEGER PRIMARY KEY AUTO_INCREMENT,
-            HPStatB INTEGER NOT NULL,
-            STRStatB INTEGER NOT NULL,
-            SPRStatB INTEGER NOT NULL,
-            DEFStatB INTEGER NOT NULL,
-            SPEStatB INTEGER NOT NULL,
-        )
+    CREATE TABLE IF NOT EXISTS Tribu (
+        nomTribu        VARCHAR(20) PRIMARY KEY
+    );
 
-        CREATE TABLE IF NOT EXISTS StatA(
-            idStatA INTEGER PRIMARY KEY AUTO_INCREMENT,
-            HPStatA INTEGER NOT NULL,
-            STRStatA INTEGER NOT NULL,
-            SPRStatA INTEGER NOT NULL,
-            DEFStatA INTEGER NOT NULL,
-            SPEStatA INTEGER NOT NULL,
-        )
-        
-        CREATE TABLE IF NOT EXISTS IV(
-            idIv INTEGER PRIMARY KEY AUTO_INCREMENT,
-            HPIv INTEGER NOT NULL,
-            STRIv INTEGER NOT NULL,
-            SPRIv INTEGER NOT NULL,
-            DEFIv INTEGER NOT NULL,
-            SPEIv INTEGER NOT NULL, 
-        )
+    CREATE TABLE IF NOT EXISTS Elemental (
+        nomElement      VARCHAR(20) PRIMARY KEY
+    );
+
+    CREATE TABLE IF NOT EXISTS Rang (
+        nomRang         VARCHAR(1) PRIMARY KEY,
+        CONSTRAINT check_Rang CHECK (nomRang IN ('S', 'A', 'B', 'C', 'D', 'E'))
+    );
+
+    CREATE TABLE IF NOT EXISTS Tier (
+        nomTier         VARCHAR(8) PRIMARY KEY,
+        CONSTRAINT check_Tier CHECK (nomTier IN ('Ubers', 'OUBL', 'OU', 'UU', 'RU', 'NU', 'ZU', 'PU'))
+    );
+
+
+    CREATE TABLE IF NOT EXISTS StatB (
+        idStatB         INTEGER PRIMARY KEY AUTO_INCREMENT,
+        HPStatB         INTEGER NOT NULL,
+        STRStatB        INTEGER NOT NULL,
+        SPRStatB        INTEGER NOT NULL,
+        DEFStatB        INTEGER NOT NULL,
+        SPEStatB        INTEGER NOT NULL
+    );
+
+
+    CREATE TABLE IF NOT EXISTS StatA (
+        idStatA         INTEGER PRIMARY KEY AUTO_INCREMENT,
+        HPStatA         INTEGER NOT NULL,
+        STRStatA        INTEGER NOT NULL,
+        SPRStatA        INTEGER NOT NULL,
+        DEFStatA        INTEGER NOT NULL,
+        SPEStatA        INTEGER NOT NULL
+    );
+
+
+    CREATE TABLE IF NOT EXISTS StatActu (
+        idStatActu      INTEGER PRIMARY KEY AUTO_INCREMENT,
+        HPStatActu      INTEGER NOT NULL,
+        STRStatActu     INTEGER NOT NULL,
+        SPRStatActu     INTEGER NOT NULL,
+        DEFStatActu     INTEGER NOT NULL,
+        SPEStatActu     INTEGER NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS Equipement (
+        idEquipement    INTEGER PRIMARY KEY AUTO_INCREMENT,
+        nomEquipement   VARCHAR(20) NOT NULL,
+    );
+
+    CREATE TABLE IF NOT EXISTS Yokai(
+        idMedaillum             INTEGER PRIMARY KEY AUTO_INCREMENT,
+        nomYokai                VARCHAR(20) NOT NULL,
+        nomTribu                VARCHAR(20) NOT NULL,
+        rangYokai               VARCHAR(1)  NOT NULL,
+        tierYokai               VARCHAR(20) NOT NULL,
+        typeElementaire         VARCHAR(20) NOT NULL,
+        faiblesseElementaire    VARCHAR(20) NOT NULL,
+        resistanceElementaire   VARCHAR(20) NOT NULL,
+        statB                   INTEGER NOT NULL,
+        statA                   INTEGER NOT NULL,
+        FOREIGN KEY(nomTribu)               REFERENCES Tribu(nomTribu),
+        FOREIGN KEY(rangYokai)              REFERENCES Rang(nomRang),
+        FOREIGN KEY(typeElementaire)        REFERENCES Elemental(nomElement),
+        FOREIGN KEY(faiblesseElementaire)   REFERENCES Elemental(nomElement),
+        FOREIGN KEY(resistanceElementaire)  REFERENCES Elemental(nomElement),
+        FOREIGN KEY(statB)                  REFERENCES StatB(idStatB),
+        FOREIGN KEY(statA)                  REFERENCES StatA(idStatA),
+    )
+
+    CREATE TABLE IF NOT EXISTS YokaiGeneral (
+        idYokaiGeneral  INTEGER PRIMARY KEY AUTO_INCREMENT,
+        nomYokai        VARCHAR(20) NOT NULL,
+        surnomYokai     VARCHAR(20),
+        niveau          INTEGER NOT NULL CHECK(niveau BETWEEN 1 AND 99),
+        nomElement      VARCHAR(20) NOT NULL,
+        nomTribu        VARCHAR(20) NOT NULL,
+        nomRang         VARCHAR(1) NOT NULL,
+        nomTier         VARCHAR(8) NOT NULL,
+        idStatB         INTEGER NOT NULL,
+        idStatA         INTEGER NOT NULL,
+        idStatActu      INTEGER NOT NULL,
+        idEquipement    INTEGER,
+        FOREIGN KEY (nomElement)    REFERENCES Elemental(nomElement),
+        FOREIGN KEY (nomTribu)      REFERENCES Tribu(nomTribu),
+        FOREIGN KEY (nomRang)       REFERENCES Rang(nomRang),
+        FOREIGN KEY (nomTier)       REFERENCES Tier(nomTier),
+        FOREIGN KEY (idStatB)       REFERENCES StatB(idStatB),
+        FOREIGN KEY (idStatA)       REFERENCES StatA(idStatA),
+        FOREIGN KEY (idStatActu)    REFERENCES StatActu(idStatActu),
+        FOREIGN KEY (idEquipement)  REFERENCES Equipement(idEquipement)
+    );
+
+    CREATE TABLE IF NOT EXISTS Equipe (
+        idEquipe        INTEGER PRIMARY KEY AUTO_INCREMENT,
+        idUser          INTEGER NOT NULL,
+        nomEquipe       VARCHAR(25) NOT NULL,
+        FOREIGN KEY (idUser) REFERENCES Users(id)
+    );
+
+
+    CREATE TABLE IF NOT EXISTS Equipe_Yokai (
+        idEquipe        INTEGER NOT NULL,
+        idYokaiGeneral  INTEGER NOT NULL,
+        position        INTEGER NOT NULL CHECK (position BETWEEN 1 AND 6),
+        PRIMARY KEY (idEquipe, position),
+        FOREIGN KEY (idEquipe)          REFERENCES Equipe(idEquipe),
+        FOREIGN KEY (idYokaiGeneral)    REFERENCES YokaiGeneral(idYokaiGeneral)
+    );
+
+
         """);
     }
     public static void delTables() throws SQLException {
