@@ -15,7 +15,6 @@ public class HomeMenu {
 
         int choix = -1;
         initBaseDeDonnee();
-        Init.insererLesAttitudes();
 
         System.out.println("Possèdez vous un compte showdown chez nous ?");
         str = sc.nextLine();
@@ -75,6 +74,15 @@ public class HomeMenu {
         } while (strUser.length() > 20 || strMdp.length() < 8);
 
         return new User(strUser, strMdp);
+    }
+
+    public void truncateBase()
+    {
+        try {
+             DataBase.viderStat();
+            } catch (SQLException e) {
+            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+            }
     }
 
     public void delBaseDeDonnee()

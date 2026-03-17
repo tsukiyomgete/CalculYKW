@@ -266,6 +266,14 @@ public class DataBase {
         uS.executeUpdate();
     }
     
+    public static void viderStat() throws SQLException
+    {
+        Statement requete = link.createStatement();
+        requete.execute("SET FOREIGN_KEY_CHECKS = 0");
+        requete.execute("TRUNCATE TABLE StatA");
+        requete.execute("TRUNCATE TABLE StatB");
+        requete.execute("SET FOREIGN_KEY_CHECKS = 1");
+    }
 
 
     public static boolean userExists(String username) throws SQLException
@@ -378,6 +386,26 @@ public class DataBase {
         uS.setInt(3, SPRA);
         uS.setInt(4, DEFA);
         uS.setInt(5, SPEA);
+        uS.executeUpdate();  
+    }
+
+    public static void insertStatB(Stat statB) throws SQLException
+    {
+        if(link == null) init();
+        
+        int HPB = statB.GetHP();
+        int STRB = statB.GetSTR();
+        int SPRB = statB.GetSPR();
+        int DEFB = statB.GetDEF();
+        int SPEB = statB.GetSPE();
+        PreparedStatement uS = link.prepareStatement(
+            "INSERT INTO StatB (HPStatB, STRStatB, SPRStatB, DEFStatB, SPEStatB) VALUES (?, ?, ?, ?, ?)"
+        );
+        uS.setInt(1, HPB);
+        uS.setInt(2, STRB);
+        uS.setInt(3, SPRB);
+        uS.setInt(4, DEFB);
+        uS.setInt(5, SPEB);
         uS.executeUpdate();  
     }
 

@@ -43,6 +43,25 @@ public class Init {
             System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
         }
 	}
+
+	public static void insererStatA(Stat statA)
+	{
+		try {
+            DataBase.insertStatA(statA);
+        } catch (SQLException e) {
+            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+        }
+	}
+
+	public static void insererStatB(Stat statB)
+	{
+		try {
+            DataBase.insertStatB(statB);
+        } catch (SQLException e) {
+            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+        }
+	}
+
 	public static void insererAttitude(Attitude attitude)
 	{
 		try {
@@ -66,9 +85,6 @@ public class Init {
 		insererAttitude(helpful);
 		insererAttitude(devoted);
 	}
-	
-		
-	
 	public static void insererLesElements()
 	{
 		insererElement(Fire);
@@ -103,8 +119,6 @@ public class Init {
 		insererRang(D);
 		insererRang(E);
 	}
-	
-
 	public static void insererLesTiers()
 	{
 		insererTier(Tier.Ubers);
@@ -115,6 +129,43 @@ public class Init {
 		insererTier(Tier.NU);
 		insererTier(Tier.PU);
 		insererTier(Tier.ZU);
+	}
+	public static void insererStatA(Stat[] statATotal)
+	{
+		for(int i=0; i<statATotal.length; i++)
+		{
+			insererStatA(statATotal[i]);
+		}
+	}
+
+	public static void insererStatATotal()
+	{
+		insererStatA(statFirstTotal_0());
+		insererStatA(statFirstTotal_1());
+		insererStatA(statFirstTotal_2());
+		insererStatA(statFirstTotal_3());
+		insererStatA(statFirstTotal_4());
+		insererStatA(statFirstTotal_5());
+		insererStatA(statFirstTotal_6());
+	}
+
+	public static void insererStatB(Stat[] statBTotal)
+	{
+		for(int i=0; i<statBTotal.length; i++)
+		{
+			insererStatB(statBTotal[i]);
+		}
+	}
+
+	public static void insererStatBTotal()
+	{
+		insererStatB(statEndTotal_0());
+		insererStatB(statEndTotal_1());
+		insererStatB(statEndTotal_2());
+		insererStatB(statEndTotal_3());
+		insererStatB(statEndTotal_4());
+		insererStatB(statEndTotal_5());
+		insererStatB(statEndTotal_6());
 	}
 
 		
@@ -143,7 +194,6 @@ public class Init {
     	public static Attitude cruel = new Attitude("cruel",0,0,0,0,26);
     	public static Attitude helpful = new Attitude("helpful",26,0,0,0,13);
     	public static Attitude devoted = new Attitude("devoted",0,13,0,13,0);
-		
 		
 		public static Elemental Fire = new Elemental("Fire");
 		public static Elemental Water = new Elemental("Water");
