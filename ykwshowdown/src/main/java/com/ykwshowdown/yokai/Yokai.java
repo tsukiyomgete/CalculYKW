@@ -29,6 +29,7 @@ public class Yokai {
         this.statEnd = statEnd;
         this.yokaiTier = Tier.NU;
         
+        this.type = Type;
         this.resistance = rest;
         this.weakness = weak;
         
@@ -40,6 +41,16 @@ public class Yokai {
     public String GetName()
     {
         return nom;
+    }
+
+    public String GetTierString()
+    {
+        return yokaiTier.getTier();
+    }
+
+    public Tier GetTier()
+    {
+        return yokaiTier;
     }
     
     public char GetRank()
@@ -54,6 +65,21 @@ public class Yokai {
     public String GetTribe()
     {
         return tribuYokai.GetTribe();
+    }
+
+    public String GetTypeElement()
+    {
+        return type.getElement();
+    }
+
+    public String GetWkElement()
+    {
+        return weakness.getElement();
+    }
+
+    public String GetResElement()
+    {
+        return resistance.getElement();
     }
 
     public Stat GetStatInit()

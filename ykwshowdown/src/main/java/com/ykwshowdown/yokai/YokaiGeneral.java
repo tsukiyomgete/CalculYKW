@@ -63,6 +63,15 @@ public class YokaiGeneral {
     {
         return yokai;
     }
+    public String GetYokaiName()
+    {
+        return yokai.GetName();
+    }
+
+    public Tier GetTier()
+    {
+        return yokai.GetTier();
+    }
 
     public IV GetIv()
     {

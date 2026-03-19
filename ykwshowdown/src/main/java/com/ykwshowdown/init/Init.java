@@ -35,6 +35,15 @@ public class Init {
         }
 	}
 
+	public static void insererYokai(Yokai yT)
+	{
+		try {
+            DataBase.insertYokai(yT);
+        } catch (SQLException e) {
+            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+        }
+	}
+
 	public static void insererTier(Tier tier)
 	{
 		try {
@@ -167,6 +176,26 @@ public class Init {
 		insererStatB(statEndTotal_5());
 		insererStatB(statEndTotal_6());
 	}
+
+	public static void insererYokai(Yokai[] yokai)
+	{
+		for(int i=0; i<yokai.length; i++)
+		{
+			insererYokai(yokai[i]);
+		}
+	}
+
+	public static void insererYokaiTotal()
+	{
+		insererYokai(medaillum_0());
+		insererYokai(medaillum_1());
+		insererYokai(medaillum_2());
+		insererYokai(medaillum_3());
+		insererYokai(medaillum_4());
+		insererYokai(medaillum_5());
+		insererYokai(medaillum_6());
+	}
+
 
 		
 		public static Tribe Brave = new Tribe("Brave");

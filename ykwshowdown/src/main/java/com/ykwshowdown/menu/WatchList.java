@@ -1,17 +1,20 @@
 package com.ykwshowdown.menu;
 import java.util.*;
+import com.ykwshowdown.yokai.*;
 
 
 public class WatchList {
     final int MAXTEAM=20;
     ArrayList<WatchBuilder> yourTeam;
     int nbTeam;
+    Tier formatTeam;
     Scanner sc = new Scanner(System.in);
     
     public WatchList()
     {
         yourTeam = new ArrayList<WatchBuilder>();
         nbTeam=0;
+        formatTeam=null;
     }
 
     public void menu()

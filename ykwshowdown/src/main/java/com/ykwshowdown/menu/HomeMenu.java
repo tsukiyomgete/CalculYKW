@@ -15,10 +15,9 @@ public class HomeMenu {
 
         int choix = -1;
         initBaseDeDonnee();
-
+        customCMD();
         System.out.println("Possèdez vous un compte showdown chez nous ?");
         str = sc.nextLine();
-
         User userConnected;
         if (str.equalsIgnoreCase("Oui")) {
             userConnected = logIn();
@@ -27,7 +26,7 @@ public class HomeMenu {
             try {
                 DataBase.addUser(userConnected);
                 System.out.println("Utilisateur ajouté à la base de données !");
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 System.out.println("Erreur : " + e.getMessage());
             }
         }
@@ -76,10 +75,10 @@ public class HomeMenu {
         return new User(strUser, strMdp);
     }
 
-    public void truncateBase()
+    public void customCMD()
     {
         try {
-             DataBase.viderStat();
+             DataBase.customCMD();
             } catch (SQLException e) {
             System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
             }

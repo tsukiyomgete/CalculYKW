@@ -5,11 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
+import java.util.*;
 
 import com.ykwshowdown.user.*;
 import com.ykwshowdown.yokai.*;
 import com.ykwshowdown.init.*;
+
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+import java.text.SimpleDateFormat;
 
 
 
@@ -22,7 +28,7 @@ public class DataBase {
     public static void init() throws SQLException {
     if(link == null) 
     {
-        String url = "jdbc:mysql://root:ZPmMfFOoCvMCVtrxahcLRAmcAqVoHHMA@mainline.proxy.rlwy.net:43528/railway";
+        String url = "jdbc:mysql://root:qTltSACuHSypPmZNAjNOZSlOngUlSWeX@autorack.proxy.rlwy.net:59240/railway";
         link = DriverManager.getConnection(url);
         initTables();
     }
@@ -42,17 +48,13 @@ public class DataBase {
         }
     }
 
-    private static void customCMD() throws SQLException {
+    public static void customCMD() throws SQLException {
         if(link == null) init();
         Statement requete = link.createStatement();
-        requete.execute("ALTER TABLE Yokai ADD COLUMN IF NOT EXISTS Attitude1 VARCHAR(20)");
-        requete.execute("ALTER TABLE Yokai ADD CONSTRAINT fk_Attitude1 FOREIGN KEY(Attitude1) REFERENCES Attitude(nomAttitude)");
-        requete.execute("ALTER TABLE Yokai ADD COLUMN IF NOT EXISTS Attitude2 VARCHAR(20)");
-        requete.execute("ALTER TABLE Yokai ADD CONSTRAINT fk_Attitude2 FOREIGN KEY(Attitude2) REFERENCES Attitude(nomAttitude)");
-        requete.execute("ALTER TABLE Yokai ADD COLUMN IF NOT EXISTS Attitude3 VARCHAR(20)");
-        requete.execute("ALTER TABLE Yokai ADD CONSTRAINT fk_Attitude3 FOREIGN KEY(Attitude3) REFERENCES Attitude(nomAttitude)");
-        requete.execute("ALTER TABLE Yokai ADD COLUMN IF NOT EXISTS Attitude4 VARCHAR(20)");
-        requete.execute("ALTER TABLE Yokai ADD CONSTRAINT fk_Attitude4 FOREIGN KEY(Attitude4) REFERENCES Attitude(nomAttitude)");
+        requete.execute("SET FOREIGN_KEY_CHECKS = 0");
+        requete.execute("DROP TABLE IF EXISTS StatActu");
+        requete.execute("ALTER TABLE YokaiGeneral DROP FOREIGN KEY YokaiGeneral_ibfk_7;");
+        requete.execute("SET FOREIGN_KEY_CHECKS = 1");
     }
 
     private static void initTables() throws SQLException {
@@ -226,23 +228,66 @@ public class DataBase {
         requete.execute("DROP TABLE IF EXISTS Users");
 }
 
-    public static void addUser(User userTest) throws SQLException
+    public static void addUser(User userTest) throws Exception {
+    
+    // 1. On formate les dates en String YYYY-MM-DD
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String joinedDate = sdf.format(userTest.getDate());
+        String lastConnected = sdf.format(userTest.getLoggedDate());
+
+    // 2. On construit l'URL avec les paramètres
+        String url = "http://localhost:8080/api/users"
+            + "?username=" + userTest.getUser()
+            + "&password=" + userTest.getPassWord()
+            + "&joinedDate=" + joinedDate
+            + "&lastConnected=" + lastConnected
+            + "&elo=1000";
+
+    // 3. On crée le client HTTP
+        HttpClient client = HttpClient.newHttpClient();
+
+    // 4. On construit la requête POST
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .POST(HttpRequest.BodyPublishers.noBody())
+            .build();
+
+    // 5. On envoie la requête
+        HttpResponse<String> response = client.send(request,
+        HttpResponse.BodyHandlers.ofString());
+
+    // 6. On vérifie que ça a marché
+        if (response.statusCode() != 200) {
+            throw new Exception("Erreur API : " + response.body());
+        }
+    }
+
+    public static void insertYokai(Yokai y) throws SQLException
     {
         if(link == null) init();
-        java.util.Date dateUser = userTest.getDate();
-        java.util.Date connectedUser = userTest.getLoggedDate();
-        java.sql.Date sqlDate = new java.sql.Date(dateUser.getTime());
-        java.sql.Date sqlLogged = new java.sql.Date(connectedUser.getTime());
-
+        int idMedaillum = y.GetID();
+        String nomYokai = y.GetName();
+        String nomTribu = y.GetTribe();
+        String rangYokai = String.valueOf(y.GetRank());
+        String typeElement = y.GetTypeElement();
+        String weakElement = y.GetWkElement();
+        String resElement = y.GetResElement();
+        String tierYokai = y.GetTier();
         PreparedStatement uS = link.prepareStatement(
-            "INSERT INTO Users (username, password, joined_date, last_connected) VALUES (?, ?, ?, ?)"
+            "INSERT INTO Yokai (nomYokai, nomTribu, rangYokai, typeElementaire, faiblesseElementaire, resistanceElementaire, statB, statA, tierYokai) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
         );
-        uS.setString(1, userTest.getUser());
-        uS.setString(2, userTest.getPassWord());
-        uS.setDate(3, sqlDate);
-        uS.setDate(4, sqlLogged);
+        uS.setString(1, nomYokai);
+        uS.setString(2, nomTribu);
+        uS.setString(3, rangYokai);
+        uS.setString(4, typeElement);
+        uS.setString(5, weakElement);
+        uS.setString(6, resElement);
+        uS.setInt(7, idMedaillum);
+        uS.setInt(8, idMedaillum);
+        uS.setString(9, tierYokai);
         uS.executeUpdate();
     }
+
 
     public static void addElo(User userTest) throws SQLException
     {
