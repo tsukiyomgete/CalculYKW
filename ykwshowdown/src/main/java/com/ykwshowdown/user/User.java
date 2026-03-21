@@ -1,20 +1,29 @@
 package com.ykwshowdown.user;
 
 import java.util.*;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.google.gson.annotations.SerializedName;
 import java.text.SimpleDateFormat;
+
+import com.google.gson.annotations.SerializedName;
 import com.ykwshowdown.menu.*;
 
 public class User {
     private Scanner sc = new Scanner(System.in);
     private static int nbUser=0;
+    
+    @SerializedName("id")
     private int ID;
+    @SerializedName("username")
     private String username;
+    @SerializedName("password")
     private String password;
+    @SerializedName("joinedDate")
     private Date joinedDate;
+    @SerializedName("lastLog")
     private Date lastLogged;
+    @SerializedName("elo")
     private int ELO;
+
     private ArrayList<WatchList> userTeam;
     private ArrayList<User> friends;
 

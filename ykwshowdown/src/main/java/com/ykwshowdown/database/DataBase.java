@@ -1,232 +1,21 @@
 package com.ykwshowdown.database;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.*;
-
-import com.ykwshowdown.user.*;
-import com.ykwshowdown.yokai.*;
-import com.ykwshowdown.init.*;
-
+import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.net.URI;
 import java.text.SimpleDateFormat;
+import java.util.*;
+import com.google.gson.Gson;
+import com.ykwshowdown.user.User;
+import com.ykwshowdown.yokai.Yokai;
 
 
 
 public class DataBase {
 
-    private static Connection link;
+    private static final String link="https://spring-boot-production-1d8d.up.railway.app/api";
 
     private DataBase() {}
-
-    public static void init() throws SQLException {
-    if(link == null) 
-    {
-        String url = "jdbc:mysql://root:qTltSACuHSypPmZNAjNOZSlOngUlSWeX@autorack.proxy.rlwy.net:59240/railway";
-        link = DriverManager.getConnection(url);
-        initTables();
-    }
-    }
-
-
-    private static void createEnvFile() {
-        java.io.File envFile = new java.io.File(".env");
-        if(!envFile.exists()) {
-            try {
-                java.io.FileWriter fw = new java.io.FileWriter(envFile);
-                fw.write("MYSQL_URL=jdbc:mysql://root:ZPmMfFOoCvMCVtrxahcLRAmcAqVoHHMA@mainline.proxy.rlwy.net:43528/railway?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
-                fw.close();
-            } catch (Exception e) {
-                System.out.println("Erreur création .env : " + e.getMessage());
-            }
-        }
-    }
-
-    public static void customCMD() throws SQLException {
-        if(link == null) init();
-        Statement requete = link.createStatement();
-        requete.execute("SET FOREIGN_KEY_CHECKS = 0");
-        requete.execute("DROP TABLE IF EXISTS StatActu");
-        requete.execute("ALTER TABLE YokaiGeneral DROP FOREIGN KEY YokaiGeneral_ibfk_7;");
-        requete.execute("SET FOREIGN_KEY_CHECKS = 1");
-    }
-
-    private static void initTables() throws SQLException {
-    if(link == null) init();
-    Statement requete = link.createStatement();
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS Users (
-            id              INTEGER PRIMARY KEY AUTO_INCREMENT,
-            username        VARCHAR(20) NOT NULL UNIQUE,
-            password        VARCHAR(255) NOT NULL,
-            joined_date     DATE NOT NULL,
-            last_connected  DATE NOT NULL,
-            elo             INTEGER DEFAULT 1000
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS Tribu (
-            nomTribu        VARCHAR(20) PRIMARY KEY
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS Elemental (
-            nomElement      VARCHAR(20) PRIMARY KEY
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS Rang (
-            nomRang         VARCHAR(1) PRIMARY KEY,
-            CONSTRAINT check_Rang CHECK (nomRang IN ('S', 'A', 'B', 'C', 'D', 'E'))
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS Tier (
-            nomTier         VARCHAR(8) PRIMARY KEY,
-            CONSTRAINT check_Tier CHECK (nomTier IN ('Ubers', 'OUBL', 'OU', 'UU', 'RU', 'NU', 'ZU', 'PU'))
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS StatB (
-            idStatB         INTEGER PRIMARY KEY AUTO_INCREMENT,
-            HPStatB         INTEGER NOT NULL,
-            STRStatB        INTEGER NOT NULL,
-            SPRStatB        INTEGER NOT NULL,
-            DEFStatB        INTEGER NOT NULL,
-            SPEStatB        INTEGER NOT NULL
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS StatA (
-            idStatA         INTEGER PRIMARY KEY AUTO_INCREMENT,
-            HPStatA         INTEGER NOT NULL,
-            STRStatA        INTEGER NOT NULL,
-            SPRStatA        INTEGER NOT NULL,
-            DEFStatA        INTEGER NOT NULL,
-            SPEStatA        INTEGER NOT NULL
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS StatActu (
-            idStatActu      INTEGER PRIMARY KEY AUTO_INCREMENT,
-            HPStatActu      INTEGER NOT NULL,
-            STRStatActu     INTEGER NOT NULL,
-            SPRStatActu     INTEGER NOT NULL,
-            DEFStatActu     INTEGER NOT NULL,
-            SPEStatActu     INTEGER NOT NULL
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS Equipement (
-            idEquipement    INTEGER PRIMARY KEY AUTO_INCREMENT,
-            nomEquipement   VARCHAR(20) NOT NULL
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS Yokai (
-            idMedaillum             INTEGER PRIMARY KEY AUTO_INCREMENT,
-            nomYokai                VARCHAR(20) NOT NULL,
-            nomTribu                VARCHAR(20) NOT NULL,
-            rangYokai               VARCHAR(1)  NOT NULL,
-            tierYokai               VARCHAR(20) NOT NULL,
-            typeElementaire         VARCHAR(20) NOT NULL,
-            faiblesseElementaire    VARCHAR(20) NOT NULL,
-            resistanceElementaire   VARCHAR(20) NOT NULL,
-            statB                   INTEGER NOT NULL,
-            statA                   INTEGER NOT NULL,
-            FOREIGN KEY(nomTribu)               REFERENCES Tribu(nomTribu),
-            FOREIGN KEY(rangYokai)              REFERENCES Rang(nomRang),
-            FOREIGN KEY(typeElementaire)        REFERENCES Elemental(nomElement),
-            FOREIGN KEY(faiblesseElementaire)   REFERENCES Elemental(nomElement),
-            FOREIGN KEY(resistanceElementaire)  REFERENCES Elemental(nomElement),
-            FOREIGN KEY(statB)                  REFERENCES StatB(idStatB),
-            FOREIGN KEY(statA)                  REFERENCES StatA(idStatA)
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS YokaiGeneral (
-            idYokaiGeneral  INTEGER PRIMARY KEY AUTO_INCREMENT,
-            nomYokai        VARCHAR(20) NOT NULL,
-            surnomYokai     VARCHAR(20),
-            niveau          INTEGER NOT NULL CHECK(niveau BETWEEN 1 AND 99),
-            nomElement      VARCHAR(20) NOT NULL,
-            nomTribu        VARCHAR(20) NOT NULL,
-            nomRang         VARCHAR(1) NOT NULL,
-            nomTier         VARCHAR(8) NOT NULL,
-            idStatB         INTEGER NOT NULL,
-            idStatA         INTEGER NOT NULL,
-            idStatActu      INTEGER NOT NULL,
-            idEquipement    INTEGER,
-            FOREIGN KEY (nomElement)    REFERENCES Elemental(nomElement),
-            FOREIGN KEY (nomTribu)      REFERENCES Tribu(nomTribu),
-            FOREIGN KEY (nomRang)       REFERENCES Rang(nomRang),
-            FOREIGN KEY (nomTier)       REFERENCES Tier(nomTier),
-            FOREIGN KEY (idStatB)       REFERENCES StatB(idStatB),
-            FOREIGN KEY (idStatA)       REFERENCES StatA(idStatA),
-            FOREIGN KEY (idStatActu)    REFERENCES StatActu(idStatActu),
-            FOREIGN KEY (idEquipement)  REFERENCES Equipement(idEquipement)
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS Equipe (
-            idEquipe        INTEGER PRIMARY KEY AUTO_INCREMENT,
-            idUser          INTEGER NOT NULL,
-            nomEquipe       VARCHAR(25) NOT NULL,
-            FOREIGN KEY (idUser) REFERENCES Users(id)
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS Equipe_Yokai (
-            idEquipe        INTEGER NOT NULL,
-            idYokaiGeneral  INTEGER NOT NULL,
-            position        INTEGER NOT NULL CHECK (position BETWEEN 1 AND 6),
-            PRIMARY KEY (idEquipe, position),
-            FOREIGN KEY (idEquipe)          REFERENCES Equipe(idEquipe),
-            FOREIGN KEY (idYokaiGeneral)    REFERENCES YokaiGeneral(idYokaiGeneral)
-        )
-    """);
-
-    requete.execute("""
-        CREATE TABLE IF NOT EXISTS Attitude (
-            nomAttitude     VARCHAR(20) PRIMARY KEY
-        )
-    """);
-}
-    public static void delTables() throws SQLException {
-        Statement requete = link.createStatement();
-        requete.execute("DROP TABLE IF EXISTS Equipe_Yokai");
-        requete.execute("DROP TABLE IF EXISTS Equipe");
-        requete.execute("DROP TABLE IF EXISTS YokaiGeneral");
-        requete.execute("DROP TABLE IF EXISTS Yokai");
-        requete.execute("DROP TABLE IF EXISTS Equipement");
-        requete.execute("DROP TABLE IF EXISTS StatActu");
-        requete.execute("DROP TABLE IF EXISTS StatA");
-        requete.execute("DROP TABLE IF EXISTS StatB");
-        requete.execute("DROP TABLE IF EXISTS Tier");
-        requete.execute("DROP TABLE IF EXISTS Rang");
-        requete.execute("DROP TABLE IF EXISTS Elemental");
-        requete.execute("DROP TABLE IF EXISTS Tribu");
-        requete.execute("DROP TABLE IF EXISTS Users");
-}
 
     public static void addUser(User userTest) throws Exception {
     
@@ -235,14 +24,14 @@ public class DataBase {
         String joinedDate = sdf.format(userTest.getDate());
         String lastConnected = sdf.format(userTest.getLoggedDate());
 
-    // 2. On construit l'URL avec les paramètres
-        String url = "http://localhost:8080/api/users"
-            + "?username=" + userTest.getUser()
+        String url = link + "/users"
+         + "?username=" + userTest.getUser()
             + "&password=" + userTest.getPassWord()
             + "&joinedDate=" + joinedDate
             + "&lastConnected=" + lastConnected
             + "&elo=1000";
-
+        
+    // 2. On construit l'URL avec les paramètres
     // 3. On crée le client HTTP
         HttpClient client = HttpClient.newHttpClient();
 
@@ -262,6 +51,95 @@ public class DataBase {
         }
     }
 
+    public static Yokai getYokai(String nom) throws Exception {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create(link + "/yokai/" + nom))
+        .GET()
+        .build();
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+        if(response.body()==null)
+        {
+            return null;
+        }
+        Gson gson = new Gson();
+        return gson.fromJson(response.body(), Yokai.class);
+
+
+    }
+
+
+    public static User getUser(String username) throws Exception {
+    
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create(link + "/users/" + username))
+        .GET()
+        .build();
+
+    HttpResponse<String> response = client.send(request,
+        HttpResponse.BodyHandlers.ofString());
+
+    // Si l'utilisateur n'existe pas l'API retourne null ou ""
+    if(response.body() == null) {
+        return null;
+    }
+
+    Gson gson = new Gson();
+    return gson.fromJson(response.body(), User.class);
+    }
+
+    public static boolean getMdp(String username, String password) throws Exception {
+    HttpClient client = HttpClient.newHttpClient();
+    
+    String encodedUsername = java.net.URLEncoder.encode(username, "UTF-8");
+    String encodedPassword = java.net.URLEncoder.encode(password, "UTF-8");
+    
+    HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create(link + "/users/login"
+            + "?username=" + encodedUsername
+            + "&password=" + encodedPassword))
+        .POST(HttpRequest.BodyPublishers.noBody())
+        .build();
+
+    HttpResponse<String> response = client.send(request,
+        HttpResponse.BodyHandlers.ofString());
+
+    return Boolean.parseBoolean(response.body());
+}
+
+    public static void setDate(User userTest, Date loggedDate) throws Exception
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String joinedDate = sdf.format(loggedDate);
+        
+        String url = link + "/users"
+         + "?username=" + userTest.getUser()
+            + "&lastConnected=" + joinedDate;
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(link))
+            .POST(HttpRequest.BodyPublishers.noBody())
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+        HttpResponse.BodyHandlers.ofString());
+
+
+        if (response.statusCode() != 200) {
+            throw new Exception("Erreur API : " + response.body());
+        }
+    }
+
+    
+
+   
+
+/* 
     public static void insertYokai(Yokai y) throws SQLException
     {
         if(link == null) init();
@@ -463,4 +341,5 @@ public class DataBase {
             link = null;
         }
     }
+        */
 }

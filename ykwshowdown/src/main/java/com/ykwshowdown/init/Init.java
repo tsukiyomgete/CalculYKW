@@ -1,3 +1,5 @@
+
+/* 
 package com.ykwshowdown.init;
 
 import com.ykwshowdown.yokai.*;
@@ -2491,4 +2493,6 @@ public static void printYokai()
 			}
     	}
 	}
+
+	*/
 

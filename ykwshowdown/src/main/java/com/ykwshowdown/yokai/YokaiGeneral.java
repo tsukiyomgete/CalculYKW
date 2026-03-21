@@ -2,10 +2,6 @@ package com.ykwshowdown.yokai;
 
 import java.util.Scanner;
 
-import static com.ykwshowdown.init.Init.medaillum;
-import static com.ykwshowdown.init.Init.unknowEquipement;
-import static com.ykwshowdown.init.Init.unknown;
-import static com.ykwshowdown.init.Init.unknownYokai;
 
 public class YokaiGeneral {
     Yokai yokai;
@@ -27,15 +23,15 @@ public class YokaiGeneral {
     
     public YokaiGeneral()
     {
-        yokai = unknownYokai;
+        yokai = null;
         surnom = "???";
         StatActu = new Stat(0,0,0,0,0);
         ItemYokai = null;
         level = 0;
-        attitudeYoKai = unknown;
+        attitudeYoKai = null;
         ivYokai = new IV(0,0,0,0,0);
         SportsClub = new SportsClub(0, 0, 0, 0);
-        ItemYokai = unknowEquipement;
+        ItemYokai = null;
     }
 
     public YokaiGeneral(Yokai yokai, String surnom, int level, IV ivYokai) {
@@ -89,7 +85,7 @@ public class YokaiGeneral {
             this.level = level;
         }
     }
-
+/* 
     public void addYokai(String str)
     {
         Scanner sc = new Scanner(System.in);
@@ -165,6 +161,8 @@ public class YokaiGeneral {
         System.out.println("On va générer les IV de ce yokai");
         ivYokai.setIV();
     }
+
+    */
 
     public void setLevel(String str)
     {
