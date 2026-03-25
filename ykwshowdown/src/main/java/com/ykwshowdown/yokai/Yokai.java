@@ -1,18 +1,33 @@
 package com.ykwshowdown.yokai;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Yokai {
+    
+    @SerializedName("nomYokai")
     String nom;
+    @SerializedName("rangYokai")
     Rank rangYokai;
+    @SerializedName("tierYokai")
     Tier yokaiTier;
+    
     face_icon faceYoKai;
+    
     boolean isLegendary;
+    @SerializedName("tribuYokai")
     Tribe tribuYokai;
+    @SerializedName("idMedaillum")
     int idMedallium;
+    @SerializedName("statA")
     Stat statInit;
+    @SerializedName("statB")
     Stat statEnd;
     
+    @SerializedName("typeElementaire")
     Elemental type;
+    @SerializedName("faiblesseElementaire")
     Elemental weakness;
+    @SerializedName("resistanceElementaire")
     Elemental resistance;
 
 

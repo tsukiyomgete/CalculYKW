@@ -1,8 +1,10 @@
 package com.ykwshowdown.menu;
 
+import java.util.Scanner;
+
 import com.ykwshowdown.init.calcul;
-import java.util.*;
-import com.ykwshowdown.yokai.*;
+import com.ykwshowdown.yokai.Tier;
+import com.ykwshowdown.yokai.YokaiGeneral;
 
 public class WatchBuilder {
     String nomTeam;
@@ -36,7 +38,7 @@ public class WatchBuilder {
                 YokaiGeneral yk = new YokaiGeneral();
 
                 WatchTeam[rang] = new YokaiGeneral();
-                //WatchTeam[rang].addYokai(yokaiString);
+                WatchTeam[rang].addYokai(yokaiString);
 
                 System.out.println(WatchTeam[rang].GetName());
                 nbYokai++;
@@ -57,24 +59,24 @@ public class WatchBuilder {
         System.out.println("    ");
         System.out.println("Lancement de méthode setIV");
         System.out.println("    ");
-        //WatchTeam[rang].setIV();
+        WatchTeam[rang].setIV();
     }
 
     public void print() {
         System.out.println(nomTeam);
         for (int i = 0; i < WatchTeam.length; i++) {
-            YokaiGeneral yk = WatchTeam[i]; // on stocke pour éviter les répétitions
+            YokaiGeneral yk = WatchTeam[i]; 
 
             if (yk == null)
-                continue; // ✅ on saute les emplacements vides
+                continue;
 
             System.out.println(yk.GetName() + " Level: " + yk.GetLevel());
             System.out.println("Rang : " + (i + 1));
 
             if (yk.GetEquipement() != null || yk.GetAttitude() != null) { // ✅ null vérifié avant
-                //yk.setStat(calcul.calculStatsCorrected(yk));
+                yk.setStat(calcul.calculStatsCorrected(yk));
             } else {
-                //yk.setStat(calcul.calculStatsUncorrected(yk));
+                yk.setStat(calcul.calculStatsUncorrected(yk));
             }
 
             System.out.println("        ");

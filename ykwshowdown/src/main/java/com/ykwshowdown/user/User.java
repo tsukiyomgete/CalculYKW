@@ -1,11 +1,12 @@
 package com.ykwshowdown.user;
 
-import java.util.*;
-import com.google.gson.annotations.SerializedName;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
+import java.util.Scanner;
 
 import com.google.gson.annotations.SerializedName;
-import com.ykwshowdown.menu.*;
+import com.ykwshowdown.menu.WatchList;
 
 public class User {
     private Scanner sc = new Scanner(System.in);

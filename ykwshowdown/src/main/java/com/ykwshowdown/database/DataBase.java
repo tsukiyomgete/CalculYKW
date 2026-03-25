@@ -4,7 +4,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+
 import com.google.gson.Gson;
 import com.ykwshowdown.user.User;
 import com.ykwshowdown.yokai.Yokai;
@@ -66,7 +67,6 @@ public class DataBase {
         }
         Gson gson = new Gson();
         return gson.fromJson(response.body(), Yokai.class);
-
 
     }
 

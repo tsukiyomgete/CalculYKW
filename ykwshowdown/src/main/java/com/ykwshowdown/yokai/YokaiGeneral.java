@@ -1,6 +1,7 @@
 package com.ykwshowdown.yokai;
-
 import java.util.Scanner;
+
+import com.ykwshowdown.database.DataBase;
 
 
 public class YokaiGeneral {
@@ -85,51 +86,34 @@ public class YokaiGeneral {
             this.level = level;
         }
     }
-/* 
+
     public void addYokai(String str)
     {
-        Scanner sc = new Scanner(System.in);
-        int trouve=-1;
-        
-        
-        if(rechercheYokai(str)!=0 && medaillum[rechercheYokai(str)]!=yokai)
+        //Scanner sc = new Scanner(System.in);
+        Yokai y =rechercheYokai(str);
+
+        if(y!=null)
         {
-            yokai = medaillum[rechercheYokai(str)];
+            this.yokai = y;
             setLevel(60);
         }
         else
         {
             System.out.println("Yokai non trouvé!");
-        }
-                
+        }      
     }
 
     
-    public int rechercheYokai(String nomRecherche)
-	{
-		int trouve=0;
-		for(int i=0; i<medaillum.length; i++)
-        {
-            if(nomRecherche.equalsIgnoreCase(medaillum[i].GetName()))
-            {
-            trouve = i;
-            return trouve;
-            }
-        }
-
-        if(trouve != -1)
-        {
-            yokai = medaillum[trouve];
-            System.out.println("The yokai " + medaillum[trouve].GetName() + " has been found!");
-            return trouve;
-        }
-        else
-        {
-            return 0;
+    public Yokai rechercheYokai(String nomRecherche)
+	{   
+        try {
+            return (DataBase.getYokai(nomRecherche)); 
+        } catch (Exception e) {
+            System.out.println("Erreur de connexion au serveur, réessayez. (Methode Recherche Yokai)");
+            System.out.println("Détail : " + e.getMessage());
+            return null;
         }
 	}
-
-    
 
     public void setStat(Stat stat)
     {
@@ -162,7 +146,6 @@ public class YokaiGeneral {
         ivYokai.setIV();
     }
 
-    */
 
     public void setLevel(String str)
     {
