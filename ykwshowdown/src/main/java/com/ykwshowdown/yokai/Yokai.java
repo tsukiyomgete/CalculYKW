@@ -14,13 +14,18 @@ public class Yokai {
     face_icon faceYoKai;
     
     boolean isLegendary;
-    @SerializedName("tribuYokai")
+    @SerializedName("nomTribu")
     Tribe tribuYokai;
     @SerializedName("idMedaillum")
     int idMedallium;
+
+
     @SerializedName("statA")
+    int statAId;
     Stat statInit;
+
     @SerializedName("statB")
+    int statBId;
     Stat statEnd;
     
     @SerializedName("typeElementaire")
@@ -33,25 +38,19 @@ public class Yokai {
 
     public Equipement[] HoldingEquipement;
 
-    public Yokai(String nom,int idMedallium, Rank rangYokai, Tribe tribuYokai,boolean isLegendary,Stat statInit, Stat statEnd, Elemental Type,Elemental weak, Elemental rest, int maxItem)
+    public Yokai(String nom, int idMedallium, Rank rangYokai, Tribe tribuYokai, boolean isLegendary, Elemental Type, Elemental weak, Elemental rest, int maxItem)
     {
         this.nom = nom;
         this.idMedallium = idMedallium;
         this.rangYokai = rangYokai;
         this.tribuYokai = tribuYokai;
         this.isLegendary = isLegendary;
-        this.statInit = statInit;
-        this.statEnd = statEnd;
         this.yokaiTier = Tier.NU;
-        
         this.type = Type;
         this.resistance = rest;
         this.weakness = weak;
-        
         this.HoldingEquipement = new Equipement[maxItem];
     }
-
-
 
     public String GetName()
     {
@@ -97,16 +96,21 @@ public class Yokai {
         return resistance.getElement();
     }
 
-    public Stat GetStatInit()
+    public int getStatAId() { return statAId; }
+    public int getStatBId() { return statBId; }
+
+    public Stat getStatA() {return statInit;}
+    public Stat getStatB() {return statEnd;}
+
+    public void setStatA(Stat sA)
     {
-        return statInit;
+        statInit = sA;
     }
 
-    public Stat GetStatEnd()
+    public void setStatB(Stat sB)
     {
-        return statEnd;
+        statEnd = sB;
     }
-
 
 
 }

@@ -4,9 +4,9 @@ com\ykwshowdown\database\DataBase.class
 com\ykwshowdown\yokai\IV.class
 com\ykwshowdown\yokai\Tribe.class
 com\ykwshowdown\yokai\constant.class
-com\ykwshowdown\init\Init.class
 com\ykwshowdown\yokai\Rank.class
 com\ykwshowdown\user\User.class
+com\ykwshowdown\yokai\Tier.class
 com\ykwshowdown\yokai\Equipement.class
 com\ykwshowdown\yokai\FoodClass.class
 com\ykwshowdown\yokai\face_icon.class

@@ -113,8 +113,8 @@ public class calcul {
 
 	public static Stat calculStatsUncorrected(YokaiGeneral yg)
 	{
-		Stat StatA = yg.GetYokai().GetStatInit();
-		Stat StatB = yg.GetYokai().GetStatEnd();
+		Stat StatA = yg.GetYokai().getStatA();
+		Stat StatB = yg.GetYokai().getStatB();
 		IV IV = yg.GetIv();
 		int Level = yg.GetLevel();
 	
@@ -150,8 +150,8 @@ public class calcul {
 
 	public static Stat calculStatsCorrected(YokaiGeneral yg)
 	{
-		Stat StatA = yg.GetYokai().GetStatInit();
-		Stat StatB = yg.GetYokai().GetStatEnd();
+		Stat StatA = yg.GetYokai().getStatA();
+		Stat StatB = yg.GetYokai().getStatB();
 		IV IV = yg.GetIv();
 		int Level = yg.GetLevel();
 		Attitude atYG = yg.GetAttitude();

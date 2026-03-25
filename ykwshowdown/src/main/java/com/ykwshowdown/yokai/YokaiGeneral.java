@@ -107,6 +107,9 @@ public class YokaiGeneral {
     public Yokai rechercheYokai(String nomRecherche)
 	{   
         try {
+            
+            Yokai y = DataBase.getYokai(nomRecherche);
+            System.out.println(y.GetName());
             return (DataBase.getYokai(nomRecherche)); 
         } catch (Exception e) {
             System.out.println("Erreur de connexion au serveur, réessayez. (Methode Recherche Yokai)");
