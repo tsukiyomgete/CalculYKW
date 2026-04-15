@@ -28,6 +28,13 @@ public class User {
     private ArrayList<WatchList> userTeam;
     private ArrayList<User> friends;
 
+    
+    public User()
+    {
+        ID=0;
+        username = "Anonyme";
+    }
+    
     public User(String username, String password)
     {
         ID=nbUser+1;

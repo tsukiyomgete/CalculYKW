@@ -113,7 +113,7 @@ public class DataBase {
                 .build();
         HttpResponse<String> response = client.send(request,
                 HttpResponse.BodyHandlers.ofString());
-        System.out.println("StatA réponse: " + response.body());
+        //System.out.println("StatA réponse: " + response.body());
         Gson gson = new Gson();
         return gson.fromJson(response.body(), Stat.class);
     }
@@ -126,7 +126,7 @@ public class DataBase {
                 .build();
         HttpResponse<String> response = client.send(request,
                 HttpResponse.BodyHandlers.ofString());
-        System.out.println("StatB réponse: " + response.body());
+        // System.out.println("StatB réponse: " + response.body());
         Gson gson = new Gson();
         return gson.fromJson(response.body(), Stat.class);
     }
@@ -162,7 +162,7 @@ public class DataBase {
                 + "?username=" + encodedUsername
                 + "&password=" + encodedPassword;
 
-        System.out.println("URL: " + url); // debug
+        // System.out.println("URL: " + url); 
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -172,8 +172,8 @@ public class DataBase {
         HttpResponse<String> response = client.send(request,
                 HttpResponse.BodyHandlers.ofString());
 
-        System.out.println("Status: " + response.statusCode()); // debug
-        System.out.println("Réponse: " + response.body()); // debug
+        //System.out.println("Status: " + response.statusCode()); // debug
+        //System.out.println("Réponse: " + response.body());  debug
 
         return Boolean.parseBoolean(response.body());
     }

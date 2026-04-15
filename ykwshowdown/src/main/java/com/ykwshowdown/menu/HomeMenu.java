@@ -20,6 +20,10 @@ public class HomeMenu {
         if (str.equalsIgnoreCase("Oui")) {
             userConnected = logIn();
         } else {
+        System.out.println("Voulez vous crée un compte ou restez anonyme?");
+        str = sc.nextLine();
+        if(str.equalsIgnoreCase("Oui"))
+        {
             userConnected = createUserData();
             try {
                 DataBase.addUser(userConnected);
@@ -27,6 +31,12 @@ public class HomeMenu {
             } catch (Exception e) {
                 System.out.println("Erreur : " + e.getMessage());
             }
+        }
+        else
+        {
+            userConnected = new User();
+        }
+            
         }
         
 

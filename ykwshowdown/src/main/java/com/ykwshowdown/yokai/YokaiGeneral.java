@@ -1,20 +1,22 @@
 package com.ykwshowdown.yokai;
+import java.io.Serial;
 import java.util.Scanner;
 
 import com.ykwshowdown.database.DataBase;
-
+import com.google.gson.annotations.SerializedName;
 
 public class YokaiGeneral {
+    
     Yokai yokai;
+    @SerializedName("surnomYokai")
     String surnom;
 
     Stat StatActu;
+    @SerializedName("IdEquipement")
     Equipement ItemYokai;
-
+    @SerializedName("niveau")
     int level;
-    int AttackLevel;
-    int TechniqueLevel;
-    int SoultimateLevel;
+
     Attitude attitudeYoKai;
     int LoafLevel;
     int TrainingCount;
