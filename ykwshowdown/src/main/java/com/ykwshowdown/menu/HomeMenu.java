@@ -1,6 +1,9 @@
 package com.ykwshowdown.menu;
 import java.util.Scanner;
 
+import com.ykwshowdown.battle.Battle;
+import com.ykwshowdown.battle.YokaiFight;
+import com.ykwshowdown.battle.YokaiTeam;
 import com.ykwshowdown.database.DataBase;
 import com.ykwshowdown.user.User;
 
@@ -42,23 +45,45 @@ public class HomeMenu {
 
         while (choix != 4) {
             System.out.println("    HOME MENU    ");
-            System.out.println("1) Equipe");
-            System.out.println("2) Tier Actuel");
-            System.out.println("3) Ladder");
-            System.out.println("4) Quitter");
+            System.out.println("1) Combat");
+            System.out.println("2) Equipe");
+            System.out.println("3) Tier Actuel");
+            System.out.println("4) Ladder");
+            System.out.println("5) Quitter");
             choix = sc.nextInt();
             sc.nextLine();
 
-            if (choix == 1) {
+            if(choix == 1)
+            {
+                YokaiFight komasan = new YokaiFight("Komasan", 200, 40, 30, 40, 20, 1);
+                YokaiFight jibanyan = new YokaiFight("Jibanyan", 200, 40, 30, 40, 20, 1);
+
+                YokaiFight noko = new YokaiFight("Noko", 180, 40, 30, 40, 20, 2);
+                YokaiFight buhu = new YokaiFight("Buhu", 300, 20, 80, 40, 20, 2);
+                
+                YokaiTeam tUser = new YokaiTeam(2, 1);
+                YokaiTeam tEnemi = new YokaiTeam(2, 2);
+
+                tUser.setYokaiIndex(0, komasan);
+                tUser.setYokaiIndex(1, jibanyan);
+
+                tEnemi.setYokaiIndex(0, noko);
+                tEnemi.setYokaiIndex(1, buhu);
+
+                Battle b = new Battle(tUser, tEnemi);
+                b.DebutCombat();
+            }
+            
+            if (choix == 2) {
                 watchList.menu();
             }
-            if (choix == 2) {
+            if (choix == 3) {
                 System.out.println("(Tier Actuel - à implémenter)");
             }
-            if (choix == 3) {
+            if (choix == 4) {
                 System.out.println("(Ladder - à implémenter)");
             }
-            if (choix == 4) {
+            if (choix == 5) {
                 System.out.println("Bye !");
                 System.exit(0);
             }

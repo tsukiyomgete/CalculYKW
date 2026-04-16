@@ -1,8 +1,5 @@
 package com.ykwshowdown.battle;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 public class YokaiFight{
     private String _nomYokai;
     private String _surnomYokai;
@@ -11,8 +8,9 @@ public class YokaiFight{
     private int _spr;
     private int _def;
     private int _spe;
+    private int _team;
 
-    public YokaiFight(String nomYokai, String surnomYokai, int pv, int atk, int spr, int def, int spe)
+    public YokaiFight(String nomYokai, String surnomYokai, int pv, int atk, int spr, int def, int spe, int team)
     {
         _nomYokai = nomYokai;
         _surnomYokai = surnomYokai;
@@ -20,7 +18,19 @@ public class YokaiFight{
         _atk = atk;
         _spr = spr;
         _def = def;
-        _spe = def;
+        _spe = spe;
+        _team = team;
+    }
+
+    public YokaiFight(String nomYokai,  int pv, int atk, int spr, int def, int spe, int team)
+    {
+        _nomYokai = nomYokai;
+        _hp = pv;
+        _atk = atk;
+        _spr = spr;
+        _def = def;
+        _spe = spe;
+        _team = team;
     }
 
     public boolean isAlive()
@@ -30,8 +40,12 @@ public class YokaiFight{
 
     public void attack(YokaiFight target)
     {
-        int damage = 8;
-        target._hp -= 8;
+        int damage = 40;
+        if(target._hp < damage)
+        {
+            target._hp = 0;
+        }
+        target._hp -= 40;
         System.out.println(this._nomYokai + " a infligé " + damage + " au " + target._nomYokai  + " enemie !");
         try {
             Thread.sleep(1200);
@@ -40,19 +54,7 @@ public class YokaiFight{
             }
     }
 
-    public YokaiFight getRandTarget(YokaiFight[] enemyTeam)
-    {
-        ArrayList<YokaiFight> enemyAlive = new ArrayList<>();
-        for(int i=0; i<enemyTeam.length; i++)
-        {
-            if(enemyTeam[i].isAlive())
-            {
-                enemyAlive.add(enemyTeam[i]);
-            }            
-        }
-        Random rand = new Random();
-        return enemyAlive.get(rand.nextInt(enemyAlive.size()));
-    } 
+    
 
     public int getHP()
     {
@@ -67,6 +69,11 @@ public class YokaiFight{
     public String getName()
     {
         return _nomYokai;
+    }
+
+    public int getTeam()
+    {
+        return _team;
     }
 
 }
