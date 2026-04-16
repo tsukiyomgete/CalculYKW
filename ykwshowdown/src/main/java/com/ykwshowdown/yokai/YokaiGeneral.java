@@ -168,10 +168,6 @@ public class YokaiGeneral {
 
 
 
-
-
-
-
     public Attitude GetAttitude()
     {
         return this.attitudeYoKai;
@@ -217,6 +213,7 @@ public class YokaiGeneral {
     {
         return level;
     }
+
     
 
 }

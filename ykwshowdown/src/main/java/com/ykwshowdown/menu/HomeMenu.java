@@ -14,12 +14,12 @@ public class HomeMenu {
 
     public void menu() {
 
+        User userConnected = null;
         int choix = -1;
         initBaseDeDonnee();
         customCMD();
         System.out.println("Possèdez vous un compte showdown chez nous ?");
         str = sc.nextLine();
-        User userConnected;
         if (str.equalsIgnoreCase("Oui")) {
             userConnected = logIn();
         } else {
@@ -43,7 +43,7 @@ public class HomeMenu {
         }
         
 
-        while (choix != 4) {
+        while (choix != 5) {
             System.out.println("    HOME MENU    ");
             System.out.println("1) Combat");
             System.out.println("2) Equipe");
@@ -55,6 +55,13 @@ public class HomeMenu {
 
             if(choix == 1)
             {
+                if(userConnected.getEquippedTeam()==null)
+                {
+                    System.out.println("Please select a team");
+                    return;
+                }
+                
+                
                 YokaiFight komasan = new YokaiFight("Komasan", 200, 40, 30, 40, 20, 1);
                 YokaiFight jibanyan = new YokaiFight("Jibanyan", 200, 40, 30, 40, 20, 1);
 
@@ -75,7 +82,7 @@ public class HomeMenu {
             }
             
             if (choix == 2) {
-                watchList.menu();
+                watchList.menu(userConnected);
             }
             if (choix == 3) {
                 System.out.println("(Tier Actuel - à implémenter)");

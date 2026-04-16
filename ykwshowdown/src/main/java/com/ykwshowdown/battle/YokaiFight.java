@@ -1,5 +1,7 @@
 package com.ykwshowdown.battle;
 
+import com.ykwshowdown.yokai.YokaiGeneral;
+
 public class YokaiFight{
     private String _nomYokai;
     private String _surnomYokai;
@@ -33,6 +35,17 @@ public class YokaiFight{
         _team = team;
     }
 
+    public YokaiFight(YokaiGeneral yg, int team)
+    {
+        _nomYokai = yg.GetName();
+        _hp = yg.GetHP();
+        _atk = yg.GetSTR();
+        _spr = yg.GetSPR();
+        _def = yg.GetDEF();
+        _spe = yg.GetSPE();
+        _team = team;
+    }
+
     public boolean isAlive()
     {
         return (this.getHP()> 0);
@@ -45,7 +58,10 @@ public class YokaiFight{
         {
             target._hp = 0;
         }
-        target._hp -= 40;
+        else
+        {
+            target._hp -= 40;
+        }
         System.out.println(this._nomYokai + " a infligé " + damage + " au " + target._nomYokai  + " enemie !");
         try {
             Thread.sleep(1200);

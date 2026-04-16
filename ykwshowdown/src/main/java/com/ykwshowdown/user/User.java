@@ -6,11 +6,13 @@ import java.util.Random;
 import java.util.Scanner;
 
 import com.google.gson.annotations.SerializedName;
-import com.ykwshowdown.menu.WatchList;
+import com.ykwshowdown.menu.*;
 
 public class User {
     private Scanner sc = new Scanner(System.in);
     private static int nbUser=0;
+
+    private WatchBuilder equippedTeam;
     
     @SerializedName("id")
     private int ID;
@@ -60,6 +62,10 @@ public class User {
         return lastLogged;
     }
 
+    public void setTeam(WatchBuilder yt)
+    {
+        equippedTeam = yt;
+    }
 
     public int getID()
     {
@@ -102,5 +108,10 @@ public class User {
     public int getELO()
     {
         return ELO;
+    }
+
+    public WatchBuilder getEquippedTeam()
+    {
+        return equippedTeam;
     }
 }

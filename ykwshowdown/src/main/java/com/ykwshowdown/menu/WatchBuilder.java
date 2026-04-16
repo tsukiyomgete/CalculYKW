@@ -35,7 +35,6 @@ public class WatchBuilder {
                 rang -= 1;
                 System.out.println("Avec quel yokai souhaites tu le remplacer?");
                 String yokaiString = sc.nextLine();
-                YokaiGeneral yk = new YokaiGeneral();
 
                 WatchTeam[rang] = new YokaiGeneral();
                 WatchTeam[rang].addYokai(yokaiString);
@@ -73,7 +72,7 @@ public class WatchBuilder {
             System.out.println(yk.GetName() + " Level: " + yk.GetLevel());
             System.out.println("Rang : " + (i + 1));
 
-            if (yk.GetEquipement() != null || yk.GetAttitude() != null) { // ✅ null vérifié avant
+            if (yk.GetEquipement() != null || yk.GetAttitude() != null) { 
                 yk.setStat(calcul.calculStatsCorrected(yk));
             } else {
                 yk.setStat(calcul.calculStatsUncorrected(yk));
