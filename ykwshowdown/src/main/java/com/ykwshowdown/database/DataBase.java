@@ -65,7 +65,7 @@ public class DataBase {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(link + "/yokai/nomYokai/" + URLEncoder.encode(nom, StandardCharsets.UTF_8)))
+                .uri(URI.create(link + "/yokai/nomYokai/" + URLEncoder.encode(nom, StandardCharsets.UTF_8).replace("+", "%20")))
                 .GET()
                 .build();
 
@@ -73,7 +73,7 @@ public class DataBase {
                 HttpResponse.BodyHandlers.ofString());
 
         System.out.println("Réponse: " + response.body());
-        if (response.body() == null) {
+        if (response.body() == null || response.body().isEmpty()) {
             return null;
         }
         Gson gson = new GsonBuilder()
@@ -98,7 +98,7 @@ public class DataBase {
                 .create();
 
         Yokai y = gson.fromJson(response.body(), Yokai.class);
-        
+
         y.setStatA(getStatA(y.getStatAId()));
         y.setStatB(getStatB(y.getStatBId()));
 
@@ -163,7 +163,6 @@ public class DataBase {
                 + "&password=" + encodedPassword;
 
         // System.out.println("URL: " + url); 
-
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.noBody())
@@ -174,7 +173,6 @@ public class DataBase {
 
         //System.out.println("Status: " + response.statusCode()); // debug
         //System.out.println("Réponse: " + response.body());  debug
-
         return Boolean.parseBoolean(response.body());
     }
 

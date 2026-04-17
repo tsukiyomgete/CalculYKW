@@ -1,10 +1,10 @@
 package com.ykwshowdown.yokai;
 
-import java.io.Serial;
 import java.util.Scanner;
 
-import com.ykwshowdown.database.DataBase;
 import com.google.gson.annotations.SerializedName;
+import com.ykwshowdown.battle.YokaiFight;
+import com.ykwshowdown.database.DataBase;
 
 public class YokaiGeneral {
 
@@ -55,6 +55,11 @@ public class YokaiGeneral {
         this.SportsClub = new SportsClub(0, 0, 0, 0);
         this.StatActu = new Stat(0, 0, 0, 0, 0);
         this.ivYokai = new IV(0, 0, 0, 0, 0);
+    }
+
+    public YokaiFight toYokaiFight(int teamNumber)
+    {
+        return new YokaiFight(this.GetName(),this.GetHP(),this.GetSTR(),this.GetSPR(),this.GetDEF(),this.GetSPE(),teamNumber);
     }
 
     public Yokai GetYokai() {

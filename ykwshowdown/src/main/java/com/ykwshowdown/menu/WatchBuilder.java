@@ -23,30 +23,25 @@ public class WatchBuilder {
         formatTeam = null;
     }
 
-    public int addYokai() {
-        if (nbYokai < MAXYOKAI) {
-            int rang = -1;
-            System.out.println("A quel rang voulez vous ajouter un yokai? (1-6)");
-            String rangNum = sc.nextLine();
-            rang = Integer.parseInt(rangNum);
-            if (rang < 1 || rang > 6) {
-                throw new IllegalArgumentException("Faux pas compris entre 1 et 6");
-            } else {
-                rang -= 1;
-                System.out.println("Avec quel yokai souhaites tu le remplacer?");
-                String yokaiString = sc.nextLine();
-
-                WatchTeam[rang] = new YokaiGeneral();
-                WatchTeam[rang].addYokai(yokaiString);
-
-                System.out.println(WatchTeam[rang].GetName());
-                nbYokai++;
-                return rang;
+    public int addYokai(int rang, String nomYokai) 
+    {
+        if (nbYokai < MAXYOKAI) 
+        {
+            if (rang < 1 || rang > 6) 
+            {
+                throw new IllegalArgumentException("Rang pas compris entre 1 et 6");
             }
-        } else {
+            rang -= 1;
+            WatchTeam[rang] = new YokaiGeneral();
+            WatchTeam[rang].addYokai(nomYokai);
+            System.out.println(WatchTeam[rang].GetName() + " ajouté au rang " + (rang+1));
+            nbYokai++;
+            return rang;
+        } 
+        else 
+        {
             throw new IllegalArgumentException("Tu as déjà atteint la limite max de Yokai");
         }
-
     }
 
     public void modifYokai(int rang) {
@@ -125,6 +120,11 @@ public class WatchBuilder {
 
     public int GetTeamSize() {
         return nbYokai;
+    }
+
+    public YokaiGeneral getYokaiIndex(int rang)
+    {
+        return WatchTeam[rang];
     }
 
 }

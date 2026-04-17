@@ -9,8 +9,7 @@ public class YokaiTeam {
     User userTeam;
     private int teamNumber;
 
-    public YokaiTeam(User userTeam, int nbTeam, int nbYokai)
-    {
+    public YokaiTeam(User userTeam, int nbTeam, int nbYokai) {
         this.frontRow = new YokaiFight[3];
         this.backRow = new YokaiFight[3];
 
@@ -18,68 +17,53 @@ public class YokaiTeam {
         this.teamNumber = nbTeam;
     }
 
-    public YokaiTeam(int nbYokai, int nbTeam)
-    {
-        this.frontRow = new YokaiFight[nbYokai];
-
+    public YokaiTeam(int nbYokai, int nbTeam) {
+        this.frontRow = new YokaiFight[nbYokai > 3 ? 3 : nbYokai];
+        this.backRow = new YokaiFight[nbYokai > 3 ? nbYokai - 3 : 0];
         this.teamNumber = nbTeam;
     }
 
-    public YokaiTeam(int nbTeam)
-    {
+    public YokaiTeam(int nbTeam) {
         this.frontRow = new YokaiFight[3];
         this.backRow = new YokaiFight[3];
 
-
         this.teamNumber = nbTeam;
     }
 
-    public int getTeamNumber()
-    {
+    public int getTeamNumber() {
         return teamNumber;
     }
 
-    public void setYokaiIndex(int i, YokaiFight y)
-    {
-        if(i <= 2)
-        {
+    public void setYokaiIndex(int i, YokaiFight y) {
+        if (i <= 2) {
             frontRow[i] = y;
-        }
-        else
-        {
-            backRow[i-3] = y;
+        } else {
+            backRow[i - 3] = y;
         }
     }
 
-    public YokaiFight getYokaiFrontRowIndex(int i)
-    {
+    public YokaiFight getYokaiFrontRowIndex(int i) {
         return frontRow[i];
     }
 
-    public YokaiFight getYokaiBackRowIndex(int i)
-    {
+    public YokaiFight getYokaiBackRowIndex(int i) {
         return backRow[i];
     }
 
-    
-    public int getFrontRowSize()
-    {
+    public int getFrontRowSize() {
         return frontRow.length;
     }
 
-    public int getBackRowSize()
-    {
+    public int getBackRowSize() {
         return backRow.length;
     }
-    
-    public YokaiFight[] getFrontTeamArray()
-    {
+
+    public YokaiFight[] getFrontTeamArray() {
         return frontRow;
     }
 
-    public int getTeamSize()
-    {
+    public int getTeamSize() {
         return frontRow.length + backRow.length;
     }
-    
+
 }

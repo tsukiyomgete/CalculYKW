@@ -5,6 +5,7 @@ import com.ykwshowdown.yokai.*;
 import com.ykwshowdown.user.*;
 
 public class WatchList {
+
     final int MAXTEAM = 20;
     ArrayList<WatchBuilder> yourTeam;
     int nbTeam;
@@ -123,11 +124,25 @@ public class WatchList {
         String nomTeam = sc.nextLine();
         for (int i = 0; i < yourTeam.size(); i++) {
             if (yourTeam.get(i) != null && nomTeam.equalsIgnoreCase(yourTeam.get(i).GetTeamName())) {
-                yourTeam.get(i).addYokai(); 
+                while (yourTeam.get(i).GetTeamSize() < 6) {
+                    System.out.println("Slots restants : " + (6 - yourTeam.get(i).GetTeamSize()));
+                    System.out.println("Commande : add <rang> <nomYokai> | quit pour terminer");
+                    String cmd = sc.nextLine();
+
+                    if (cmd.equalsIgnoreCase("quit")) {
+                        break;
+                    }
+
+                    String[] parts = cmd.split(" ");
+                    if (parts[0].equalsIgnoreCase("add")) {
+                        int rang = Integer.parseInt(parts[1]);
+                        String nomYokai = String.join(" ", Arrays.copyOfRange(parts, 2, parts.length));
+                        yourTeam.get(i).addYokai(rang, nomYokai);
+                    }
+                }
                 return;
             }
         }
         System.out.println("Aucune équipe trouvée");
     }
-
 }

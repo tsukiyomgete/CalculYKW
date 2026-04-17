@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import com.google.gson.annotations.SerializedName;
 import com.ykwshowdown.menu.*;
+import com.ykwshowdown.yokai.*;
 
 public class User {
     private Scanner sc = new Scanner(System.in);
@@ -113,5 +114,10 @@ public class User {
     public WatchBuilder getEquippedTeam()
     {
         return equippedTeam;
+    }
+
+    public YokaiGeneral getYokaiIndex(int i)
+    {
+        return equippedTeam.getYokaiIndex(i);
     }
 }

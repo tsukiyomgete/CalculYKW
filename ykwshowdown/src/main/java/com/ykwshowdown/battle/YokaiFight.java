@@ -46,6 +46,16 @@ public class YokaiFight{
         _team = team;
     }
 
+    public void setYokaiFight(YokaiGeneral yg)
+    {
+        _nomYokai = yg.GetName();
+        _hp = yg.GetHP();
+        _atk = yg.GetSTR();
+        _spr = yg.GetSPR();
+        _def = yg.GetDEF();
+        _spe = yg.GetSPE();
+    }
+
     public boolean isAlive()
     {
         return (this.getHP()> 0);
