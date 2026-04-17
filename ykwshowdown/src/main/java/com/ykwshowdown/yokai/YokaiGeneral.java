@@ -1,4 +1,5 @@
 package com.ykwshowdown.yokai;
+
 import java.io.Serial;
 import java.util.Scanner;
 
@@ -6,7 +7,7 @@ import com.ykwshowdown.database.DataBase;
 import com.google.gson.annotations.SerializedName;
 
 public class YokaiGeneral {
-    
+
     Yokai yokai;
     @SerializedName("surnomYokai")
     String surnom;
@@ -23,29 +24,27 @@ public class YokaiGeneral {
     IV ivYokai;
     SportsClub SportsClub;
 
-    
-    public YokaiGeneral()
-    {
+    public YokaiGeneral() {
         yokai = null;
         surnom = "???";
-        StatActu = new Stat(0,0,0,0,0);
+        StatActu = new Stat(0, 0, 0, 0, 0);
         ItemYokai = null;
         level = 0;
         attitudeYoKai = null;
-        ivYokai = new IV(0,0,0,0,0);
+        ivYokai = new IV(0, 0, 0, 0, 0);
         SportsClub = new SportsClub(0, 0, 0, 0);
         ItemYokai = null;
     }
 
     public YokaiGeneral(Yokai yokai, String surnom, int level, IV ivYokai) {
-        
+
         this.yokai = yokai;
         this.surnom = surnom;
-        this.level = level;   
+        this.level = level;
     }
 
-    public YokaiGeneral(Yokai yokai, String surnom,int level, Attitude attitudeYoKai, Equipement EquipYokai) {
-        
+    public YokaiGeneral(Yokai yokai, String surnom, int level, Attitude attitudeYoKai, Equipement EquipYokai) {
+
         this.yokai = yokai;
         this.surnom = surnom;
         this.ItemYokai = EquipYokai;
@@ -53,75 +52,60 @@ public class YokaiGeneral {
 
         this.attitudeYoKai = attitudeYoKai;
 
-        this.SportsClub = new SportsClub(0,0,0,0);
-        this.StatActu = new Stat(0,0,0,0, 0);
-        this.ivYokai = new IV(0, 0, 0, 0,0);
+        this.SportsClub = new SportsClub(0, 0, 0, 0);
+        this.StatActu = new Stat(0, 0, 0, 0, 0);
+        this.ivYokai = new IV(0, 0, 0, 0, 0);
     }
 
-    public Yokai GetYokai()
-    {
+    public Yokai GetYokai() {
         return yokai;
     }
-    public String GetYokaiName()
-    {
+
+    public String GetYokaiName() {
         return yokai.GetName();
     }
 
-    public Tier GetTier()
-    {
+    public Tier GetTier() {
         return yokai.GetTier();
     }
 
-    public IV GetIv()
-    {
+    public IV GetIv() {
         return ivYokai;
     }
-    
-    public void setLevel(int level)
-    {
-        if(level < 0 || level > 99)
-        {
+
+    public void setLevel(int level) {
+        if (level < 0 || level > 99) {
             throw new IllegalArgumentException("Impossible, valeur de niveau non comprise");
-        }
-        else
-        {
+        } else {
             this.level = level;
         }
     }
 
-    public void addYokai(String str)
-    {
-        //Scanner sc = new Scanner(System.in);
-        Yokai y =rechercheYokai(str);
+    public void addYokai(String str) {
+        // Scanner sc = new Scanner(System.in);
+        Yokai y = rechercheYokai(str);
 
-        if(y!=null)
-        {
+        if (y != null) {
             this.yokai = y;
             setLevel(60);
-        }
-        else
-        {
+        } else {
             System.out.println("Yokai non trouvé!");
-        }      
+        }
     }
 
-    
-    public Yokai rechercheYokai(String nomRecherche)
-	{   
+    public Yokai rechercheYokai(String nomRecherche) {
         try {
-            
             Yokai y = DataBase.getYokai(nomRecherche);
             System.out.println(y.GetName());
-            return (DataBase.getYokai(nomRecherche)); 
+            return y; // ← retourne y directement
         } catch (Exception e) {
             System.out.println("Erreur de connexion au serveur, réessayez. (Methode Recherche Yokai)");
             System.out.println("Détail : " + e.getMessage());
             return null;
         }
-	}
+    }
 
-    public void setStat(Stat stat)
-    {
+    public void setStat(Stat stat) {
         this.StatActu.HP = stat.HP;
         this.StatActu.STR = stat.STR;
         this.StatActu.SPR = stat.SPR;
@@ -129,91 +113,70 @@ public class YokaiGeneral {
         this.StatActu.SPE = stat.SPE;
     }
 
-    public void setName()
-    {
-        final int MAXNAMESIZE=26;
+    public void setName() {
+        final int MAXNAMESIZE = 26;
         Scanner sc = new Scanner(System.in);
         System.out.println("What will be the nickname of your yokai?");
         String str = sc.nextLine();
-        if(str.length()>26 || str.length()<0)
-        {
+        if (str.length() > 26 || str.length() < 0) {
             System.out.println("The name of your yokai isn't correct, max limit is 26 caracter");
-        }
-        else
-        {
+        } else {
             surnom = str;
         }
     }
 
-    public void setIV()
-    {
+    public void setIV() {
         System.out.println("On va générer les IV de ce yokai");
         ivYokai.setIV();
     }
 
-
-    public void setLevel(String str)
-    {
-        int level=Integer.parseInt(str);
-        if(level < 0 || level > 99)
-        {
+    public void setLevel(String str) {
+        int level = Integer.parseInt(str);
+        if (level < 0 || level > 99) {
             throw new IllegalArgumentException("Impossible, valeur de niveau non comprise");
-        }
-        else
-        {
+        } else {
             this.level = level;
         }
     }
 
-
-
-
-    public Attitude GetAttitude()
-    {
+    public Attitude GetAttitude() {
         return this.attitudeYoKai;
     }
 
-    public Equipement GetEquipement()
-    {
+    public Equipement GetEquipement() {
         return ItemYokai;
     }
 
-    public SportsClub GetSportsClub()
-    {
+    public SportsClub GetSportsClub() {
         return SportsClub;
     }
 
-    public int GetHP()
-    {
+    public int GetHP() {
         return StatActu.HP;
     }
-    public int GetSTR()
-    {
+
+    public int GetSTR() {
         return StatActu.STR;
     }
-    public int GetSPR()
-    {
+
+    public int GetSPR() {
         return StatActu.SPR;
     }
-    public int GetDEF()
-    {
+
+    public int GetDEF() {
         return StatActu.DEF;
     }
-    public int GetSPE()
-    {
+
+    public int GetSPE() {
         return StatActu.SPE;
     }
 
-    public String GetName()
-    {
+    public String GetName() {
         return yokai.GetName();
     }
 
-    public int GetLevel()
-    {
+    public int GetLevel() {
         return level;
     }
-
-    
 
 }

@@ -58,7 +58,8 @@ public class HomeMenu {
                 if(userConnected.getEquippedTeam()==null)
                 {
                     System.out.println("Please select a team");
-                    return;
+                    watchList.menu(userConnected);
+                    continue;
                 }
                 
                 

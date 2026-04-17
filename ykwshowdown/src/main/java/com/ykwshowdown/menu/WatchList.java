@@ -35,10 +35,10 @@ public class WatchList {
                 addTeam();
             }
             if (choix == 2) {
-                selectTeam();
+                printTeam();
             }
             if (choix == 3) {
-                printTeam();
+                selectTeam();
             }
             if (choix == 4) {
                 System.out.println("Bye !");
@@ -49,7 +49,6 @@ public class WatchList {
     }
 
     public User selectTeam() {
-        printTeam();
         System.out.println("Selectionne ton équipe");
         String nomTeam = sc.nextLine();
         for (int i = 0; i < yourTeam.size(); i++) {
@@ -78,7 +77,7 @@ public class WatchList {
 
     public void printTeam() {
         int choix = -1;
-        while (choix != 2) {
+        while (choix != 3) {
             if (nbTeam == 0) {
                 System.out.println("Aucune équipe n'est encore disponible");
                 return;
@@ -109,11 +108,10 @@ public class WatchList {
                 for (int i = 0; i < yourTeam.size(); i++) {
                     if (yourTeam.get(i) != null && nomTeam.equalsIgnoreCase(yourTeam.get(i).GetTeamName())) {
                         yourTeam.get(i).print();
-                    } else {
-                        System.out.println("Aucune équipe ont été trouvé");
                         return;
                     }
                 }
+                System.out.println("Aucune équipe trouvée");
             } else if (choix == 3) {
                 break;
             }
@@ -125,13 +123,11 @@ public class WatchList {
         String nomTeam = sc.nextLine();
         for (int i = 0; i < yourTeam.size(); i++) {
             if (yourTeam.get(i) != null && nomTeam.equalsIgnoreCase(yourTeam.get(i).GetTeamName())) {
-                yourTeam.get(i).print();
-                yourTeam.get(i).addYokai();
-            } else {
-                System.out.println("Aucune équipe ont été trouvé");
+                yourTeam.get(i).addYokai(); 
                 return;
             }
         }
+        System.out.println("Aucune équipe trouvée");
     }
 
 }
