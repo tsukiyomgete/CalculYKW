@@ -126,7 +126,6 @@ public class calcul {
 
 
 		Scanner sc = new Scanner(System.in);
-		System.out.println("On va afficher les stats");
 		double niv = (Level - 1)/98.0;
 
 		uHP  = (int) Math.floor(StatA.GetHP()+(StatB.GetHP()-StatA.GetHP()+IV.GetIvHP())*niv);

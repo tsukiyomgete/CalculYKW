@@ -1,10 +1,11 @@
 package com.ykwshowdown.yokai;
 
+import java.io.Serial;
 import java.util.Scanner;
 
-import com.google.gson.annotations.SerializedName;
 import com.ykwshowdown.battle.YokaiFight;
 import com.ykwshowdown.database.DataBase;
+import com.google.gson.annotations.SerializedName;
 
 public class YokaiGeneral {
 
@@ -57,11 +58,6 @@ public class YokaiGeneral {
         this.ivYokai = new IV(0, 0, 0, 0, 0);
     }
 
-    public YokaiFight toYokaiFight(int teamNumber)
-    {
-        return new YokaiFight(this.GetName(),this.GetHP(),this.GetSTR(),this.GetSPR(),this.GetDEF(),this.GetSPE(),teamNumber);
-    }
-
     public Yokai GetYokai() {
         return yokai;
     }
@@ -89,6 +85,16 @@ public class YokaiGeneral {
     public void addYokai(String str) {
         // Scanner sc = new Scanner(System.in);
         Yokai y = rechercheYokai(str);
+        if (y != null) {
+            this.yokai = y;
+            setLevel(60);
+        } else {
+            System.out.println("Yokai non trouvé!");
+        }
+    }
+
+    public void replaceYokai(String str) {
+        Yokai y = rechercheYokai(str);
 
         if (y != null) {
             this.yokai = y;
@@ -102,12 +108,23 @@ public class YokaiGeneral {
         try {
             Yokai y = DataBase.getYokai(nomRecherche);
             System.out.println(y.GetName());
-            return y; // ← retourne y directement
+            return y;
         } catch (Exception e) {
             System.out.println("Erreur de connexion au serveur, réessayez. (Methode Recherche Yokai)");
             System.out.println("Détail : " + e.getMessage());
             return null;
         }
+    }
+
+    public YokaiFight toYokaiFight(int teamNumber) {
+        return new YokaiFight(
+                this.GetName(),
+                this.GetHP(),
+                this.GetSTR(),
+                this.GetSPR(),
+                this.GetDEF(),
+                this.GetSPE(),
+                teamNumber);
     }
 
     public void setStat(Stat stat) {
@@ -130,9 +147,17 @@ public class YokaiGeneral {
         }
     }
 
-    public void setIV() {
-        System.out.println("On va générer les IV de ce yokai");
+    public void setIV(String name) {
+        System.out.println("On va générer les IV de " + name);
         ivYokai.setIV();
+    }
+
+    public void setIv(int ivHP, int ivSTR, int ivSPR, int ivDEF, int ivSPE) {
+        ivYokai.setIV(ivHP, ivSTR, ivSPR, ivDEF, ivSPE);
+    }
+
+    public void setAttitude(String str) {
+        this.attitudeYoKai = new Attitude(str, 0, 0, 0, 0, 0);
     }
 
     public void setLevel(String str) {
@@ -142,6 +167,14 @@ public class YokaiGeneral {
         } else {
             this.level = level;
         }
+    }
+
+    public String GetTribe() {
+        return yokai.GetTribe();
+    }
+
+    public String GetElement() {
+        return yokai.GetTypeElement();
     }
 
     public Attitude GetAttitude() {
@@ -154,6 +187,26 @@ public class YokaiGeneral {
 
     public SportsClub GetSportsClub() {
         return SportsClub;
+    }
+
+    public int GetIvHP() {
+        return ivYokai.GetIvHP();
+    }
+
+    public int GetIvSTR() {
+        return ivYokai.GetIvSTR();
+    }
+
+    public int GetIvSPR() {
+        return ivYokai.GetIvSPR();
+    }
+
+    public int GetIvDEF() {
+        return ivYokai.GetIvDEF();
+    }
+
+    public int GetIvSPE() {
+        return ivYokai.GetIvSPE();
     }
 
     public int GetHP() {
