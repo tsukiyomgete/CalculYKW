@@ -174,7 +174,15 @@ public class YokaiGeneral {
     }
 
     public String GetElement() {
-        return yokai.GetTypeElement();
+        return yokai.GetTypeElementString();
+    }
+
+    public String GetElementWeak() {
+        return yokai.GetWkElementString();
+    }
+
+    public String GetElementRes() {
+        return yokai.GetResElementString();
     }
 
     public Attitude GetAttitude() {

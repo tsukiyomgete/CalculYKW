@@ -1,5 +1,4 @@
 com\ykwshowdown\menu\WatchList.class
-com\ykwshowdown\yokai\Food.class
 com\ykwshowdown\database\DataBase.class
 com\ykwshowdown\yokai\IV.class
 com\ykwshowdown\yokai\Tribe.class
@@ -8,7 +7,6 @@ com\ykwshowdown\yokai\Rank.class
 com\ykwshowdown\user\User.class
 com\ykwshowdown\yokai\Tier.class
 com\ykwshowdown\yokai\Equipement.class
-com\ykwshowdown\yokai\FoodClass.class
 com\ykwshowdown\yokai\face_icon.class
 com\ykwshowdown\yokai\Attitude.class
 com\ykwshowdown\yokai\Item.class

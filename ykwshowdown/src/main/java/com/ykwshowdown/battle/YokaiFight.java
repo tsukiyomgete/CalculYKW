@@ -1,10 +1,13 @@
 package com.ykwshowdown.battle;
 
-import com.ykwshowdown.yokai.YokaiGeneral;
+import com.ykwshowdown.yokai.*;
 
 public class YokaiFight{
     private String _nomYokai;
     private String _surnomYokai;
+    private String _elementWeak;
+    private String _elementRes;
+    private String _elementType;
     private int _hp;
     private int _atk;
     private int _spr;
@@ -43,6 +46,11 @@ public class YokaiFight{
         _spr = yg.GetSPR();
         _def = yg.GetDEF();
         _spe = yg.GetSPE();
+
+        _elementWeak = yg.GetElementWeak();
+        _elementRes = yg.GetElementRes();
+        _elementType = yg.GetElement();
+
         _team = team;
     }
 
@@ -80,11 +88,34 @@ public class YokaiFight{
             }
     }
 
-    
+    public String getWeak()
+    {
+        return _elementWeak;
+    }
+
+    public String getRes()
+    {
+        return _elementRes;
+    }
+
+    public String getElementAttack()
+    {
+        return _elementType;
+    }
 
     public int getHP()
     {
         return _hp;
+    }
+
+    public int getSPR()
+    {
+        return _spr;
+    }
+
+    public int getAtk()
+    {
+        return _atk;
     }
 
     public int getSPE()

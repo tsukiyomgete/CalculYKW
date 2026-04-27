@@ -1,138 +1,159 @@
 package com.ykwshowdown.init;
+
 import java.util.Random;
 import java.util.Scanner;
 import com.ykwshowdown.yokai.*;
-
-
+import com.ykwshowdown.battle.*;
 
 public class calcul {
-	
 
 	static Random r = new Random();
 
-	public static int randomGenerate(int max)
-	{
+	public static int randomGenerate(int max) {
 		return r.nextInt(max);
 	}
 
-	public static int min(int valeurMax, int valeur)
-	{
-		if(valeur < valeurMax) 
-		{
+	public static int min(int valeurMax, int valeur) {
+		if (valeur < valeurMax) {
 			return valeur;
-		}
-		else 
-		{
+		} else {
 			return valeurMax;
 		}
 	}
 
-	public void calculDegat()
-	{
+	public static int calculateDamage(YokaiFight sender, YokaiFight target) {
+		final int maxDamage = 999;
+		final int minDamage = 1;
+
+		double damageRoll = 0.9 + Math.random() * 0.2;
+		int CorrectedSTRSPR;
+		int BasePower;
+		int Def;
+		double EM = 1;
+		double SkillVal = 1;
+		float GuardInt = 1;
+		int valeur = 0;
+		//We are seeing what's greater between the spirit stats and strength stat
+		if (sender.getSPR() > sender.getAtk()) {
+			CorrectedSTRSPR = sender.getSPR();
+		} else {
+			CorrectedSTRSPR = sender.getAtk();
+		}
+		EM = WeakResNeutralDamage(sender, target);
+		return 0;
+	}
+
+
+	public void calculDegat() {
 		final int YokaiNumber = 6;
 		final int maxDamage = 999;
 		final int minDamage = 1;
-		
+
 		double damageRoll = 0.9 + Math.random() * 0.2;
 		int CorrectedSTRSPR;
 		int BasePower;
 		int Def;
 		double EM;
 		double SkillVal;
-		float GuardInt=1;
-		int valeur=0;
-		
+		float GuardInt = 1;
+		int valeur = 0;
+
 		Scanner sc = new Scanner(System.in);
-		
+
 		System.out.println("Is your yokai receiving physical or special damage?");
 		String str = sc.nextLine();
-		if(str.equals("P")) 
-		{
+		if (str.equals("P")) {
 			EM = 1;
 			System.out.println("Insert the physical damage of the enemy's attack ");
-			 str = sc.nextLine();
-			CorrectedSTRSPR= Integer.parseInt(str);
-		}
-		else
-		{
+			str = sc.nextLine();
+			CorrectedSTRSPR = Integer.parseInt(str);
+		} else {
 			System.out.println("Insert the special damage of the enemy's attack ");
-			 str = sc.nextLine();
-			CorrectedSTRSPR= Integer.parseInt(str);
-			
+			str = sc.nextLine();
+			CorrectedSTRSPR = Integer.parseInt(str);
+
 			System.out.println("Is your yokai weak or resistant to the magic attack? Respond with W or R");
 			str = sc.nextLine();
-			if(str.equals("W"))
-			{
-				EM= 1.2f;
-			}
-			else
-			{
-				EM= 0.8f;
+			if (str.equals("W")) {
+				EM = 1.2f;
+			} else {
+				EM = 0.8f;
 			}
 		}
-		
-		
+
 		System.out.println("Now insert the base power of the attack");
 		str = sc.nextLine();
-		BasePower= Integer.parseInt(str);
-		
+		BasePower = Integer.parseInt(str);
+
 		System.out.println("Insert the defense of your yokai");
 		str = sc.nextLine();
-		Def= Integer.parseInt(str);
-		
+		Def = Integer.parseInt(str);
+
 		System.out.println("Does your ennemi got any SkillMultiplier active?");
 		str = sc.nextLine();
-		if(str.equals("N"))
-		{
+		if (str.equals("N")) {
 			SkillVal = 1;
-		}
-		else
-		{
-			System.out.println("How many yo kai in the enemy teams got a skill multiplier compatible with the spell's types?");
+		} else {
+			System.out.println(
+					"How many yo kai in the enemy teams got a skill multiplier compatible with the spell's types?");
 			str = sc.nextLine();
-			while(Integer.parseInt(str) >YokaiNumber)
-			{
+			while (Integer.parseInt(str) > YokaiNumber) {
 				System.out.println("Error, max yokai number can only be 6");
 				str = sc.nextLine();
 			}
-			SkillVal = (int)Math.pow(1.2f, Integer.parseInt(str));
-			
+			SkillVal = (int) Math.pow(1.2f, Integer.parseInt(str));
+
 		}
 		System.out.println("Are you guarding?");
 		str = sc.nextLine();
-		if(str.equals("Y"))
-		{
-			GuardInt = 0.5f; 
+		if (str.equals("Y")) {
+			GuardInt = 0.5f;
 		}
-		
-		//THE ENTIRE FORMULA
-		
-		valeur = (int)((((CorrectedSTRSPR)/2)+(BasePower/2)-(Def/4))*1*EM*SkillVal*GuardInt);
+
+		// THE ENTIRE FORMULA
+
+		valeur = (int) ((((CorrectedSTRSPR) / 2) + (BasePower / 2) - (Def / 4)) * 1 * EM * SkillVal * GuardInt);
 		System.out.println("Your yokai is dealing: " + valeur);
 	}
 
-	public static Stat calculStatsUncorrected(YokaiGeneral yg)
-	{
+	public static double WeakResNeutralDamage(YokaiFight sender, YokaiFight target) {
+		String senderTypeAttack = sender.getElementAttack();
+		String targetWeak = target.getWeak();
+		String targetRes = target.getRes();
+
+		if (targetWeak.equalsIgnoreCase(senderTypeAttack)) {
+			return 1.2f;
+		}
+		else if(targetRes.equalsIgnoreCase(senderTypeAttack))
+		{
+			return 0.8f;
+		}
+		else
+		{
+			return 1;
+		}
+	}
+
+	public static Stat calculStatsUncorrected(YokaiGeneral yg) {
 		Stat StatA = yg.GetYokai().getStatA();
 		Stat StatB = yg.GetYokai().getStatB();
 		IV IV = yg.GetIv();
 		int Level = yg.GetLevel();
-	
+
 		int uHP;
 		int uSTR;
 		int uSPR;
 		int uDEF;
 		int uSPE;
 
-
 		Scanner sc = new Scanner(System.in);
-		double niv = (Level - 1)/98.0;
+		double niv = (Level - 1) / 98.0;
 
-		uHP  = (int) Math.floor(StatA.GetHP()+(StatB.GetHP()-StatA.GetHP()+IV.GetIvHP())*niv);
-		uSTR = (int) Math.floor(StatA.GetSTR()+(StatB.GetSTR()-StatA.GetSTR()+IV.GetIvSTR())*niv);
-		uSPR = (int) Math.floor(StatA.GetSPR()+(StatB.GetSPR()-StatA.GetSPR()+IV.GetIvSPR())*niv);
-		uDEF = (int) Math.floor(StatA.GetDEF()+(StatB.GetDEF()-StatA.GetDEF()+IV.GetIvDEF())*niv);
-		uSPE = (int) Math.floor(StatA.GetSPE()+(StatB.GetSPE()-StatA.GetSPE()+IV.GetIvSPE())*niv);
+		uHP = (int) Math.floor(StatA.GetHP() + (StatB.GetHP() - StatA.GetHP() + IV.GetIvHP()) * niv);
+		uSTR = (int) Math.floor(StatA.GetSTR() + (StatB.GetSTR() - StatA.GetSTR() + IV.GetIvSTR()) * niv);
+		uSPR = (int) Math.floor(StatA.GetSPR() + (StatB.GetSPR() - StatA.GetSPR() + IV.GetIvSPR()) * niv);
+		uDEF = (int) Math.floor(StatA.GetDEF() + (StatB.GetDEF() - StatA.GetDEF() + IV.GetIvDEF()) * niv);
+		uSPE = (int) Math.floor(StatA.GetSPE() + (StatB.GetSPE() - StatA.GetSPE() + IV.GetIvSPE()) * niv);
 
 		System.out.println("HP" + uHP);
 		System.out.println("STR" + uSTR);
@@ -140,15 +161,12 @@ public class calcul {
 		System.out.println("DEF" + uDEF);
 		System.out.println("SPE" + uSPE);
 
-		Stat UncoStatActu = new Stat(uHP,uSTR,uSPR,uDEF,uSPE);
+		Stat UncoStatActu = new Stat(uHP, uSTR, uSPR, uDEF, uSPE);
 
 		return UncoStatActu;
 	}
 
-	
-
-	public static Stat calculStatsCorrected(YokaiGeneral yg)
-	{
+	public static Stat calculStatsCorrected(YokaiGeneral yg) {
 		Stat StatA = yg.GetYokai().getStatA();
 		Stat StatB = yg.GetYokai().getStatB();
 		IV IV = yg.GetIv();
@@ -156,36 +174,41 @@ public class calcul {
 		Attitude atYG = yg.GetAttitude();
 		Equipement ItemYG = yg.GetEquipement();
 		SportsClub nbYG = yg.GetSportsClub();
-		
+
 		int aHP = atYG.GetHP();
 		int aSTR = atYG.GetSTR();
 		int aSPR = atYG.GetSPR();
 		int aDEF = atYG.GetDEF();
 		int aSPE = atYG.GetSPE();
 
-		int iHP=ItemYG.GetHP();
-		int iSTR=ItemYG.GetSTR();
-		int iSPR=ItemYG.GetSPR();
-		int iDEF=ItemYG.GetDEF();
-		int iSPE=ItemYG.GetSPE();
+		int iHP = ItemYG.GetHP();
+		int iSTR = ItemYG.GetSTR();
+		int iSPR = ItemYG.GetSPR();
+		int iDEF = ItemYG.GetDEF();
+		int iSPE = ItemYG.GetSPE();
 
-		int nbSTR= nbYG.nbGetSPR();
-		int nbSPR= nbYG.nbGetSPR();
-		int nbDEF= nbYG.nbGetDEF();
-		int nbSPE= nbYG.nbGetSPE();
+		int nbSTR = nbYG.nbGetSPR();
+		int nbSPR = nbYG.nbGetSPR();
+		int nbDEF = nbYG.nbGetDEF();
+		int nbSPE = nbYG.nbGetSPE();
 
 		int cHP;
 		int cSTR;
 		int cSPR;
 		int cDEF;
 		int cSPE;
-		double niv = (Level - 1)/98.0;
+		double niv = (Level - 1) / 98.0;
 
-		cHP  = (int) Math.floor(StatA.GetHP()+(StatB.GetHP()-StatA.GetHP()+IV.GetIvHP())*niv+aHP*(1+Level/198)+iHP);
-		cSTR = (int) Math.floor(StatA.GetSTR()+(StatB.GetSTR()-StatA.GetSTR()+IV.GetIvSTR())*niv+aSTR*(1+Level/198)+nbSTR*5+iSTR);
-		cSPR = (int) Math.floor(StatA.GetSPR()+(StatB.GetSPR()-StatA.GetSPR()+IV.GetIvSPR())*niv+aSPR*(1+Level/198)+nbSPR*5+iSPR);
-		cDEF = (int) Math.floor(StatA.GetDEF()+(StatB.GetDEF()-StatA.GetDEF()+IV.GetIvDEF())*niv+aDEF*(1+Level/198)+nbDEF*5+iDEF);
-		cSPE = (int) Math.floor(StatA.GetSPE()+(StatB.GetSPE()-StatA.GetSPE()+IV.GetIvSPE())*niv+aSPE*(1+Level/198)+nbSPE*5+iSPE);
+		cHP = (int) Math.floor(
+				StatA.GetHP() + (StatB.GetHP() - StatA.GetHP() + IV.GetIvHP()) * niv + aHP * (1 + Level / 198) + iHP);
+		cSTR = (int) Math.floor(StatA.GetSTR() + (StatB.GetSTR() - StatA.GetSTR() + IV.GetIvSTR()) * niv
+				+ aSTR * (1 + Level / 198) + nbSTR * 5 + iSTR);
+		cSPR = (int) Math.floor(StatA.GetSPR() + (StatB.GetSPR() - StatA.GetSPR() + IV.GetIvSPR()) * niv
+				+ aSPR * (1 + Level / 198) + nbSPR * 5 + iSPR);
+		cDEF = (int) Math.floor(StatA.GetDEF() + (StatB.GetDEF() - StatA.GetDEF() + IV.GetIvDEF()) * niv
+				+ aDEF * (1 + Level / 198) + nbDEF * 5 + iDEF);
+		cSPE = (int) Math.floor(StatA.GetSPE() + (StatB.GetSPE() - StatA.GetSPE() + IV.GetIvSPE()) * niv
+				+ aSPE * (1 + Level / 198) + nbSPE * 5 + iSPE);
 
 		System.out.println("HP" + cHP);
 		System.out.println("STR" + cSTR);
@@ -193,15 +216,9 @@ public class calcul {
 		System.out.println("DEF" + cDEF);
 		System.out.println("SPE" + cSPE);
 
-		Stat CoStatActu = new Stat(cHP,cSTR,cSPR,cDEF,cSPE);
+		Stat CoStatActu = new Stat(cHP, cSTR, cSPR, cDEF, cSPE);
 
-		return CoStatActu;	
+		return CoStatActu;
 	}
 
-	
-	
-
-
-
 }
-	

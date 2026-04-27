@@ -81,9 +81,14 @@ public class Yokai {
         return tribuYokai.GetTribe();
     }
 
-    public String GetTypeElement()
+    public String GetTypeElementString()
     {
         return type.getElement();
+    }
+
+    public String GetWkElementString()
+    {
+        return weakness.getElement();
     }
 
     public String GetWkElement()
@@ -91,7 +96,7 @@ public class Yokai {
         return weakness.getElement();
     }
 
-    public String GetResElement()
+    public String GetResElementString()
     {
         return resistance.getElement();
     }
