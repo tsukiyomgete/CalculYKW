@@ -3,6 +3,8 @@ package com.ykwshowdown.battle;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import com.ykwshowdown.Talent.*;
+import com.ykwshowdown.Talent.Talent;
 
 public class Battle {
 
@@ -74,7 +76,7 @@ public class Battle {
             YokaiFight y = yt.getYokaiFrontRowIndex(i);
             int j = i - 1;
 
-            while (j >= 0 && yt.getYokaiFrontRowIndex(j).getSPE() < y.getSPE()) {
+            while (j >= 0 && yt.getYokaiFrontRowIndex(j).getSPEC() < y.getSPEC()) {
                 yt.setYokaiIndex(j + 1, yt.getYokaiFrontRowIndex(j));
                 j--;
             }
@@ -128,20 +130,20 @@ public class Battle {
         System.out.println("LA FRONT LANE ALLIE");
         for (int i = 0; i < player1.getFrontRowSize(); i++) {
             System.out.println("[ALLIEE] " + player1.getYokaiFrontRowIndex(i).getName() + " PV: "
-                    + player1.getYokaiFrontRowIndex(i).getHP());
+                    + player1.getYokaiFrontRowIndex(i).getHPC());
         }
         System.out.println("");
         System.out.println("LA BACK LANE ALLIE");
         for (int i = 0; i < player1.getBackRowSize(); i++) {
             System.out.println("[ALLIEE] " + player1.getYokaiBackRowIndex(i).getName() + " PV: "
-                    + player1.getYokaiBackRowIndex(i).getHP());
+                    + player1.getYokaiBackRowIndex(i).getHPC());
         }
 
         System.out.println("");
         System.out.println("LA FRONT LANE ENEMI");
         for (int y = 0; y < player2.getFrontRowSize(); y++) {
             System.out.println("[ENEMIE] " + player2.getYokaiFrontRowIndex(y).getName() + " PV: "
-                    + player2.getYokaiFrontRowIndex(y).getHP());
+                    + player2.getYokaiFrontRowIndex(y).getHPC());
         }
 
         try {
@@ -195,6 +197,12 @@ public class Battle {
         }
         for (int i = 0; i < yt.getBackRowSize(); i++) {
             yt.setYokaiIndex(i + yt.getFrontRowSize(), roue[i + yt.getFrontRowSize()]);
+        }
+    }
+
+    public void checkTriggers(TriggerType trigger, YokaiFight holder, YokaiFight target) {
+        if (holder.getTalent() != null && holder.getTalent().getTriggerType() == trigger) {
+            holder.getTalent().activate(holder, target);
         }
     }
 

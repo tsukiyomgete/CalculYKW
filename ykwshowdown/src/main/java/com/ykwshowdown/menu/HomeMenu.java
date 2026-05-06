@@ -1,11 +1,15 @@
 package com.ykwshowdown.menu;
 
+import java.sql.SQLException;
 import java.util.Scanner;
+
+import javax.xml.crypto.Data;
 
 import com.ykwshowdown.battle.Battle;
 import com.ykwshowdown.battle.YokaiFight;
 import com.ykwshowdown.battle.YokaiTeam;
 import com.ykwshowdown.database.DataBase;
+import com.ykwshowdown.init.Init;
 import com.ykwshowdown.init.calcul;
 import com.ykwshowdown.user.User;
 import com.ykwshowdown.yokai.YokaiGeneral;
@@ -62,10 +66,8 @@ public class HomeMenu {
                 YokaiTeam tUser = new YokaiTeam(1);
                 for (int i = 0; i < 6; i++) {
                     YokaiGeneral yg = userConnected.getYokaiIndex(i);
-                    if (yg != null) 
-                    {
-                        if (yg.GetEquipement() != null || yg.GetAttitude() != null) 
-                        {
+                    if (yg != null) {
+                        if (yg.GetEquipement() != null || yg.GetAttitude() != null) {
                             yg.setStat(calcul.calculStatsCorrected(yg));
                         } else {
                             yg.setStat(calcul.calculStatsUncorrected(yg));
@@ -123,6 +125,12 @@ public class HomeMenu {
     }
 
     public void customCMD() {
+        try {
+			DataBase.createInspirit();
+		} catch(SQLException e){
+			System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+		}
+        Init.insererLesInspirits();
     }
 
     public void delBaseDeDonnee() {

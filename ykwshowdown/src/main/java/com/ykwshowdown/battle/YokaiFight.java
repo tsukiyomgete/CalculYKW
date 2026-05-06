@@ -1,135 +1,144 @@
 package com.ykwshowdown.battle;
 
 import com.ykwshowdown.yokai.*;
+import com.ykwshowdown.fightingdata.*;
+import com.ykwshowdown.Talent.Talent;
 
-public class YokaiFight{
+public class YokaiFight {
     private String _nomYokai;
     private String _surnomYokai;
+
     private String _elementWeak;
     private String _elementRes;
-    private String _elementType;
-    private int _hp;
-    private int _atk;
-    private int _spr;
-    private int _def;
-    private int _spe;
+    private Technique _technique;
+    private Talent _talent;
+
+    private int _hpT;
+    private int _strT;
+    private int _sprT;
+    private int _defT;
+    private int _speT;
+
+    private int _hpC;
+    private int _strC;
+    private int _sprC;
+    private int _defC;
+    private int _speC;
+
+    private float _hpTribeBonus;
+    private float _strTribeBonus;
+
+    private float _tribeBonus;
+    private float _adjacentBoost;
+    private float _inspiritBoost;
+
     private int _team;
 
-    public YokaiFight(String nomYokai, String surnomYokai, int pv, int atk, int spr, int def, int spe, int team)
-    {
+    public YokaiFight(String nomYokai, String surnomYokai, int pv, int atk, int spr, int def, int spe, int team) {
         _nomYokai = nomYokai;
         _surnomYokai = surnomYokai;
-        _hp = pv;
-        _atk = atk;
-        _spr = spr;
-        _def = def;
-        _spe = spe;
+        _hpC = pv;
+        _strC = atk;
+        _sprC = spr;
+        _defC = def;
+        _speC = spe;
         _team = team;
     }
 
-    public YokaiFight(String nomYokai,  int pv, int atk, int spr, int def, int spe, int team)
-    {
+    public YokaiFight(String nomYokai, int pv, int atk, int spr, int def, int spe, int team) {
         _nomYokai = nomYokai;
-        _hp = pv;
-        _atk = atk;
-        _spr = spr;
-        _def = def;
-        _spe = spe;
+        _hpC = pv;
+        _strC = atk;
+        _sprC = spr;
+        _defC = def;
+        _speC = spe;
         _team = team;
     }
 
-    public YokaiFight(YokaiGeneral yg, int team)
-    {
+    public YokaiFight(YokaiGeneral yg, int team) {
         _nomYokai = yg.GetName();
-        _hp = yg.GetHP();
-        _atk = yg.GetSTR();
-        _spr = yg.GetSPR();
-        _def = yg.GetDEF();
-        _spe = yg.GetSPE();
+        _hpC = yg.GetHP();
+        _strC = yg.GetSTR();
+        _sprC = yg.GetSPR();
+        _defC = yg.GetDEF();
+        _speC = yg.GetSPE();
 
         _elementWeak = yg.GetElementWeak();
         _elementRes = yg.GetElementRes();
-        _elementType = yg.GetElement();
+        _technique = yg.GetTechnique();
 
         _team = team;
     }
 
-    public void setYokaiFight(YokaiGeneral yg)
-    {
+    public void setYokaiFight(YokaiGeneral yg) {
         _nomYokai = yg.GetName();
-        _hp = yg.GetHP();
-        _atk = yg.GetSTR();
-        _spr = yg.GetSPR();
-        _def = yg.GetDEF();
-        _spe = yg.GetSPE();
+        _hpC = yg.GetHP();
+        _strC = yg.GetSTR();
+        _sprC = yg.GetSPR();
+        _defC = yg.GetDEF();
+        _speC = yg.GetSPE();
     }
 
-    public boolean isAlive()
-    {
-        return (this.getHP()> 0);
+    public boolean isAlive() {
+        return (this.getHPC() > 0);
     }
 
-    public void attack(YokaiFight target)
-    {
+    public void attack(YokaiFight target) {
         int damage = 40;
-        if(target._hp < damage)
-        {
-            target._hp = 0;
+        if (target._hpT < damage) {
+            target._hpT = 0;
+        } else {
+            target._hpT -= 40;
         }
-        else
-        {
-            target._hp -= 40;
-        }
-        System.out.println(this._nomYokai + " a infligé " + damage + " au " + target._nomYokai  + " enemie !");
+        System.out.println(this._nomYokai + " a infligé " + damage + " au " + target._nomYokai + " enemie !");
         try {
             Thread.sleep(1200);
         } catch (InterruptedException e) {
             e.printStackTrace();
-            }
+        }
     }
 
-    public String getWeak()
-    {
+    public Talent getTalent() {
+        return _talent;
+    }
+
+    public void setTalent(Talent talent) {
+        this._talent = talent;
+    }
+
+    public String getWeak() {
         return _elementWeak;
     }
 
-    public String getRes()
-    {
+    public String getRes() {
         return _elementRes;
     }
 
-    public String getElementAttack()
-    {
-        return _elementType;
+    public Technique getTechnique() {
+        return _technique;
     }
 
-    public int getHP()
-    {
-        return _hp;
+    public int getHPC() {
+        return _hpC;
     }
 
-    public int getSPR()
-    {
-        return _spr;
+    public int getSPRC() {
+        return _sprC;
     }
 
-    public int getAtk()
-    {
-        return _atk;
+    public int getStrC() {
+        return _strC;
     }
 
-    public int getSPE()
-    {
-        return _spe;
+    public int getSPEC() {
+        return _speC;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return _nomYokai;
     }
 
-    public int getTeam()
-    {
+    public int getTeam() {
         return _team;
     }
 

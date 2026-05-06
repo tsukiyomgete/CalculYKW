@@ -7,6 +7,8 @@ import com.ykwshowdown.battle.YokaiFight;
 import com.ykwshowdown.database.DataBase;
 import com.google.gson.annotations.SerializedName;
 
+import com.ykwshowdown.fightingdata.*;
+
 public class YokaiGeneral {
 
     Yokai yokai;
@@ -173,8 +175,8 @@ public class YokaiGeneral {
         return yokai.GetTribe();
     }
 
-    public String GetElement() {
-        return yokai.GetTypeElementString();
+    public Technique GetTechnique() {
+        return yokai.GetTechnique();
     }
 
     public String GetElementWeak() {

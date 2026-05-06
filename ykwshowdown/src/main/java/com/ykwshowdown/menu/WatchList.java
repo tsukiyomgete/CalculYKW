@@ -90,7 +90,6 @@ public class WatchList {
         yT.importTeam(sb.toString());
         yourTeam.add(yT);
         nbTeam++;
-        // vider le buffer résiduel
         while (sc.hasNextLine() && !sc.nextLine().isEmpty()) {
         }
     }

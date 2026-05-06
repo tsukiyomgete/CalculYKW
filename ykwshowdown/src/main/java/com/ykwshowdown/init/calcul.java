@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 import com.ykwshowdown.yokai.*;
 import com.ykwshowdown.battle.*;
+import com.ykwshowdown.fightingdata.*;
 
 public class calcul {
 
@@ -34,10 +35,10 @@ public class calcul {
 		float GuardInt = 1;
 		int valeur = 0;
 		//We are seeing what's greater between the spirit stats and strength stat
-		if (sender.getSPR() > sender.getAtk()) {
-			CorrectedSTRSPR = sender.getSPR();
+		if (sender.getSPRC() > sender.getStrC()) {
+			CorrectedSTRSPR = sender.getSPRC();
 		} else {
-			CorrectedSTRSPR = sender.getAtk();
+			CorrectedSTRSPR = sender.getStrC();
 		}
 		EM = WeakResNeutralDamage(sender, target);
 		return 0;
@@ -117,14 +118,14 @@ public class calcul {
 	}
 
 	public static double WeakResNeutralDamage(YokaiFight sender, YokaiFight target) {
-		String senderTypeAttack = sender.getElementAttack();
+		Technique senderTypeAttack = sender.getTechnique();
 		String targetWeak = target.getWeak();
 		String targetRes = target.getRes();
 
-		if (targetWeak.equalsIgnoreCase(senderTypeAttack)) {
+		if (targetWeak.equalsIgnoreCase(senderTypeAttack.showTechniqueElemental())) {
 			return 1.2f;
 		}
-		else if(targetRes.equalsIgnoreCase(senderTypeAttack))
+		else if(targetRes.equalsIgnoreCase(senderTypeAttack.showTechniqueElemental()))
 		{
 			return 0.8f;
 		}
