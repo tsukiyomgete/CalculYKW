@@ -6,7 +6,6 @@ public class Main {
         while(true)
         {
             new HomeMenu().menu(); 
-            
         }
     }
 }

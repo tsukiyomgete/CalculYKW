@@ -58,32 +58,35 @@ public class Yokai {
     public Equipement[] HoldingEquipement;
 
     public Yokai(String nom, int idMedallium, Rank rangYokai, Tribe tribuYokai, boolean isLegendary,
+            Stat statA, Stat statB,                          // ← AJOUTER CES DEUX LIGNES
             PhysicalAttack attack, Technique tech, String talent, Inspirit inspirit,
             Elemental weak, double wkMultipliers, Elemental rest, double resMultipliers,
             double baseAtk, double baseTech, double baseInspirit, double baseGuard,
             double chanceInspirited, int maxItem) 
-    {
-        this.nom = nom;
-        this.idMedallium = idMedallium;
-        this.rangYokai = rangYokai;
-        this.tribuYokai = tribuYokai;
-        this.isLegendary = isLegendary;
-        this.yokaiTier = Tier.NU;
-        this.attack = attack;
-        this.technique = tech;
-        this.talent = talent;
-        this.inspiritYokai = inspirit;
-        this.weakness = weak;
-        this.weakMultipliers = wkMultipliers;
-        this.resistance = rest;
-        this.resMultipliers = resMultipliers;
-        this._baseAttackPerC = baseAtk;
-        this._baseTechniquePerC = baseTech;
-        this._baseInspiritPerC = baseInspirit;
-        this._baseGuardPerC = baseGuard;
-        this.chanceOfBeingInspirited = chanceInspirited;
-        this.HoldingEquipement = new Equipement[maxItem];
-    }
+{
+    this.nom = nom;
+    this.idMedallium = idMedallium;
+    this.rangYokai = rangYokai;
+    this.tribuYokai = tribuYokai;
+    this.isLegendary = isLegendary;
+    this.statInit = statA;                // ← AJOUTER
+    this.statEnd = statB;                // ← AJOUTER
+    this.yokaiTier = Tier.NU;
+    this.attack = attack;
+    this.technique = tech;
+    this.talent = talent;
+    this.inspiritYokai = inspirit;
+    this.weakness = weak;
+    this.weakMultipliers = wkMultipliers;
+    this.resistance = rest;
+    this.resMultipliers = resMultipliers;
+    this._baseAttackPerC = baseAtk;
+    this._baseTechniquePerC = baseTech;
+    this._baseInspiritPerC = baseInspirit;
+    this._baseGuardPerC = baseGuard;
+    this.chanceOfBeingInspirited = chanceInspirited;
+    this.HoldingEquipement = new Equipement[maxItem];
+}
 
     public String GetName() {
         return nom;

@@ -24,8 +24,6 @@ public class HomeMenu {
 
         User userConnected = null;
         int choix = -1;
-        initBaseDeDonnee();
-        customCMD();
         System.out.println("Possèdez vous un compte showdown chez nous ?");
         str = sc.nextLine();
         if (str.equalsIgnoreCase("Oui")) {
