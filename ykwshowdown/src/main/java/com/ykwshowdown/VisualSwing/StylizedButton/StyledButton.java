@@ -1,16 +1,8 @@
 package com.ykwshowdown.VisualSwing.StylizedButton;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 public class StyledButton extends JButton {
 
@@ -19,7 +11,7 @@ public class StyledButton extends JButton {
     private int borderHex;
 
     public StyledButton(String text, int topHex, int bottomHex, int borderHex) {
-        super("<html><div style='text-align: center;'><strong> "+ "Fight !" +"</strong><br><small>Find a random opponent</small></div></html>");
+        super("<html><div style='text-align: center;'><strong> "+ text +"</strong><br></div></html>");
         this.topHex = topHex;
         this.bottomHex = bottomHex;
         this.borderHex = borderHex; 
@@ -27,6 +19,20 @@ public class StyledButton extends JButton {
         setFocusPainted(false);
         setOpaque(false);
         setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 15)); // padding
+        setForeground(Color.WHITE);
+        setHorizontalAlignment(SwingConstants.CENTER);
+        setPreferredSize(new Dimension(160, 55));
+    }
+
+    public StyledButton(String text, String textDesc ,int topHex, int bottomHex, int borderHex) {
+        super("<html><div style='text-align: center;'><strong> "+ text +"</strong><br><small>" + textDesc + "</small></div></html>");
+        this.topHex = topHex;
+        this.bottomHex = bottomHex;
+        this.borderHex = borderHex; 
+        setContentAreaFilled(false);
+        setFocusPainted(false);
+        setOpaque(false);
+        setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 15)); 
         setForeground(Color.WHITE);
         setHorizontalAlignment(SwingConstants.CENTER);
         setPreferredSize(new Dimension(160, 55));

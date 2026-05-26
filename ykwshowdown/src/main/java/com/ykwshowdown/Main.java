@@ -1,18 +1,24 @@
 package com.ykwshowdown;
 import com.ykwshowdown.menu.HomeMenu;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.*;
 
 import com.ykwshowdown.VisualSwing.*;
+import com.ykwshowdown.VisualSwing.JTeamBuilder;
 
 public class Main {
-    public static void main(String[] args) {
+	private static CardLayout cardLayout;
+    private static JPanel mainPanel;
+	
+	public static void main(String[] args) {
         HomeMenu hm = new HomeMenu();
         JHomeMenu jhm = new JHomeMenu(hm);
         
+        JTeamBuilder jt= new JTeamBuilder();
+        
         JFrame frame = new JFrame("YKW Showdown");
-        frame.add(jhm);
+        frame.add(jt);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);
 
